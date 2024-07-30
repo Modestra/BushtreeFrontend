@@ -9,6 +9,6 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /usr/src/dist /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/sites-enabled/defaul
 WORKDIR /usr/share/nginx/html/
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
