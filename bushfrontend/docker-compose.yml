@@ -1,0 +1,15 @@
+version: "3.3"
+networks:
+  front:
+    driver: bridge
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - 80:80
+    networks:
+      - front
