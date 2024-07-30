@@ -7,7 +7,7 @@ RUN npm run build
 FROM nginx:latest
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /usr/src/dist /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/sites-enabled/defaulr
+COPY nginx.conf /etc/nginx/sites-enabled/defaul
 WORKDIR /usr/share/nginx/html/
 EXPOSE 80
 
