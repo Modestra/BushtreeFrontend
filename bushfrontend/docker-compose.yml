@@ -1,7 +1,9 @@
 version: "3"
 networks:
   front:
+    name: front
     driver: bridge
+    external: true
 
 services:
   frontend:
@@ -17,9 +19,7 @@ services:
     image: "jc21/nginx-proxy-manager:latest"
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "81:81"
-      - "443:443"
+      - 81:81
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
