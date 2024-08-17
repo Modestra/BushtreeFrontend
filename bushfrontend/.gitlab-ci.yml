@@ -25,6 +25,5 @@ deploy-job:
   environment: production
   script:
     - echo "Deploying application..."
-    - ssh root@45.12.74.181
   only:
     = deploy
