@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import HeaderApp from './components/Header'
+import MainPage from './pages/MainPage'
+import FlowersPage from './pages/FlowersPage'
 
-function App() {useState(0)
+function App() {
 
   return (
-    <>
-      <HeaderApp></HeaderApp>
-    </>
+    <BrowserRouter>
+      <Routes>
+          <Route path='/' element={<MainPage/>}></Route>
+          <Route path='flowers' element={<FlowersPage/>}></Route>
+          <Route></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

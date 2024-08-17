@@ -26,4 +26,4 @@ deploy-job:
   script:
     - echo "Deploying application..."
   only:
-    = deploy
+    - deploy
