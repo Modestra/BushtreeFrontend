@@ -14,6 +14,8 @@ jobs:
     defaults:
       run:
         working-directory: "bushfrontend"
+    needs:
+      - ssh_connection
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -28,13 +30,12 @@ jobs:
   ssh_connection:
     name: Connection on Virtual Machine
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/deploy'
     defaults:
       run:
         working-directory: "bushfrontend"
     needs:
       - build
-      - docker_install
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -44,7 +45,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: "scripts/deploy-docker.sh"
+          script: "scripts/deploy-docker.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}"
 
   test:
     runs-on: ubuntu-latest
