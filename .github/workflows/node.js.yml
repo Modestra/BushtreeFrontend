@@ -48,7 +48,7 @@ jobs:
           port: 22
           script: |
             cd /usr/bashtreefrontend/bushfrontend
-            sudo scripts/docker-install.sh
+            bush scripts/docker-install.sh
   test:
     runs-on: ubuntu-latest
     defaults:
