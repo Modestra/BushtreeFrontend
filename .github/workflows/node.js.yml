@@ -46,8 +46,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: "scripts/deploy-docker.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}"
-
+          script: "ls"
+          #./scripts/deploy-docker.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
   test:
     runs-on: ubuntu-latest
     defaults:
