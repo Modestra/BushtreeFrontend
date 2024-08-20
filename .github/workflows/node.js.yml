@@ -45,8 +45,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: "echo Hello World"
-  #scripts/deploy-docker.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+          port: 22
+          script: "scripts/deploy-docker.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}"
 
   test:
     runs-on: ubuntu-latest
