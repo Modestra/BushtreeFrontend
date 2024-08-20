@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: "./scripts/deploy-docker.sh"
+          script: "./usr/src/bushtreebackend/bushtree/scripts/docker-install.sh"
   test:
     runs-on: ubuntu-latest
     defaults:
