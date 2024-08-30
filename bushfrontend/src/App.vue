@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
       <div class="container">
         <RouterLink class="navbar-brand" to="/" active-class="active"
           >Bushtree</RouterLink
@@ -61,12 +61,41 @@ import { RouterLink, RouterView } from "vue-router";
 
   <RouterView />
 
-  <footer class="footer mt-auto py-3 bg-light">
+  <footer class="footer mt-auto py-3 bg-light fullWidth">
     <div class="container">
-      <span class="text-muted">Здесь футер</span>
+      <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+          <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+            <svg class="bi" width="1em" height="1em">
+              <use xlink:href="#toggles2"></use>
+            </svg>
+          </div>
+          <div>
+            <p class="text-start">Просто выберите параметры вашего участка</p>
+          </div>
+        </div>
+        <div class="col d-flex align-items-start">
+          <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+            <svg class="bi" width="1em" height="1em">
+              <use xlink:href="#cpu-fill"></use>
+            </svg>
+          </div>
+          <div>
+            <p class="text-start">
+              Мы предложим подходящие цветы и варианты рассадки
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 </template>
 
 <style>
+.fullWidth {
+  max-width: 100% !important;
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
 </style>
