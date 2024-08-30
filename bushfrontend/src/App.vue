@@ -27,13 +27,15 @@ import { RouterLink, RouterView } from "vue-router";
               <RouterLink
                 class="nav-link"
                 aria-current="page"
-                to="/about"
+                to="/gensettings"
                 active-class="active"
                 >Инструкция</RouterLink
               >
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/">Готовые решения</RouterLink>
+              <RouterLink class="nav-link" to="/results"
+                >Готовые решения</RouterLink
+              >
             </li>
             <li class="nav-item">
               <RouterLink
@@ -48,7 +50,7 @@ import { RouterLink, RouterView } from "vue-router";
           <form class="d-flex">
             <RouterLink
               class="btn btn-outline-success"
-              to="/about"
+              to="/gensettings"
               active-class="active"
             >
               Создать цветник
