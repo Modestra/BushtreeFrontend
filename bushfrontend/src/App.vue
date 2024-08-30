@@ -61,9 +61,11 @@ import { RouterLink, RouterView } from "vue-router";
 
   <RouterView />
 
-  <footer class="footer mt-auto py-3 bg-light fullWidth">
+  <footer class="footer mt-auto py-3 bg-light fullWidthFooterBootstrapFix">
     <div class="container">
-      <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div
+        class="row justify-content-between g-4 py-5 row-cols-1 row-cols-lg-3"
+      >
         <div class="col d-flex align-items-start">
           <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
             <svg class="bi" width="1em" height="1em">
@@ -71,7 +73,9 @@ import { RouterLink, RouterView } from "vue-router";
             </svg>
           </div>
           <div>
-            <p class="text-start">Просто выберите параметры вашего участка</p>
+            <p class="text-start">bushtreeee@gmail.com</p>
+            <p class="text-start">+7 (964) 300-45-10</p>
+            <p class="text-start">© 2024 BushTree. Все права защищены</p>
           </div>
         </div>
         <div class="col d-flex align-items-start">
@@ -81,9 +85,9 @@ import { RouterLink, RouterView } from "vue-router";
             </svg>
           </div>
           <div>
-            <p class="text-start">
-              Мы предложим подходящие цветы и варианты рассадки
-            </p>
+            <p class="text-start">Остались вопросы и не нашли ответы?</p>
+            <p class="text-start">Пишите в Telegram или WhatsApp!</p>
+            <p class="text-start">Дизайн и разработка</p>
           </div>
         </div>
       </div>
@@ -92,7 +96,7 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <style>
-.fullWidth {
+.fullWidthFooterBootstrapFix {
   max-width: 100% !important;
   position: absolute;
   left: 0;
