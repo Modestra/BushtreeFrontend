@@ -50,18 +50,19 @@
       <div class="g-4 py-5">
         <div class="flower-item">
           <div class="flower-item-texts">
-            <div class="flower-item-texts-title">
-              <p>1</p>
-              <p>Щучка Душистая</p>
+            <div class="flower-item-texts-title row justify-content-center">
+              <h4 class="col text-start">1</h4>
+              <h4 class="col text-start">Щучка дернистая</h4>
+              <p class="col-lg-6 text-start"></p>
             </div>
             <div class="flower-item-texts-descr">
-              <p>
+              <p class="text-start">
                 Многолетний дерновинный злак, образующий кочки. Стебли
                 прямостоячие с расставленными узлами. Листья длинные,
                 тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
                 что придаёт кочке полукруглый, каскадообразный вид.
               </p>
-              <p>
+              <p class="text-start">
                 Общее соцветие — раскидистые метелки длиной 10–25 см. Зацветают
                 зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
                 становятся светло-золотистыми и выгорают до светло-соломенного.
