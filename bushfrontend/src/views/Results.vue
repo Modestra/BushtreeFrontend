@@ -47,11 +47,13 @@
     </div>
     <div class="container px-4 py-5">
       <h2 class="pb-2 mr-auto text-start">Цветы</h2>
-      <div class="g-4 py-5">
-        <div class="flower-item">
-          <div class="flower-item-texts">
-            <div class="flower-item-texts-title row justify-content-center">
-              <h4 class="col text-start">1</h4>
+      <div class="py-3">
+        <div class="flower-item row g-4 py-5" v-for="index in 6" :key="index">
+          <div class="flower-item-texts py-5 col-lg-8">
+            <div
+              class="flower-item-texts-title border-bottom my-4 row justify-content-center"
+            >
+              <h4 class="col text-start">{{ index }}</h4>
               <h4 class="col text-start">Щучка дернистая</h4>
               <p class="col-lg-6 text-start"></p>
             </div>
@@ -69,7 +71,7 @@
               </p>
             </div>
           </div>
-          <div class="flower-item-pic g-4 py-5">
+          <div class="flower-item-pic col g-4 py-5">
             <img src="#" alt="#" />
           </div>
         </div>
