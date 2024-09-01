@@ -2,8 +2,10 @@
   <div class="py-2"></div>
   <div class="container px-4 py-5">
     <h1>Настройте параметры вашего будущего цветника</h1>
-    <div class="container px-4 py-5">
-      <div class="options-group-all">
+    <div
+      class="container px-4 py-5 row justify-content-left g-4 py-5 row-cols-1 row-cols-lg-2"
+    >
+      <div class="options-group-1">
         <h4 class="text-start">Начало цветения</h4>
         <div class="text-start">
           <div class="form-check">
@@ -64,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="options-group-1">
+      <div class="options-group-2">
         <h4 class="text-start">Конец цветения</h4>
         <div class="text-start">
           <div class="form-check">
@@ -125,7 +127,7 @@
           </div>
         </div>
       </div>
-      <div class="options-group-1">
+      <div class="options-group-3">
         <h4 class="text-start">Освещённость</h4>
         <div class="text-start">
           <div class="form-check">
@@ -164,7 +166,7 @@
           </div>
         </div>
       </div>
-      <div class="options-group-1">
+      <div class="options-group-4">
         <h4 class="text-start">Режим полива</h4>
         <div class="text-start">
           <div class="form-check">
@@ -214,7 +216,7 @@
           </div>
         </div>
       </div>
-      <div class="options-group-1">
+      <div class="options-group-5">
         <h4 class="text-start">Режим полива</h4>
         <div class="text-start">
           <div class="form-check">
