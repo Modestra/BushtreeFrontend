@@ -105,3 +105,6 @@ import { RouterLink, RouterView } from "vue-router";
   width: 100%;
 }
 </style>
+
+<script setup>
+</script>

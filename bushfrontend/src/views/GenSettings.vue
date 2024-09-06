@@ -282,7 +282,60 @@
       <button class="btn btn-outline-success">Сгенерировать</button>
     </div>
   </div>
+  <form @submit.prevent="onSubmit">
+    <img
+      class="mb-4"
+      src="../assets/brand/bootstrap-logo.svg"
+      alt=""
+      width="72"
+      height="57"
+    />
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input
+        type="username"
+        class="form-control"
+        id="floatingInput"
+        placeholder="name@example.com"
+        v-model="formData.username"
+        ref="username"
+      />
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="Username"
+        class="form-control"
+        id="floatingPassword"
+        placeholder="Password"
+        v-model="formData.date"
+        ref="date"
+      />
+      <label for="floatingPassword">Date</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
 </template>
 
 <style>
 </style>
+
+<script setup>
+import { ref } from "vue";
+import { GetSession, CreateSession } from "../services/sessions";
+
+GetSession().then((resp) => {
+  console.log(resp);
+});
+
+const formData = ref({
+  username: "",
+  date: "",
+});
+
+async function onSubmit() {
+  CreateSession(formData);
+}
+</script>
