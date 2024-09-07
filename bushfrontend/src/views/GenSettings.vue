@@ -319,23 +319,22 @@
   </form>
 </template>
 
-<style>
-</style>
+<style></style>
 
-<script setup>
-import { ref } from "vue";
-import { GetSession, CreateSession } from "../services/sessions";
+<script setup lang="ts">
+import { Ref, ref } from "vue";
+import { CreateSession, GetSession } from "../services/sessions";
+import { Seccion } from "../entities/seccion";
 
 GetSession().then((resp) => {
   console.log(resp);
 });
 
-const formData = ref({
+const formData: Ref<Seccion> = ref({
   username: "",
   date: "",
 });
-
 async function onSubmit() {
-  CreateSession(formData);
+  CreateSession(formData.value);
 }
 </script>

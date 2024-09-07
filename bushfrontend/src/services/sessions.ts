@@ -1,7 +1,8 @@
+import { Seccion } from "../entities/seccion.ts";
 import { HTTP } from "../http.ts";
 
 //Получить данные по всем мероприятиям
-export function CreateSession(data) {
+export function CreateSession(data: Seccion) {
   return HTTP.post("/createseccion/", data, {
     headers: {
       "Content-Type": "application/json",
@@ -13,12 +14,9 @@ export function CreateSession(data) {
 }
 
 export function GetSession() {
-  return HTTP.get("/seccions/list/", {
+  return HTTP.get("/seccions/list", {
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "*",
-      "Access-Control-Allow-Headers": "*",
     },
   });
 }
