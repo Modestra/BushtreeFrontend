@@ -1,8 +1,8 @@
-import { Seccion } from "../entities/seccion.ts";
+import { Session } from "../entities/session.ts";
 import { HTTP } from "../http.ts";
 
 //Получить данные по всем мероприятиям
-export function CreateSession(data: Seccion) {
+export function CreateSession(data: Session) {
   return HTTP.post("/createseccion/", data, {
     headers: {
       "Content-Type": "application/json",
@@ -13,6 +13,7 @@ export function CreateSession(data: Seccion) {
   });
 }
 
+//Тест на получение данных
 export function GetSession() {
   return HTTP.get("/seccions/list", {
     headers: {

@@ -292,7 +292,7 @@
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
-        v-model="formData.username"
+        v-model="formData.Name"
         ref="username"
       />
       <label for="floatingInput">Username</label>
@@ -303,7 +303,7 @@
         class="form-control"
         id="floatingPassword"
         placeholder="Password"
-        v-model="formData.date"
+        v-model="formData.Description"
         ref="date"
       />
       <label for="floatingPassword">Date</label>
@@ -318,17 +318,28 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { CreateSession, GetSession } from "../services/sessions";
-import { Seccion } from "../entities/seccion";
+// import { Session } from "../entities/session";
+import { postFlowerComp } from "../services/flowers";
+import { FlowerComp } from "../entities/flowercomp";
 
 GetSession().then((resp) => {
   console.log(resp);
 });
 
-const formData: Ref<Seccion> = ref({
-  username: "",
-  date: "",
+const formData: Ref<FlowerComp> = ref({
+  Name: "",
+  Description: "",
+  Frozen_resistance: "",
+  Sunlight: "",
+  Period_blossom_start: "",
+  Period_blossom_end: "",
+  Height: "",
+  Color_bloss_name: "",
+  Color_bloss_hex: "",
+  Color_leaves_name: "",
+  Color_leaves_hex: "",
 });
 async function onSubmit() {
-  CreateSession(formData.value);
+  postFlowerComp(formData.value);
 }
 </script>

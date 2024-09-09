@@ -1,8 +1,9 @@
 import { HTTP } from "../http.ts";
+import { FlowerComp } from "../entities/flowercomp.ts";
 
-//Получить данные по всем мероприятиям
-export function getTestApiResponse() {
-  return HTTP.get("/getseccions/", {
+//Отправить данные цветника пользователя
+export function postFlowerComp(data: FlowerComp) {
+  return HTTP.post("/createflowers", data, {
     headers: {
       "Content-Type": "application/json",
     },
