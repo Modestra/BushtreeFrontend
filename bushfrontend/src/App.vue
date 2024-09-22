@@ -97,14 +97,12 @@ import { RouterLink, RouterView } from "vue-router";
   </footer>
 </template>
 
-<style>
+<style lang="scss">
 .fullWidthFooterBootstrapFix {
   max-width: 100% !important;
   position: absolute;
   left: 0;
   width: 100%;
+  @include footer-gradient(background);
 }
 </style>
-
-<script setup>
-</script>
