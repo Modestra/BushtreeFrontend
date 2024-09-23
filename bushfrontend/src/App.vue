@@ -5,8 +5,8 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-      <div class="container">
+    <nav class="navbar navbar-expand-md fixed-top my-1">
+      <div class="container glass-effect-1 g-4 py-2">
         <RouterLink class="navbar-brand" to="/" active-class="active"
           >Bushtree</RouterLink
         >
@@ -49,7 +49,7 @@ import { RouterLink, RouterView } from "vue-router";
           </ul>
           <form class="d-flex">
             <RouterLink
-              class="btn btn-outline-success"
+              class="btn btn-outline-success text-black bg-white"
               to="/gensettings"
               active-class="active"
             >
@@ -63,13 +63,13 @@ import { RouterLink, RouterView } from "vue-router";
 
   <RouterView />
 
-  <footer class="footer mt-auto py-3 bg-light fullWidthFooterBootstrapFix">
+  <footer class="footer mt-auto py-3 fullWidthFooterBootstrapFix">
     <div class="container">
       <div
-        class="row justify-content-between g-4 py-5 row-cols-1 row-cols-lg-3"
+        class="row justify-content-between g-4 py-5 row-cols-1 row-cols-lg-3 text-white"
       >
         <div class="col d-flex align-items-start">
-          <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <div class="icon-square flex-shrink-0 me-3">
             <svg class="bi" width="1em" height="1em">
               <use xlink:href="#toggles2"></use>
             </svg>
@@ -81,7 +81,7 @@ import { RouterLink, RouterView } from "vue-router";
           </div>
         </div>
         <div class="col d-flex align-items-start">
-          <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <div class="icon-square flex-shrink-0 me-3">
             <svg class="bi" width="1em" height="1em">
               <use xlink:href="#cpu-fill"></use>
             </svg>
@@ -104,5 +104,19 @@ import { RouterLink, RouterView } from "vue-router";
   left: 0;
   width: 100%;
   @include footer-gradient(background);
+}
+.glass-effect-1 {
+  /* From https://css.glass */
+  background: $bshtr-green-1-opas25;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid $bshtr-green-1;
+}
+
+body {
+  background-color: $bshtr-darkgreen !important;
+  --bs-body-bg: $bshtr-green-1;
 }
 </style>
