@@ -119,4 +119,16 @@ body {
   background-color: $bshtr-darkgreen !important;
   --bs-body-bg: $bshtr-green-1;
 }
+
+.glowBehind-1 {
+  background: radial-gradient(
+    closest-side,
+    $bshtr-green-bggrad1,
+    transparent 99%
+  );
+}
+
+.border-bshtr-green1 {
+  border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
+}
 </style>

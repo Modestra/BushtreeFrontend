@@ -9,40 +9,62 @@
         Подберем идеальный цветник для вашего участка
       </h1>
       <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="col d-flex align-items-start">
-          <div>
-            <p class="text-center">
-              Выберите параметры вашего участка и мы предложим подходящие цветы
-              и варианты рассадки
-            </p>
-          </div>
+        <div class="col align-items-center">
+          <p class="text-center">
+            Выберите параметры вашего участка и мы предложим подходящие цветы
+            и варианты рассадки
+          </p>
+          <form class="d-flex justify-content-center">
+            <RouterLink
+              class="btn btn-outline-success text-black bg-white"
+              to="/gensettings"
+              active-class="active"
+            >
+              Создать цветник
+            </RouterLink>
+          </form>
         </div>
       </div>
     </div>
+
+    <div class="container px-4 py-5">
+      <h2 class="pb-2 mr-auto text-center text-uppercase">Готовые решения</h2>
+      <div></div>
+    </div>
+
     <div class="container px-4 py-5">
       <h2 class="pb-2 mr-auto text-center text-uppercase">
         Кому подойдёт сервис?
       </h2>
       <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="card text-bg-light mb-3" style="max-width: 18rem">
-          <div class="card-header">Бизнес</div>
+        <div
+          class="card text-bg-dark mb-3 border-bshtr-green1"
+          style="max-width: 18rem"
+        >
           <div class="card-body">
+            <p>Бизнес</p>
             <p class="card-text">
               Для предпринимателей, которые занимаются озеленением
             </p>
           </div>
         </div>
-        <div class="card text-bg-light mb-3" style="max-width: 18rem">
-          <div class="card-header">Садоводство</div>
+        <div
+          class="card text-bg-dark mb-3 border-bshtr-green1"
+          style="max-width: 18rem"
+        >
           <div class="card-body">
+            <p>Садоводство</p>
             <p class="card-text">
               Для садоводов, которые хотят создать красивый цветник
             </p>
           </div>
         </div>
-        <div class="card mb-3" style="max-width: 18rem">
-          <div class="card-header">Дизайн</div>
+        <div
+          class="card text-bg-dark mb-3 border-bshtr-green1"
+          style="max-width: 18rem"
+        >
           <div class="card-body">
+            <p>Дизайн</p>
             <p class="card-text">
               Для ландшафтных архитекторов, которые ценят свое время
             </p>
@@ -50,12 +72,14 @@
         </div>
       </div>
     </div>
+
     <div class="container px-4 py-5">
       <h2 class="pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>
     </div>
-    <div class="container px-4 py-5">
+
+    <div class="container px-4 py-5 glowBehind-1">
       <h2 class="pb-2 mr-auto text-center text-uppercase">
         Ответы на популярные вопросы
       </h2>
@@ -171,7 +195,10 @@
 .accordion {
   --bs-accordion-active-bg: transparent;
   --bs-accordion-btn-bg: transparent;
-  --bs-accordion-btn-color: green;
-  --bs-accordion-active-color: red;
+  // --bs-accordion-btn-color: green;
+  // --bs-accordion-active-color: red;
+}
+.card {
+  @include card-gradient(background);
 }
 </style>
