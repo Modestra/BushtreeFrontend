@@ -27,7 +27,7 @@ import { RouterLink, RouterView } from "vue-router";
               <RouterLink
                 class="nav-link"
                 aria-current="page"
-                to="/gensettings"
+                to="/"
                 active-class="active"
                 >Инструкция</RouterLink
               >

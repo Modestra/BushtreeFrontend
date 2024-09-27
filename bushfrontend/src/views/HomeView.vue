@@ -2,34 +2,181 @@
 </script>
 
 <template>
-  <div class="py-5"></div>
   <div>
-    <div class="container px-4 py-5">
-      <h1 class="pb-2 mr-auto text-center text-uppercase">
-        Подберем идеальный цветник для вашего участка
-      </h1>
-      <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="col align-items-center">
-          <p class="text-center">
-            Выберите параметры вашего участка и мы предложим подходящие цветы
-            и варианты рассадки
-          </p>
-          <form class="d-flex justify-content-center">
-            <RouterLink
-              class="btn btn-outline-success text-black bg-white"
-              to="/gensettings"
-              active-class="active"
-            >
-              Создать цветник
-            </RouterLink>
-          </form>
+    <div class="landing-hero py-5">
+      <div class="container px-4 py-5">
+        <h1 class="pb-2 mr-auto text-center text-uppercase">
+          Подберем идеальный цветник для вашего участка
+        </h1>
+        <div
+          class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
+        >
+          <div class="col align-items-center">
+            <p class="text-center">
+              Выберите параметры вашего участка и мы предложим подходящие цветы
+              и варианты рассадки
+            </p>
+            <form class="d-flex justify-content-center">
+              <RouterLink
+                class="btn btn-outline-success text-black bg-white"
+                to="/gensettings"
+                active-class="active"
+              >
+                Создать цветник
+              </RouterLink>
+            </form>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container px-4 py-5">
       <h2 class="pb-2 mr-auto text-center text-uppercase">Готовые решения</h2>
-      <div></div>
+      <div>
+        <div
+          class="carousel slide"
+          id="carouselDemo"
+          data-bs-wrap="true"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="@assets/img/flowerbed-1.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 0</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="2000">
+              <img src="@assets/img/flowerbed-2.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 1</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="@assets/img/flowerbed-3.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 2</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="@assets/img/flowerbed-4.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 3</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="@assets/img/flowerbed-5.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 4</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="@assets/img/flowerbed-6.png" class="w-100" />
+              <div class="carousel-caption">
+                <h5>Title Slide 5</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Modi, nemo?
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselDemo"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselDemo"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              class="active"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="0"
+            >
+              <img src="@assets/img/flowerbed-1.png" />
+            </button>
+
+            <button
+              type="button"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="1"
+            >
+              <img src="@assets/img/flowerbed-2.png" />
+            </button>
+
+            <button
+              type="button"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="2"
+            >
+              <img src="@assets/img/flowerbed-3.png" />
+            </button>
+
+            <button
+              type="button"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="3"
+            >
+              <img src="@assets/img/flowerbed-4.png" />
+            </button>
+
+            <button
+              type="button"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="4"
+            >
+              <img src="@assets/img/flowerbed-5.png" />
+            </button>
+
+            <button
+              type="button"
+              data-bs-target="#carouselDemo"
+              data-bs-slide-to="5"
+            >
+              <img src="@assets/img/flowerbed-6.png" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="container px-4 py-5">
@@ -192,6 +339,9 @@
 </template>
 
 <style lang="scss" scoped>
+.landing-hero {
+  background-image: url("@assets/img/image-neural-network-generates-flowers.png");
+}
 .accordion {
   --bs-accordion-active-bg: transparent;
   --bs-accordion-btn-bg: transparent;
@@ -200,5 +350,16 @@
 }
 .card {
   @include card-gradient(background);
+}
+
+.carousel-indicators img {
+  width: 70px;
+  display: block;
+}
+.carousel-indicators button {
+  width: max-content !important;
+}
+.carousel-indicators {
+  position: unset;
 }
 </style>
