@@ -5,9 +5,11 @@
   <div>
     <div class="landing-hero py-5">
       <div class="container px-4 py-5">
-        <h1 class="pb-2 mr-auto text-center text-uppercase">
+        <h1 class="h1_bigger1 pb-2 mr-auto text-center text-uppercase">
           Подберем идеальный цветник для вашего участка
         </h1>
+        <div class="p-5"></div>
+        <div class="p-5"></div>
         <div
           class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
         >
@@ -18,11 +20,11 @@
             </p>
             <form class="d-flex justify-content-center">
               <RouterLink
-                class="btn btn-outline-success text-black bg-white"
+                class="btn btn-outline-success text-black bg-white px-4 py-2"
                 to="/gensettings"
                 active-class="active"
               >
-                Создать цветник
+                Узнать подробнее
               </RouterLink>
             </form>
           </div>
@@ -31,10 +33,12 @@
     </div>
 
     <div class="container px-4 py-5">
-      <h2 class="pb-2 mr-auto text-center text-uppercase">Готовые решения</h2>
+      <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
+        Готовые решения
+      </h2>
       <div>
         <div
-          class="carousel slide"
+          class="carousel slide col"
           id="carouselDemo"
           data-bs-wrap="true"
           data-bs-ride="carousel"
@@ -180,38 +184,41 @@
     </div>
 
     <div class="container px-4 py-5">
-      <h2 class="pb-2 mr-auto text-center text-uppercase">
+      <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         Кому подойдёт сервис?
       </h2>
       <div class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3">
         <div
-          class="card text-bg-dark mb-3 border-bshtr-green1"
-          style="max-width: 18rem"
+          class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+          style="max-width: 24rem"
         >
-          <div class="card-body">
-            <p>Бизнес</p>
+          <div class="card-body px-2">
+            <img src="@assets/img/landing-project.svg" class="pb-5" />
+            <p class="h5 fw-normal">Бизнес</p>
             <p class="card-text">
               Для предпринимателей, которые занимаются озеленением
             </p>
           </div>
         </div>
         <div
-          class="card text-bg-dark mb-3 border-bshtr-green1"
-          style="max-width: 18rem"
+          class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+          style="max-width: 24rem"
         >
-          <div class="card-body">
-            <p>Садоводство</p>
+          <div class="card-body px-2">
+            <img src="@assets/img/landing-gardening.svg" class="pb-5" />
+            <p class="h5 fw-normal">Садоводство</p>
             <p class="card-text">
               Для садоводов, которые хотят создать красивый цветник
             </p>
           </div>
         </div>
         <div
-          class="card text-bg-dark mb-3 border-bshtr-green1"
-          style="max-width: 18rem"
+          class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+          style="max-width: 24rem"
         >
-          <div class="card-body">
-            <p>Дизайн</p>
+          <div class="card-body px-2">
+            <img src="@assets/img/landing-designer.svg" class="pb-5" />
+            <p class="h5 fw-normal">Дизайн</p>
             <p class="card-text">
               Для ландшафтных архитекторов, которые ценят свое время
             </p>
@@ -221,13 +228,13 @@
     </div>
 
     <div class="container px-4 py-5">
-      <h2 class="pb-2 mr-auto text-center text-uppercase">
+      <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>
     </div>
 
     <div class="container px-4 py-5 glowBehind-1">
-      <h2 class="pb-2 mr-auto text-center text-uppercase">
+      <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         Ответы на популярные вопросы
       </h2>
       <div>
@@ -340,7 +347,8 @@
 
 <style lang="scss" scoped>
 .landing-hero {
-  background-image: url("@assets/img/image-neural-network-generates-flowers.png");
+  background-image: url("@assets/img/landing-image-neural-network-generates-flowers.png");
+  background-repeat: no-repeat;
 }
 .accordion {
   --bs-accordion-active-bg: transparent;

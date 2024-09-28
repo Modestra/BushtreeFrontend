@@ -49,7 +49,7 @@ import { RouterLink, RouterView } from "vue-router";
           </ul>
           <form class="d-flex">
             <RouterLink
-              class="btn btn-outline-success text-black bg-white"
+              class="btn btn-outline-success text-black bg-white px-3"
               to="/gensettings"
               active-class="active"
             >
@@ -130,5 +130,14 @@ body {
 
 .border-bshtr-green1 {
   border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
+}
+
+.h1_bigger1 {
+  font-size: calc(1.375rem + 2vw);
+}
+@media (max-width: 1200px) {
+  .h1_bigger1 {
+    font-size: 3rem;
+  }
 }
 </style>
