@@ -236,10 +236,48 @@
       <div class="row justify-content-center g-4 py-5 mx-auto align-self-end">
         <div class="col align-items-center">
           <div class="landing-4steps">
-            <div><div>Выберите параметры своего участка</div></div>
-            <div><div>Нажмите кнопку «Сгенерировать»</div></div>
-            <div><div>Посмотрите результат</div></div>
-            <div><div>Скачайте материалы</div></div>
+            <div class="row align-items-center">
+              <div class="col">Выберите параметры своего участка</div>
+              <div class="col">
+                <div
+                  class="landing-littleVectorFlower d-flex justify-content-center"
+                >
+                  <div class="p-0 m-0 g-0 text-center align-self-center h5">
+                    1
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>Нажмите кнопку «Сгенерировать»</div>
+              <div
+                class="landing-littleVectorFlower d-flex justify-content-center"
+              >
+                <div class="p-0 m-0 g-0 text-center align-self-center h5">
+                  2
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="landing-littleVectorFlower d-flex justify-content-center"
+              >
+                <div class="p-0 m-0 g-0 text-center align-self-center h5">
+                  3
+                </div>
+              </div>
+              <div>Посмотрите результат</div>
+            </div>
+            <div>
+              <div
+                class="landing-littleVectorFlower d-flex justify-content-center"
+              >
+                <div class="p-0 m-0 g-0 text-center align-self-center h5">
+                  4
+                </div>
+              </div>
+              <div>Скачайте материалы</div>
+            </div>
           </div>
           <form class="d-flex justify-content-center">
             <RouterLink
@@ -379,6 +417,13 @@
   background-image: url("@assets/img/landing-round_flowers.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.landing-littleVectorFlower {
+  background-image: url("@assets/img/LittleVectorFlower.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 55px;
 }
 .accordion {
   --bs-accordion-active-bg: transparent;
