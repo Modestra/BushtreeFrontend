@@ -1,30 +1,32 @@
-<script setup lang="ts">
+<script setup>
 </script>
 
 <template>
   <div>
-    <div class="landing-hero py-5">
-      <div class="container px-4 py-5">
-        <h1 class="h1_bigger1 pb-2 mr-auto text-center text-uppercase">
+    <div class="landing-hero pt-5" style="height: 120vh">
+      <div class="container px-4 py-5 d-flex flex-column" style="height: 100%">
+        <h1
+          class="h1_bigger1 pb-2 mr-auto text-center text-uppercase align-self-start"
+        >
           Подберем идеальный цветник для вашего участка
         </h1>
-        <div class="p-5"></div>
-        <div class="p-5"></div>
         <div
-          class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
+          class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-2 mx-auto align-self-end"
         >
           <div class="col align-items-center">
-            <p class="text-center">
+            <p class="text-center pb-4">
               Выберите параметры вашего участка и мы предложим подходящие цветы
               и варианты рассадки
             </p>
             <form class="d-flex justify-content-center">
               <RouterLink
-                class="btn btn-outline-success text-black bg-white px-4 py-2"
+                class="btn btn-outline-success text-black bg-white px-4 py-3"
                 to="/gensettings"
                 active-class="active"
               >
-                Узнать подробнее
+                <p class="justify-content-center h5 fw-normal p-0 m-0">
+                  Узнать подробнее
+                </p>
               </RouterLink>
             </form>
           </div>
@@ -38,14 +40,14 @@
       </h2>
       <div>
         <div
-          class="carousel slide col"
+          class="carousel slide row"
           id="carouselDemo"
           data-bs-wrap="true"
           data-bs-ride="carousel"
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="@assets/img/flowerbed-1.png" class="w-100" />
+              <img src="@assets/img/flowerbed-1.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 0</h5>
                 <p>
@@ -55,8 +57,8 @@
               </div>
             </div>
 
-            <div class="carousel-item" data-bs-interval="2000">
-              <img src="@assets/img/flowerbed-2.png" class="w-100" />
+            <div class="carousel-item" data-bs-interval="20000">
+              <img src="@assets/img/flowerbed-2.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 1</h5>
                 <p>
@@ -67,7 +69,7 @@
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-3.png" class="w-100" />
+              <img src="@assets/img/flowerbed-3.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 2</h5>
                 <p>
@@ -78,7 +80,7 @@
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-4.png" class="w-100" />
+              <img src="@assets/img/flowerbed-4.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 3</h5>
                 <p>
@@ -89,7 +91,7 @@
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-5.png" class="w-100" />
+              <img src="@assets/img/flowerbed-5.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 4</h5>
                 <p>
@@ -100,7 +102,7 @@
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-6.png" class="w-100" />
+              <img src="@assets/img/flowerbed-6.png" class="w-50" />
               <div class="carousel-caption">
                 <h5>Title Slide 5</h5>
                 <p>
@@ -231,6 +233,27 @@
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>
+      <div class="row justify-content-center g-4 py-5 mx-auto align-self-end">
+        <div class="col align-items-center">
+          <div class="landing-4steps">
+            <div><div>Выберите параметры своего участка</div></div>
+            <div><div>Нажмите кнопку «Сгенерировать»</div></div>
+            <div><div>Посмотрите результат</div></div>
+            <div><div>Скачайте материалы</div></div>
+          </div>
+          <form class="d-flex justify-content-center">
+            <RouterLink
+              class="btn btn-outline-success text-black bg-white px-4 py-3"
+              to="/gensettings"
+              active-class="active"
+            >
+              <p class="justify-content-center h5 fw-normal p-0 m-0">
+                Узнать подробнее
+              </p>
+            </RouterLink>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="container px-4 py-5 glowBehind-1">
@@ -349,6 +372,13 @@
 .landing-hero {
   background-image: url("@assets/img/landing-image-neural-network-generates-flowers.png");
   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-4steps {
+  background-image: url("@assets/img/landing-round_flowers.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .accordion {
   --bs-accordion-active-bg: transparent;
