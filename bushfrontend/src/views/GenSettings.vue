@@ -9,6 +9,7 @@
         <div>
           <div class="options-group-1">
             <h4 class="text-start">Период цветения</h4>
+            <Slider v-model="value" range class="w-56" />
           </div>
         </div>
         <div class="row-cols-1 row-cols-lg-2">
@@ -179,6 +180,9 @@ import { CreateSession, GetSession } from "../services/sessions";
 // import { Session } from "../entities/session";
 import { postFlowerComp } from "../services/flowers";
 import { FlowerComp } from "../entities/flowercomp";
+
+import Slider from "primevue/slider";
+var value = 1;
 
 GetSession().then((resp) => {
   console.log(resp);

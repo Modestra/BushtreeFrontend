@@ -47,69 +47,27 @@
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="@assets/img/flowerbed-1.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 0</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-1.png" class="w-100" />
             </div>
 
             <div class="carousel-item" data-bs-interval="20000">
-              <img src="@assets/img/flowerbed-2.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 1</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-2.png" class="w-100" />
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-3.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 2</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-3.png" class="w-100" />
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-4.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 3</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-4.png" class="w-100" />
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-5.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 4</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-5.png" class="w-100" />
             </div>
 
             <div class="carousel-item">
-              <img src="@assets/img/flowerbed-6.png" class="w-50" />
-              <div class="carousel-caption">
-                <h5>Title Slide 5</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Modi, nemo?
-                </p>
-              </div>
+              <img src="@assets/img/flowerbed-6.png" class="w-100" />
             </div>
           </div>
 

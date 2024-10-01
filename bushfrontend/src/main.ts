@@ -4,8 +4,16 @@ import App from "./App.vue";
 import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import PrimeVue from "primevue/config";
+import Aura from "@primevue/themes/aura";
 
 const app = createApp(App);
 
 app.use(router);
 app.mount("#app");
+
+app.use(PrimeVue, {
+  theme: {
+    preset: Aura,
+  },
+});
