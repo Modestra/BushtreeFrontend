@@ -1,5 +1,40 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { onMounted } from "vue";
+import { db, storage } from "@/firebase";
+import { collection, getDocs, query } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+onMounted(async () => {
+  const starsRef = ref(storage, "images/0.png"); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам
+  const flowers = [];
+  // Get the download URL
+  getDownloadURL(starsRef)
+    .then((url) => {
+      console.log(url);
+      // Insert url into an <img> tag to "download"
+    })
+    .catch((error) => {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case "storage/object-not-found":
+          // File doesn't exist
+          break;
+        case "storage/unauthorized":
+          // User doesn't have permission to access the object
+          break;
+        case "storage/canceled":
+          // User canceled the upload
+          break;
+
+        // ...
+
+        case "storage/unknown":
+          // Unknown error occurred, inspect the server response
+          break;
+      }
+    });
+});
 </script>
 
 <template>
