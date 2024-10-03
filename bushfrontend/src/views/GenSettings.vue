@@ -9,14 +9,13 @@
         <div>
           <div class="options-group-1">
             <h4 class="text-start">Период цветения</h4>
-            <div class="row">
-              <div class="col">Column</div>
-              <div class="col">Column</div>
-              <div class="col">Column</div>
-              <div class="col">Column</div>
-              <div class="col text-end">Column</div>
-            </div>
-            <VueSlider ref="slider" v-model="value"></VueSlider>
+            <VueSlider
+              ref="slider"
+              v-model="value"
+              :marks="true"
+              :min="0"
+              :max="5"
+            ></VueSlider>
           </div>
         </div>
         <div class="row-cols-1 row-cols-lg-2">
@@ -194,6 +193,48 @@ import "vue-slider-component/theme/antd.css";
 
 const value = ref([2, 4]);
 defineExpose({ value });
+
+// options: { // all slider options //
+//         dotSize: 14,
+//         width: 'auto',
+//         height: 4,
+//         contained: false,
+//         direction: 'ltr',
+// 	       data: null,
+//         dataLabel: 'label',
+//         dataValue: 'value',
+//         min: 0,
+//         max: 100,
+//         interval: 1,
+//         disabled: false,
+//         clickable: true,
+//         duration: 0.5,
+//         adsorb: false,
+//         lazy: false,
+//         tooltip: 'active',
+//         tooltipPlacement: 'top',
+//         tooltipFormatter: void 0,
+//         useKeyboard: false,
+//         keydownHook: null,
+//         dragOnClick: false,
+//         enableCross: true,
+//         fixed: false,
+//         minRange: void 0,
+//         maxRange: void 0,
+//         order: true,
+//         marks: true,
+//         dotOptions: void 0,
+//         dotAttrs: void 0,
+//         process: true,
+//         dotStyle: void 0,
+//         railStyle: void 0,
+//         processStyle: void 0,
+//         tooltipStyle: void 0,
+//         stepStyle: void 0,
+//         stepActiveStyle: void 0,
+//         labelStyle: void 0,
+//         labelActiveStyle: void 0,
+//       }
 
 GetSession().then((resp) => {
   console.log(resp);

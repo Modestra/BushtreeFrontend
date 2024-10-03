@@ -44,6 +44,12 @@ export default defineConfig({
           new URL("./src/shared/use", import.meta.url)
         ),
       },
+      {
+        find: "@node_modules",
+        replacement: fileURLToPath(
+          new URL("../../node_modules", import.meta.url)
+        ),
+      },
     ],
   },
   css: {
