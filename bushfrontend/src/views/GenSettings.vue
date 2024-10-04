@@ -1,180 +1,157 @@
 <template>
   <div class="py-5"></div>
   <div class="container px-4 py-5">
-    <h1 class="pb-4 mr-auto text-center text-uppercase">
+    <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
       Настройте параметры вашего будущего цветника
     </h1>
     <div>
       <div
         class="gensettings px-4 py-5 row justify-content-left g-4 py-5 rounded"
       >
-        <div>
-          <div class="options-group-1">
-            <h4 class="text-start">Период цветения</h4>
-            <VueSlider
-              ref="slider"
-              v-model="value"
-              :marks="true"
-              :min="0"
-              :max="5"
-            ></VueSlider>
+        <div class="col-8">
+          <div>
+            <div class="options-group-1">
+              <h4 class="text-start">Период цветения</h4>
+              <VueSlider
+                ref="slider"
+                v-model="value"
+                :marks="true"
+                :min="0"
+                :max="5"
+                class="m-5 mt-3 mx-0"
+              ></VueSlider>
+            </div>
+          </div>
+          <div class="row">
+            <div class="options-group-2 col py-4">
+              <h4 class="text-start text-truncate">Освещённость</h4>
+              <div
+                class="text-start whiteBlock text-black p-3 rounded border-primary h-100"
+              >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="lightnessradio"
+                    id="lightnessradio1"
+                  />
+                  <label class="form-check-label" for="lightnessradio1">
+                    Солнце
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="lightnessradio"
+                    id="lightnessradio2"
+                    checked
+                  />
+                  <label class="form-check-label" for="lightnessradio2">
+                    Полутень
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="lightnessradio"
+                    id="lightnessradio3"
+                  />
+                  <label class="form-check-label" for="lightnessradio3">
+                    Тень
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="options-group-3 col py-4">
+              <h4 class="text-start text-truncate">Режим полива</h4>
+              <div class="text-start whiteBlock text-black p-3 rounded h-100">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode1"
+                  />
+                  <label class="form-check-label" for="wateringMode1">
+                    частый
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode2"
+                    checked
+                  />
+                  <label class="form-check-label" for="wateringMode2">
+                    умеренный
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode3"
+                  />
+                  <label class="form-check-label" for="wateringMode3">
+                    редкий
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode4"
+                  />
+                  <label class="form-check-label" for="wateringMode4">
+                    сухой
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="options-group-4 col py-4">
+              <h4 class="text-start text-truncate">Цветовая гамма</h4>
+              <div class="text-start whiteBlock text-black p-3 rounded h-100">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode1"
+                  />
+                  <label class="form-check-label" for="wateringMode1">
+                    Май
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="wateringMode"
+                    id="wateringMode2"
+                    checked
+                  />
+                  <label class="form-check-label" for="wateringMode2">
+                    Июнь
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <button class="btn btn-outline-success text-black bg-white">
+              Сгенерировать
+            </button>
           </div>
         </div>
-        <div class="row-cols-1 row-cols-lg-2">
-          <div class="options-group-2">
-            <h4 class="text-start">Освещённость</h4>
-            <div class="text-start whiteBlock text-black p-3 rounded">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="lightnessradio"
-                  id="lightnessradio1"
-                />
-                <label class="form-check-label" for="lightnessradio1">
-                  Солнце
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="lightnessradio"
-                  id="lightnessradio2"
-                  checked
-                />
-                <label class="form-check-label" for="lightnessradio2">
-                  Полутень
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="lightnessradio"
-                  id="lightnessradio3"
-                />
-                <label class="form-check-label" for="lightnessradio3">
-                  Тень
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="options-group-3">
-            <h4 class="text-start">Режим полива</h4>
-            <div class="text-start whiteBlock text-black p-3 rounded">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode1"
-                />
-                <label class="form-check-label" for="wateringMode1">
-                  частый
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode2"
-                  checked
-                />
-                <label class="form-check-label" for="wateringMode2">
-                  умеренный
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode3"
-                />
-                <label class="form-check-label" for="wateringMode3">
-                  редкий
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode4"
-                />
-                <label class="form-check-label" for="wateringMode4">
-                  сухой
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="options-group-4">
-            <h4 class="text-start">Цветовая гамма</h4>
-            <div class="text-start whiteBlock text-black p-3 rounded">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode1"
-                />
-                <label class="form-check-label" for="wateringMode1">
-                  Май
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode2"
-                  checked
-                />
-                <label class="form-check-label" for="wateringMode2">
-                  Июнь
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode3"
-                />
-                <label class="form-check-label" for="wateringMode3">
-                  Июль
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode4"
-                />
-                <label class="form-check-label" for="wateringMode4">
-                  Август
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="wateringMode"
-                  id="wateringMode5"
-                />
-                <label class="form-check-label" for="wateringMode5">
-                  Сентябрь
-                </label>
-              </div>
-            </div>
-          </div>
+        <div class="col">
+          <img src="@assets/img/gen-flowers.png" style="width: 100%" />
         </div>
-      </div>
-      <div>
-        <button class="btn btn-outline-success">Сгенерировать</button>
       </div>
     </div>
   </div>
@@ -191,7 +168,6 @@ import { FlowerComp } from "../entities/flowercomp";
 
 import VueSlider from "vue-slider-component";
 // import "vue-slider-component/theme/default.css";
-import "vue-slider-component/theme/antd.css";
 
 const value = ref([2, 4]);
 defineExpose({ value });

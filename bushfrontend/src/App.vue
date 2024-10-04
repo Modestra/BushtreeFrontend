@@ -101,17 +101,37 @@ onMounted(async () => {
   <footer class="footer mt-auto py-3 fullWidthFooterBootstrapFix">
     <div class="container">
       <div
-        class="row justify-content-between g-4 py-5 row-cols-1 row-cols-lg-3 text-white"
+        class="row justify-content-between g-4 py-2 row-cols-1 row-cols-lg-3 text-white"
       >
         <div class="col d-flex align-items-start">
-          <div class="icon-square flex-shrink-0 me-3">
-            <svg class="bi" width="1em" height="1em">
-              <use xlink:href="#toggles2"></use>
-            </svg>
-          </div>
           <div>
             <p class="text-start">bushtreeee@gmail.com</p>
             <p class="text-start">+7 (964) 300-45-10</p>
+          </div>
+        </div>
+        <div class="col d-flex align-items-start">
+          <div class="icon-square flex-shrink-0 me-3">
+            <svg class="bi" width="1em" height="1em">
+              <use xlink:href="#cpu-fill"></use>
+            </svg>
+          </div>
+          <div>
+            <p class="text-start">
+              Остались вопросы и не нашли ответы? Пишите в Telegram или
+              WhatsApp!
+            </p>
+            <div>
+              <p class="text-start">@henry_chinaskey</p>
+              <p class="text-start">+7 (964) 300-45-10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between g-4 py-2 row-cols-1 row-cols-lg-3 text-white border-top border-primary"
+      >
+        <div class="col d-flex align-items-start">
+          <div>
             <p class="text-start">© 2024 BushTree. Все права защищены</p>
           </div>
         </div>
@@ -122,9 +142,7 @@ onMounted(async () => {
             </svg>
           </div>
           <div>
-            <p class="text-start">Остались вопросы и не нашли ответы?</p>
-            <p class="text-start">Пишите в Telegram или WhatsApp!</p>
-            <p class="text-start">Дизайн и разработка</p>
+            <p class="text-start">Дизайн и разработка союз. Дизайн фрипик</p>
           </div>
         </div>
       </div>
