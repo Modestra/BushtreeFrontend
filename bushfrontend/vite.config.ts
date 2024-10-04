@@ -27,6 +27,10 @@ export default defineConfig({
         replacement: fileURLToPath(new URL("./src/assets", import.meta.url)),
       },
       {
+        find: "@css",
+        replacement: fileURLToPath(new URL("./src/css", import.meta.url)),
+      },
+      {
         find: "@cmp",
         replacement: fileURLToPath(
           new URL("./src/shared/cmp", import.meta.url)

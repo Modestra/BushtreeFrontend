@@ -41,10 +41,10 @@ onMounted(async () => {
   <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md fixed-top my-1">
-      <div class="container glass-effect-1 g-4 py-2">
+      <div class="container glass-effect-1 g-4 py-2 d-flex">
         <RouterLink class="navbar-brand" to="/" active-class="active"
-          >Bushtree</RouterLink
-        >
+          ><img src="@assets/logo.svg" class=""
+        /></RouterLink>
         <button
           class="navbar-toggler"
           type="button"
@@ -56,8 +56,12 @@ onMounted(async () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <div
+          class="collapse navbar-collapse align-self-center"
+          id="navbarCollapse"
+        >
+          <ul class="navbar-nav mx-auto mb-2 mb-md-0">
+            <div></div>
             <li class="nav-item">
               <RouterLink
                 class="nav-link"
@@ -128,7 +132,7 @@ onMounted(async () => {
         </div>
       </div>
       <div
-        class="row justify-content-between g-4 py-2 row-cols-1 row-cols-lg-3 text-white border-top border-primary"
+        class="row justify-content-between g-4 my-1 py-1 row-cols-1 row-cols-lg-3 text-white border-top-dotted-f4f4f4"
       >
         <div class="col d-flex align-items-start">
           <div>
@@ -141,8 +145,18 @@ onMounted(async () => {
               <use xlink:href="#cpu-fill"></use>
             </svg>
           </div>
-          <div>
-            <p class="text-start">Дизайн и разработка союз. Дизайн фрипик</p>
+          <div class="row">
+            <div class="col row">
+              <p class="text-start col">Дизайн и разработка</p>
+              <img
+                src="@assets/img/logo-devBy.svg"
+                class="col"
+                style="width: 100%"
+              />
+            </div>
+            <div class="col">
+              <p>Design by Freepik</p>
+            </div>
           </div>
         </div>
       </div>
@@ -183,6 +197,11 @@ body {
 
 .border-bshtr-green1 {
   border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
+}
+
+.border-top-dotted-f4f4f4 {
+  border-style: dotted none none none;
+  border-color: #f4f4f4;
 }
 
 .h1_bigger1 {

@@ -167,7 +167,6 @@ import { postFlowerComp } from "../services/flowers";
 import { FlowerComp } from "../entities/flowercomp";
 
 import VueSlider from "vue-slider-component";
-// import "vue-slider-component/theme/default.css";
 
 const value = ref([2, 4]);
 defineExpose({ value });
