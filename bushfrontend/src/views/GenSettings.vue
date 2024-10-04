@@ -5,7 +5,9 @@
       Настройте параметры вашего будущего цветника
     </h1>
     <div>
-      <div class="gensettings px-4 py-5 row justify-content-left g-4 py-5">
+      <div
+        class="gensettings px-4 py-5 row justify-content-left g-4 py-5 rounded"
+      >
         <div>
           <div class="options-group-1">
             <h4 class="text-start">Период цветения</h4>
@@ -21,7 +23,7 @@
         <div class="row-cols-1 row-cols-lg-2">
           <div class="options-group-2">
             <h4 class="text-start">Освещённость</h4>
-            <div class="text-start whiteBlock text-black">
+            <div class="text-start whiteBlock text-black p-3 rounded">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -60,7 +62,7 @@
           </div>
           <div class="options-group-3">
             <h4 class="text-start">Режим полива</h4>
-            <div class="text-start whiteBlock text-black">
+            <div class="text-start whiteBlock text-black p-3 rounded">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -110,7 +112,7 @@
           </div>
           <div class="options-group-4">
             <h4 class="text-start">Цветовая гамма</h4>
-            <div class="text-start whiteBlock text-black">
+            <div class="text-start whiteBlock text-black p-3 rounded">
               <div class="form-check">
                 <input
                   class="form-check-input"
