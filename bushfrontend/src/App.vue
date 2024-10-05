@@ -103,56 +103,70 @@ onMounted(async () => {
   <RouterView />
 
   <footer class="footer mt-auto py-3 fullWidthFooterBootstrapFix">
-    <div class="container">
+    <div class="container pt-2">
       <div
-        class="row justify-content-between g-4 py-2 row-cols-1 row-cols-lg-3 text-white"
+        class="row justify-content-between g-4 py-2 pb-3 row-cols-1 row-cols-lg-2 text-white"
       >
         <div class="col d-flex align-items-start">
           <div>
-            <p class="text-start">bushtreeee@gmail.com</p>
-            <p class="text-start">+7 (964) 300-45-10</p>
+            <p class="text-start h5 fw-normal">bushtreeee@gmail.com</p>
+            <p class="text-start h5 fw-normal">+7 (964) 300-45-10</p>
           </div>
         </div>
         <div class="col d-flex align-items-start">
-          <div class="icon-square flex-shrink-0 me-3">
-            <svg class="bi" width="1em" height="1em">
-              <use xlink:href="#cpu-fill"></use>
-            </svg>
-          </div>
           <div>
-            <p class="text-start">
+            <div class="text-start h5 fw-normal pb-3">
               Остались вопросы и не нашли ответы? Пишите в Telegram или
               WhatsApp!
-            </p>
+            </div>
             <div>
-              <p class="text-start">@henry_chinaskey</p>
-              <p class="text-start">+7 (964) 300-45-10</p>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-telegram.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+                <div class="flex-grow-1 ms-3">@henry_chinaskey</div>
+              </div>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-whatsapp.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+                <div class="flex-grow-1 ms-3">+7 (964) 300-45-10</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="row justify-content-between g-4 my-1 py-1 row-cols-1 row-cols-lg-3 text-white border-top-dotted-f4f4f4"
+        class="row justify-content-between g-4 my-1 py-1 row-cols-1 row-cols-lg-2 text-white border-top-dotted-f4f4f4"
       >
-        <div class="col d-flex align-items-start">
+        <div class="col">
           <div>
             <p class="text-start">© 2024 BushTree. Все права защищены</p>
           </div>
         </div>
-        <div class="col d-flex align-items-start">
-          <div class="icon-square flex-shrink-0 me-3">
-            <svg class="bi" width="1em" height="1em">
-              <use xlink:href="#cpu-fill"></use>
-            </svg>
-          </div>
-          <div class="row">
-            <div class="col row">
-              <p class="text-start col">Дизайн и разработка</p>
-              <img
-                src="@assets/img/logo-devBy.svg"
-                class="col"
-                style="width: 100%"
-              />
+        <div class="col">
+          <div class="row d-flex align-items-end">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <p class="text-start col text-truncate">
+                    Дизайн и разработка
+                  </p>
+                </div>
+                <div class="col">
+                  <img
+                    src="@assets/img/logo-devBy.svg"
+                    class="col"
+                    style="width: 100%"
+                  />
+                </div>
+              </div>
             </div>
             <div class="col">
               <p>Design by Freepik</p>
@@ -187,7 +201,7 @@ body {
   --bs-body-bg: $bshtr-green-1;
 }
 
-.glowBehind-1 {
+.glowBehindBlock-1 {
   background: radial-gradient(
     closest-side,
     $bshtr-green-bggrad1,
@@ -195,8 +209,17 @@ body {
   );
 }
 
+.gradient-block-1 {
+  @include gradient-block-1(background);
+}
+
 .border-bshtr-green1 {
   border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
+}
+
+.border-bshtr-contrastgreen {
+  border: 2px solid;
+  border-color: $bshtr-contrastgreen;
 }
 
 .border-top-dotted-f4f4f4 {

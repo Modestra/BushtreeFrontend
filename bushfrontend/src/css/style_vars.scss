@@ -40,7 +40,7 @@ $bshtr-grad1-green2: #0ecba766;
   #{$attribute}: linear-gradient($bshtr-green-1, $bshtr-green-opt) !important;
 }
 
-@mixin card-gradient($attribute) {
+@mixin gradient-block-1($attribute) {
   #{$attribute}: -webkit-linear-gradient(
     $bshtr-grad1-green1,
     $bshtr-grad1-green2

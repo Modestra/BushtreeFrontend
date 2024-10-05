@@ -79,8 +79,8 @@ const position = "right";
       </div>
     </div>
 
-    <div class="py-5 glowBehind-1">
-      <div class="container px-4">
+    <div class="py-5 glowBehindBlock-1">
+      <div class="container px-4 pb-5">
         <h2 class="h1 pb-5 mr-auto text-center text-uppercase">
           Готовые решения
         </h2>
@@ -116,7 +116,7 @@ const position = "right";
         </div>
       </div>
 
-      <div class="pt-5">
+      <div class="container-fluid pt-5">
         <h2 class="h1 pt-5 pb-2 mr-auto text-center text-uppercase">
           Кому подойдёт сервис?
         </h2>
@@ -124,7 +124,7 @@ const position = "right";
           class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
         >
           <div
-            class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -138,7 +138,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -152,7 +152,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -247,13 +247,13 @@ const position = "right";
       </div>
     </div>
 
-    <div class="container px-4 py-5 glowBehind-1">
+    <div class="container px-4 py-5 glowBehindBlock-1">
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         Ответы на популярные вопросы
       </h2>
-      <div>
+      <div class="pb-5">
         <div
-          class="accordion accordion-flush"
+          class="accordion accordion-flush pb-5"
           id="accordionPanelsStayOpenExample1"
         >
           <div class="accordion-item">
@@ -383,9 +383,6 @@ const position = "right";
 .accordion {
   --bs-accordion-active-bg: transparent;
   // --bs-accordion-btn-bg: transparent;
-}
-.card {
-  @include card-gradient(background);
 }
 
 .carousel-indicators img {

@@ -1,156 +1,264 @@
 <template>
   <div class="py-5"></div>
-  <div class="container px-4 py-5">
-    <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
-      Настройте параметры вашего будущего цветника
-    </h1>
-    <div>
-      <div
-        class="gensettings px-4 py-5 row justify-content-left g-4 py-5 rounded"
-      >
-        <div class="col-8">
-          <div>
-            <div class="options-group-1">
-              <h4 class="text-start">Период цветения</h4>
-              <VueSlider
-                ref="slider"
-                v-model="value"
-                :marks="true"
-                :min="0"
-                :max="5"
-                class="m-5 mt-3 mx-0"
-              ></VueSlider>
+
+  <div class="glowBehindBlock-1">
+    <div class="container px-4 py-5">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
+        Настройте параметры вашего будущего цветника
+      </h1>
+      <div>
+        <div
+          class="gensettings px-4 py-5 row justify-content-left g-4 py-5 rounded border-bshtr-green1 gen-flowers-background"
+        >
+          <div class="col-8">
+            <div>
+              <div class="options-group-1">
+                <h4 class="text-start">Период цветения</h4>
+                <VueSlider
+                  ref="slider"
+                  v-model="value"
+                  :marks="true"
+                  :min="0"
+                  :max="5"
+                  class="m-5 mt-3 mx-0"
+                ></VueSlider>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="options-group-2 col py-4">
-              <h4 class="text-start text-truncate">Освещённость</h4>
-              <div
-                class="text-start whiteBlock text-black p-3 rounded border-primary h-100"
+            <div class="row">
+              <div class="options-group-2 col py-4">
+                <h4 class="text-start text-truncate">Освещённость</h4>
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                >
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="lightnessradio"
+                      id="lightnessradio1"
+                    />
+                    <label class="form-check-label" for="lightnessradio1">
+                      Солнце
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="lightnessradio"
+                      id="lightnessradio2"
+                      checked
+                    />
+                    <label class="form-check-label" for="lightnessradio2">
+                      Полутень
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="lightnessradio"
+                      id="lightnessradio3"
+                    />
+                    <label class="form-check-label" for="lightnessradio3">
+                      Тень
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="options-group-3 col py-4">
+                <h4 class="text-start text-truncate">Режим полива</h4>
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                >
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="wateringMode"
+                      id="wateringMode1"
+                    />
+                    <label class="form-check-label" for="wateringMode1">
+                      частый
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="wateringMode"
+                      id="wateringMode2"
+                      checked
+                    />
+                    <label class="form-check-label" for="wateringMode2">
+                      умеренный
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="wateringMode"
+                      id="wateringMode3"
+                    />
+                    <label class="form-check-label" for="wateringMode3">
+                      редкий
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="wateringMode"
+                      id="wateringMode4"
+                    />
+                    <label class="form-check-label" for="wateringMode4">
+                      сухой
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="options-group-4 col py-4">
+                <h4 class="text-start text-truncate">Цветовая гамма</h4>
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100 row-cols-2"
+                >
+                  <div class="" v-for="index in 3" :key="index">
+                    <input
+                      class="form-check-input p-4"
+                      type="checkbox"
+                      id="checkboxNoLabel"
+                      value=""
+                      aria-label="..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5">
+              <button
+                class="btn btn-light btn-outline-success text-black px-4 py-2"
               >
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="lightnessradio"
-                    id="lightnessradio1"
-                  />
-                  <label class="form-check-label" for="lightnessradio1">
-                    Солнце
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="lightnessradio"
-                    id="lightnessradio2"
-                    checked
-                  />
-                  <label class="form-check-label" for="lightnessradio2">
-                    Полутень
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="lightnessradio"
-                    id="lightnessradio3"
-                  />
-                  <label class="form-check-label" for="lightnessradio3">
-                    Тень
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="options-group-3 col py-4">
-              <h4 class="text-start text-truncate">Режим полива</h4>
-              <div class="text-start whiteBlock text-black p-3 rounded h-100">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode1"
-                  />
-                  <label class="form-check-label" for="wateringMode1">
-                    частый
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode2"
-                    checked
-                  />
-                  <label class="form-check-label" for="wateringMode2">
-                    умеренный
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode3"
-                  />
-                  <label class="form-check-label" for="wateringMode3">
-                    редкий
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode4"
-                  />
-                  <label class="form-check-label" for="wateringMode4">
-                    сухой
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="options-group-4 col py-4">
-              <h4 class="text-start text-truncate">Цветовая гамма</h4>
-              <div class="text-start whiteBlock text-black p-3 rounded h-100">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode1"
-                  />
-                  <label class="form-check-label" for="wateringMode1">
-                    Май
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="wateringMode"
-                    id="wateringMode2"
-                    checked
-                  />
-                  <label class="form-check-label" for="wateringMode2">
-                    Июнь
-                  </label>
-                </div>
-              </div>
+                Сгенерировать
+              </button>
             </div>
           </div>
-          <div class="mt-5">
-            <button class="btn btn-outline-success text-black bg-white">
-              Сгенерировать
-            </button>
+          <div class="col">
+            <!-- <img src="" style="width: 100%" /> -->
           </div>
         </div>
-        <div class="col">
-          <img src="@assets/img/gen-flowers.png" style="width: 100%" />
+      </div>
+    </div>
+  </div>
+
+  <div class="glowBehindBlock-1">
+    <div class="container px-4 py-5">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
+      <div class="row">
+        <div
+          class="col gradient-block-1 p-5 rounded border-bshtr-green1"
+          id="result_text"
+        >
+          <div id="results_1" class="pb-4">
+            <div class="h4 fw-normal pb-2">Период цветения</div>
+            <div class="row">
+              <div class="col">
+                <div class="h5 fw-normal">Начало:</div>
+                <div>май</div>
+              </div>
+              <div class="col">
+                <div class="h5 fw-normal">Конец:</div>
+                <div>июль</div>
+              </div>
+            </div>
+          </div>
+          <div id="results_2" class="row pb-4">
+            <div id="results_2-1" class="col">
+              <div class="h4 fw-normal pb-2">Освещённость</div>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-grow-1 me-3">солнце</div>
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-whatsapp.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="results_2-2" class="col">
+              <div class="h4 fw-normal pb-2">Режим полива</div>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-grow-1 me-3">частый</div>
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-whatsapp.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="results_3">
+            <div class="h4 fw-normal pb-2">Цветовая гамма</div>
+            <div
+              class="d-flex align-items-center pb-2 whiteBlock rounded border-bshtr-contrastgreen p-4"
+            >
+              <div class="flex-grow-1 me-3">частый</div>
+              <div class="flex-shrink-0">
+                <img src="@assets/img/logo-whatsapp.svg" alt="telegram-logo" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col" id="result_pic">
+          <img
+            src="@assets/img/flowerbed-1.png"
+            alt="#"
+            style="max-height: 100%; width: 100%"
+            class="rounded"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="container px-4 py-5 glowBehindBlock-1">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
+        Карта рассадки
+      </h1>
+      <div class="gradient-block-1" style="height: 50vh"></div>
+    </div>
+    <div class="container px-4 py-5 glowBehindBlock-1">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Цветы</h1>
+      <div class="row align-items-start">
+        <div class="flower-item row g-4 py-5" v-for="index in 6" :key="index">
+          <div class="flower-item-texts py-5 col-lg-8">
+            <div
+              class="flower-item-texts-title border-bottom my-4 row justify-content-center"
+            >
+              <h4 class="col text-start">{{ index }}</h4>
+              <h4 class="col text-start">Щучка дернистая</h4>
+              <p class="col-lg-6 text-start"></p>
+            </div>
+            <div class="flower-item-texts-descr">
+              <p class="text-start">
+                Многолетний дерновинный злак, образующий кочки. Стебли
+                прямостоячие с расставленными узлами. Листья длинные,
+                тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
+                что придаёт кочке полукруглый, каскадообразный вид.
+              </p>
+              <p class="text-start">
+                Общее соцветие — раскидистые метелки длиной 10–25 см. Зацветают
+                зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
+                становятся светло-золотистыми и выгорают до светло-соломенного.
+              </p>
+            </div>
+          </div>
+          <div class="flower-item-pic col g-4 py-5">
+            <img
+              src="@assets/img/flowerbed-1.png"
+              alt="#"
+              style="height: 100%; width: 100%"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -237,7 +345,14 @@ async function onSubmit() {
 
 <style lang="scss" scoped>
 .gensettings {
-  @include card-gradient(background);
+  @include gradient-block-1(background);
+}
+
+.gen-flowers-background {
+  background-image: url("@assets/img/gen-VectorFlowers.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .whiteBlock {
