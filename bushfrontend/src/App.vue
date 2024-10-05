@@ -201,6 +201,22 @@ body {
   --bs-body-bg: $bshtr-green-1;
 }
 
+@media (min-width: 1400px) {
+  .container-custom1920 {
+    max-width: 1680px;
+  }
+}
+
+.container-custom1920 {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .glowBehindBlock-1 {
   background: radial-gradient(
     closest-side,
@@ -225,6 +241,11 @@ body {
 .border-top-dotted-f4f4f4 {
   border-style: dotted none none none;
   border-color: #f4f4f4;
+}
+
+.border-top-dotted-4f4f4f {
+  border-style: dotted none none none;
+  border-color: #4f4f4f;
 }
 
 .h1_bigger1 {

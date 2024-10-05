@@ -80,7 +80,7 @@ const position = "right";
     </div>
 
     <div class="py-5 glowBehindBlock-1">
-      <div class="container px-4 pb-5">
+      <div class="container-custom1920 px-4 pb-5">
         <h2 class="h1 pb-5 mr-auto text-center text-uppercase">
           Готовые решения
         </h2>
@@ -116,7 +116,7 @@ const position = "right";
         </div>
       </div>
 
-      <div class="container-fluid pt-5">
+      <div class="container-custom1920 pt-5">
         <h2 class="h1 pt-5 pb-2 mr-auto text-center text-uppercase">
           Кому подойдёт сервис?
         </h2>
@@ -169,7 +169,7 @@ const position = "right";
       </div>
     </div>
 
-    <div class="container px-4 py-5">
+    <div class="container-custom1920 px-4 py-5">
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>

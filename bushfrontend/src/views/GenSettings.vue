@@ -2,7 +2,7 @@
   <div class="py-5"></div>
 
   <div class="glowBehindBlock-1">
-    <div class="container px-4 py-5">
+    <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
       </h1>
@@ -118,19 +118,37 @@
                   </div>
                 </div>
               </div>
-              <div class="options-group-4 col py-4">
-                <h4 class="text-start text-truncate">Цветовая гамма</h4>
-                <div
-                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100 row-cols-2"
-                >
-                  <div class="" v-for="index in 3" :key="index">
-                    <input
-                      class="form-check-input p-4"
-                      type="checkbox"
-                      id="checkboxNoLabel"
-                      value=""
-                      aria-label="..."
-                    />
+              <div class="options-group-4 col py-4 pb-0">
+                <div class="pb-3">
+                  <h4 class="text-start text-truncate">Основной цвет</h4>
+                  <div
+                    class="text-start whiteBlock text-black p-2 rounded border-bshtr-contrastgreen h-100 row"
+                  >
+                    <div class="col" v-for="index in 3" :key="index">
+                      <input
+                        class="form-check-input p-3"
+                        type="checkbox"
+                        id="checkboxNoLabel"
+                        value=""
+                        aria-label="..."
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="text-start text-truncate">Дополнительный цвет</h4>
+                  <div
+                    class="text-start whiteBlock text-black p-2 rounded border-bshtr-contrastgreen h-100 row"
+                  >
+                    <div class="col" v-for="index in 3" :key="index">
+                      <input
+                        class="form-check-input p-3"
+                        type="checkbox"
+                        id="checkboxNoLabel"
+                        value=""
+                        aria-label="..."
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -152,7 +170,7 @@
   </div>
 
   <div class="glowBehindBlock-1">
-    <div class="container px-4 py-5">
+    <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
         <div
@@ -198,7 +216,7 @@
               </div>
             </div>
           </div>
-          <div id="results_3">
+          <div id="results_3" class="pb-4">
             <div class="h4 fw-normal pb-2">Цветовая гамма</div>
             <div
               class="d-flex align-items-center pb-2 whiteBlock rounded border-bshtr-contrastgreen p-4"
@@ -208,6 +226,25 @@
                 <img src="@assets/img/logo-whatsapp.svg" alt="telegram-logo" />
               </div>
             </div>
+          </div>
+          <div id="results_4_buttons" class="pb-4">
+            <button
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+            >
+              Редактировать
+            </button>
+            <button
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+            >
+              Скачать материалы
+            </button>
+          </div>
+          <div id="results_5_generate">
+            <button
+              class="btn btn-light btn-outline-success text-black px-4 py-2"
+            >
+              Сгенерировать
+            </button>
           </div>
         </div>
         <div class="col" id="result_pic">
@@ -220,44 +257,40 @@
         </div>
       </div>
     </div>
-    <div class="container px-4 py-5 glowBehindBlock-1">
+    <div class="container-custom1920 px-4 py-5 glowBehindBlock-1">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Карта рассадки
       </h1>
-      <div class="gradient-block-1" style="height: 50vh"></div>
+      <div class="gradient-block-1 rounded" style="height: 50vh"></div>
     </div>
-    <div class="container px-4 py-5 glowBehindBlock-1">
-      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Цветы</h1>
-      <div class="row align-items-start">
-        <div class="flower-item row g-4 py-5" v-for="index in 6" :key="index">
-          <div class="flower-item-texts py-5 col-lg-8">
-            <div
-              class="flower-item-texts-title border-bottom my-4 row justify-content-center"
-            >
-              <h4 class="col text-start">{{ index }}</h4>
-              <h4 class="col text-start">Щучка дернистая</h4>
-              <p class="col-lg-6 text-start"></p>
+    <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
+      <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
+      <div class="d-flex align-content-start flex-wrap m-auto">
+        <div
+          class="flower-item py-4 px-4"
+          v-for="index in 6"
+          :key="index"
+          style="max-width: 700px"
+        >
+          <div class="h4 fw-normal px-0">{{ index + ". " }}Щучка дернистая</div>
+          <div class="row g-0">
+            <div class="col border-top-dotted-4f4f4f py-4">
+              Многолетний дерновинный злак, образующий кочки. Стебли
+              прямостоячие с расставленными узлами. Листья длинные,
+              тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
+              что придаёт кочке полукруглый, каскадообразный вид. Общее
+              соцветие — раскидистые метелки длиной 10–25 см. Зацветают
+              зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
+              становятся светло-золотистыми и выгорают до светло-соломенного.
             </div>
-            <div class="flower-item-texts-descr">
-              <p class="text-start">
-                Многолетний дерновинный злак, образующий кочки. Стебли
-                прямостоячие с расставленными узлами. Листья длинные,
-                тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
-                что придаёт кочке полукруглый, каскадообразный вид.
-              </p>
-              <p class="text-start">
-                Общее соцветие — раскидистые метелки длиной 10–25 см. Зацветают
-                зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
-                становятся светло-золотистыми и выгорают до светло-соломенного.
-              </p>
+            <div class="col ps-4" style="max-width: 300px">
+              <img
+                src="@assets/img/flowerbed-1.png"
+                alt="#"
+                style="width: 100%"
+                class="rounded"
+              />
             </div>
-          </div>
-          <div class="flower-item-pic col g-4 py-5">
-            <img
-              src="@assets/img/flowerbed-1.png"
-              alt="#"
-              style="height: 100%; width: 100%"
-            />
           </div>
         </div>
       </div>
@@ -338,6 +371,29 @@ const formData: Ref<FlowerComp> = ref({
   Color_leaves_name: "",
   Color_leaves_hex: "",
 });
+// const formData: Ref<FlowerComp> = ref({
+//   Name: "",
+//   description: "",
+//   frost_resistance_zone: 0,
+//   light: "",
+//   watering: "",
+//   color_main: "",
+//   color_other: "",
+//   period_bloosom_start: "",
+//   period_bloosom_end: ""
+// });
+// {
+//   "name": "string",
+//   "description": "string",
+//   "frost_resistance_zone": 2147483647,
+//   "light": "string",
+//   "watering": "string",
+//   "color_main": "фиолетовый",
+//   "color_other": "белый",
+//   "period_bloosom_start": 2147483647,
+//   "period_bloosom_end": 2147483647
+// }
+// user sends only 2 colors
 async function onSubmit() {
   postFlowerComp(formData.value);
 }
