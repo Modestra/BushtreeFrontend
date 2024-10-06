@@ -8,9 +8,9 @@
       </h1>
       <div>
         <div
-          class="gensettings px-4 py-5 row justify-content-left g-4 py-5 rounded border-bshtr-green1 gen-flowers-background"
+          class="gensettings px-4 py-5 row justify-content-start g-4 py-5 rounded border-bshtr-green1 gen-flowers-background"
         >
-          <div class="col-8">
+          <div>
             <div>
               <div class="options-group-1">
                 <h4 class="text-start">Период цветения</h4>
@@ -118,13 +118,15 @@
                   </div>
                 </div>
               </div>
-              <div class="options-group-4 col py-4 pb-0">
-                <div class="pb-3">
+              <div
+                class="options-group-4 col py-4 pb-0 d-flex flex-wrap justify-content-between"
+              >
+                <div id="formColors1" class="align-self-start w-100">
                   <h4 class="text-start text-truncate">Основной цвет</h4>
                   <div
-                    class="text-start whiteBlock text-black p-2 rounded border-bshtr-contrastgreen h-100 row"
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="col" v-for="index in 3" :key="index">
+                    <div class="" v-for="index in 3" :key="index">
                       <input
                         class="form-check-input p-3"
                         type="checkbox"
@@ -135,12 +137,12 @@
                     </div>
                   </div>
                 </div>
-                <div>
+                <div id="formColors2" class="align-self-end w-100">
                   <h4 class="text-start text-truncate">Дополнительный цвет</h4>
                   <div
-                    class="text-start whiteBlock text-black p-2 rounded border-bshtr-contrastgreen h-100 row"
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="col" v-for="index in 3" :key="index">
+                    <div class="" v-for="index in 3" :key="index">
                       <input
                         class="form-check-input p-3"
                         type="checkbox"
@@ -161,8 +163,8 @@
               </button>
             </div>
           </div>
-          <div class="col">
-            <!-- <img src="" style="width: 100%" /> -->
+          <div>
+            <img src="" style="width: 500px" />
           </div>
         </div>
       </div>
@@ -261,11 +263,77 @@
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Карта рассадки
       </h1>
-      <div class="gradient-block-1 rounded" style="height: 50vh"></div>
+      <div
+        class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
+        style="height: 50vh"
+      >
+        <div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              1
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              2
+            </div>
+          </div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              3
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              4
+            </div>
+          </div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              5
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              6
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
-      <div class="d-flex align-content-start flex-wrap m-auto">
+      <div class="d-flex flex-wrap justify-content-center">
         <div
           class="flower-item py-4 px-4"
           v-for="index in 6"

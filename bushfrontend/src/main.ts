@@ -19,3 +19,7 @@ app.use(PrimeVue, {
     preset: Aura,
   },
 });
+
+import Tooltip from "primevue/tooltip";
+
+app.directive("tooltip", Tooltip);
