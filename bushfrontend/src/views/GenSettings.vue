@@ -273,6 +273,21 @@
                       <div>
                         <input
                           class="form-check-input p-3 m-1 rounded"
+                          :class="{
+                            colorPicker_white: garden === 'белый',
+                            colorPicker_red: garden === 'красный',
+                            colorPicker_yellow: garden === 'желтый',
+                            colorPicker_green: garden === 'зеленый',
+                            colorPicker_blue: garden === 'синий',
+                            colorPicker_purple: garden === 'фиолетовый',
+                            colorPicker_pink: garden === 'розовый',
+                          }"
+                          v-tooltip.top="{
+                            value: garden,
+                            pt: {
+                              text: 'bg-white text-black',
+                            },
+                          }"
                           type="radio"
                           name="maincolorradio"
                           id="maincolorradio"
@@ -294,6 +309,21 @@
                     >
                       <input
                         class="form-check-input p-3 m-1 rounded"
+                        :class="{
+                          colorPicker_white: garden1 === 'белый',
+                          colorPicker_red: garden1 === 'красный',
+                          colorPicker_yellow: garden1 === 'желтый',
+                          colorPicker_green: garden1 === 'зеленый',
+                          colorPicker_blue: garden1 === 'синий',
+                          colorPicker_purple: garden1 === 'фиолетовый',
+                          colorPicker_pink: garden1 === 'розовый',
+                        }"
+                        v-tooltip.top="{
+                          value: garden1,
+                          pt: {
+                            text: 'bg-white text-black',
+                          },
+                        }"
                         type="radio"
                         name="othercolorradio"
                         id="checkboxNoLabel"
@@ -393,9 +423,45 @@
             <div
               class="d-flex align-items-center pb-2 whiteBlock rounded border-bshtr-contrastgreen p-4"
             >
-              <div class="flex-grow-1 me-3">частый</div>
-              <div class="flex-shrink-0">
-                <img src="@assets/img/logo-whatsapp.svg" alt="telegram-logo" />
+              <div class="" v-if="formData.color_main != null">
+                <div
+                  class="border-dark p-3 m-1 rounded"
+                  :class="{
+                    colorPicker_white: formData.color_main === 'белый',
+                    colorPicker_red: formData.color_main === 'красный',
+                    colorPicker_yellow: formData.color_main === 'желтый',
+                    colorPicker_green: formData.color_main === 'зеленый',
+                    colorPicker_blue: formData.color_main === 'синий',
+                    colorPicker_purple: formData.color_main === 'фиолетовый',
+                    colorPicker_pink: formData.color_main === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_main,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
+              </div>
+              <div class="" v-if="formData.color_other != null">
+                <div
+                  class="border-dark p-3 m-1 rounded"
+                  :class="{
+                    colorPicker_white: formData.color_other === 'белый',
+                    colorPicker_red: formData.color_other === 'красный',
+                    colorPicker_yellow: formData.color_other === 'желтый',
+                    colorPicker_green: formData.color_other === 'зеленый',
+                    colorPicker_blue: formData.color_other === 'синий',
+                    colorPicker_purple: formData.color_other === 'фиолетовый',
+                    colorPicker_pink: formData.color_other === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_other,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
               </div>
             </div>
           </div>
@@ -703,5 +769,27 @@ const gardenSubmit = async () => {
 }
 .p-button-secondary {
   color: black;
+}
+
+.colorPicker_white {
+  background-color: rgb(219, 219, 219);
+}
+.colorPicker_red {
+  background-color: #ff3030;
+}
+.colorPicker_yellow {
+  background-color: #fff27c;
+}
+.colorPicker_green {
+  background-color: #207b25;
+}
+.colorPicker_blue {
+  background-color: #3239b4;
+}
+.colorPicker_purple {
+  background-color: #da71ff;
+}
+.colorPicker_pink {
+  background-color: #fe8fc7;
 }
 </style>
