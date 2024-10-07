@@ -7,10 +7,8 @@
         Настройте параметры вашего будущего цветника
       </h1>
       <div>
-        <div
-          class="gensettings px-5 py-5 row justify-content-start g-4 rounded border-bshtr-green1 gen-flowers-background"
-        >
-          <div>
+        <div class="gensettings p-5 g-4 rounded border-bshtr-green1">
+          <div id="gen_gensettings_fields" style="max-width: 1000px">
             <div>
               <div class="options-group-1">
                 <h4 class="text-start">Период цветения</h4>
@@ -46,6 +44,7 @@
                     <label
                       class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio1"
+                      style="min-width: 100px"
                     >
                       Солнце
                     </label>
@@ -71,6 +70,7 @@
                     <label
                       class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio2"
+                      style="min-width: 100px"
                     >
                       Полутень
                     </label>
@@ -95,6 +95,7 @@
                     <label
                       class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio3"
+                      style="min-width: 100px"
                     >
                       Тень
                     </label>
@@ -252,13 +253,14 @@
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
                     <div class="" v-for="index in 3" :key="index">
-                      <input
-                        class="form-check-input p-3"
-                        type="checkbox"
-                        id="checkboxNoLabel"
-                        value=""
-                        aria-label="..."
-                      />
+                      <div>
+                        <input
+                          class="form-check-input p-3 rounded"
+                          type="radio"
+                          name="lightnessradio"
+                          id="lightnessradio1"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -611,13 +613,10 @@ async function onSubmit() {
 
 <style lang="scss" scoped>
 .gensettings {
-  @include gradient-block-1(background);
-}
-
-.gen-flowers-background {
-  background-image: url("@assets/img/gen-VectorFlowers.png");
+  background-image: url("@assets/img/gen-VectorFlowers.png"),
+    linear-gradient(to top, $bshtr-grad1-green1, $bshtr-grad1-green2);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   background-size: contain;
 }
 
