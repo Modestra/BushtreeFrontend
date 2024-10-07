@@ -8,7 +8,7 @@
       </h1>
       <div>
         <div
-          class="gensettings px-4 py-5 row justify-content-start g-4 py-5 rounded border-bshtr-green1 gen-flowers-background"
+          class="gensettings px-5 py-5 row justify-content-start g-4 rounded border-bshtr-green1 gen-flowers-background"
         >
           <div>
             <div>
@@ -17,11 +17,12 @@
                 <VueSlider
                   ref="slider"
                   v-model="value"
-                  :marks="true"
+                  :marks="sliderMarks"
                   :min="0"
-                  :max="5"
+                  :max="4"
                   class="m-5 mt-3 mx-0"
-                ></VueSlider>
+                >
+                </VueSlider>
               </div>
             </div>
             <div class="row">
@@ -30,57 +31,75 @@
                 <div
                   class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
                 >
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="lightnessradio"
-                      id="lightnessradio1"
-                    />
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio1"
+                      />
+                    </div>
+
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio1"
                     >
                       Солнце
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_lightIcon_1_sun.svg"
                       alt="icon_lightIcon_1_sun"
                     />
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="lightnessradio"
-                      id="lightnessradio2"
-                      checked
-                    />
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio2"
+                        checked
+                      />
+                    </div>
+
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio2"
                     >
                       Полутень
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_lightIcon_2_halfsun.svg"
                       alt="icon_lightIcon_2_halfsun"
                     />
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="lightnessradio"
-                      id="lightnessradio3"
-                    />
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio3"
+                      />
+                    </div>
+
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="lightnessradio3"
                     >
                       Тень
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_lightIcon_3_cloudyDay.svg"
                       alt="icon_lightIcon_3_cloudyDay"
                     />
@@ -93,94 +112,131 @@
                   class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
                 >
                   <div
-                    class="form-check"
-                    v-tooltip.top="'ежедневно'"
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'ежедневно',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
                     type="text"
                     placeholder="Top"
                   >
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wateringMode"
-                      id="wateringMode1"
-                    />
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode1"
+                      />
+                    </div>
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="wateringMode1"
                     >
                       частый
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
                     />
                   </div>
+
                   <div
-                    class="form-check"
-                    v-tooltip.top="'через 2-3 дня'"
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'через 2-3 дня',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
                     type="text"
                     placeholder="Top"
                   >
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wateringMode"
-                      id="wateringMode2"
-                      checked
-                    />
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode2"
+                        checked
+                      />
+                    </div>
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="wateringMode2"
                     >
                       умеренный
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
                     />
                   </div>
                   <div
-                    class="form-check"
-                    v-tooltip.top="'раз в неделю'"
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'раз в неделю',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
                     type="text"
                     placeholder="Top"
                   >
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wateringMode"
-                      id="wateringMode3"
-                    />
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode3"
+                      />
+                    </div>
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="wateringMode3"
                     >
                       редкий
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
                     />
                   </div>
                   <div
-                    class="form-check"
-                    v-tooltip.top="'опрыскивание'"
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'опрыскивание',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
                     type="text"
                     placeholder="Top"
                   >
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="wateringMode"
-                      id="wateringMode4"
-                    />
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode4"
+                      />
+                    </div>
                     <label
-                      class="form-check-label h5 fw-normal"
+                      class="form-check-label h5 fw-normal m-0 px-1"
                       for="wateringMode4"
                     >
                       сухой
                     </label>
                     <img
+                      class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
                     />
@@ -446,8 +502,25 @@ import { FlowerComp } from "../entities/flowercomp";
 
 import VueSlider from "vue-slider-component";
 
-const value = ref([2, 4]);
+const value = ref([1, 4]);
 defineExpose({ value });
+const sliderMarks = ref({
+  0: {
+    label: "май",
+  },
+  1: {
+    label: "июнь",
+  },
+  2: {
+    label: "июль",
+  },
+  3: {
+    label: "август",
+  },
+  4: {
+    label: "сентябрь",
+  },
+});
 
 // options: { // all slider options //
 //         dotSize: 14,
