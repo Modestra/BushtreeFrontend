@@ -420,6 +420,26 @@ const position = "right";
   position: relative;
   left: 18vh;
 }
+@media (max-width: 1400px) {
+  .landing-4steps-flower-1 {
+    position: relative;
+    top: -10vw;
+    left: -3vw;
+  }
+  .landing-4steps-flower-2 {
+    position: relative;
+    top: -10vw;
+    left: 3vw;
+  }
+  .landing-4steps-flower-3 {
+    position: relative;
+    left: -17vw;
+  }
+  .landing-4steps-flower-4 {
+    position: relative;
+    left: 17vw;
+  }
+}
 
 .landing-littleVectorFlower {
   background-image: url("@assets/img/LittleVectorFlower.svg");
