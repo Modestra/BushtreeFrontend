@@ -140,6 +140,7 @@
                         name="wateringMode"
                         id="wateringMode1"
                         v-model="formData.watering"
+                        value="частый"
                       />
                     </div>
                     <label
@@ -175,6 +176,7 @@
                         id="wateringMode2"
                         v-model="formData.watering"
                         checked
+                        value="умеренный"
                       />
                     </div>
                     <label
@@ -208,6 +210,7 @@
                         name="wateringMode"
                         id="wateringMode3"
                         v-model="formData.watering"
+                        value="редкий"
                       />
                     </div>
                     <label
@@ -241,6 +244,7 @@
                         name="wateringMode"
                         id="wateringMode4"
                         v-model="formData.watering"
+                        value="сухой"
                       />
                     </div>
                     <label
@@ -350,26 +354,37 @@
           <div id="results_2" class="row pb-4">
             <div id="results_2-1" class="col">
               <div class="h4 fw-normal pb-2">Освещённость</div>
-              <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">{{ formData.light }}</div>
-                <div class="flex-shrink-0">
-                  <img
-                    src="@assets/img/logo-whatsapp.svg"
-                    alt="telegram-logo"
-                  />
-                </div>
+
+              <div class="d-flex justify-content-start align-items-center mb-2">
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1"
+                  for="lightnessradio1"
+                  style="min-width: 100px"
+                >
+                  {{ formData.light }}
+                </label>
+                <img
+                  class="px-1"
+                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  alt="icon_lightIcon_1_sun"
+                />
               </div>
             </div>
             <div id="results_2-2" class="col">
               <div class="h4 fw-normal pb-2">Режим полива</div>
-              <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">{{ formData.watering }}</div>
-                <div class="flex-shrink-0">
-                  <img
-                    src="@assets/img/logo-whatsapp.svg"
-                    alt="telegram-logo"
-                  />
-                </div>
+              <div class="d-flex justify-content-start align-items-center mb-2">
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1"
+                  for="lightnessradio1"
+                  style="min-width: 100px"
+                >
+                  {{ formData.watering }}
+                </label>
+                <img
+                  class="px-1"
+                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  alt="icon_lightIcon_1_sun"
+                />
               </div>
             </div>
           </div>
