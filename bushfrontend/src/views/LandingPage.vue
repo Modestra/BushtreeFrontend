@@ -175,63 +175,90 @@ const position = "right";
       </h2>
       <div class="row justify-content-center g-4 py-5 mx-auto align-self-end">
         <div class="col align-items-center">
-          <div class="landing-4steps row-cols-2">
-            <div>
-              <div class="row align-items-center col">
-                <div class="col">Нажмите кнопку «Сгенерировать»</div>
-                <div class="col">
+          <div class="d-flex justify-content-center align-items-center">
+            <div
+              class="landing-4steps d-flex justify-content-center align-items-center"
+            >
+              <div style="width: 100%">
+                <div class="row">
                   <div
-                    class="landing-littleVectorFlower d-flex justify-content-center"
+                    class="landing-4steps-flower-1 row align-items-center col"
                   >
-                    <div class="p-0 m-0 g-0 text-center align-self-center h5">
-                      2
+                    <div class="col text-end">
+                      Нажмите кнопку «Сгенерировать»
+                    </div>
+                    <div class="col">
+                      <div
+                        class="landing-littleVectorFlower d-flex justify-content-center"
+                      >
+                        <div
+                          class="p-0 m-0 g-0 text-center align-self-center h5"
+                        >
+                          2
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="row align-items-center col">
-                <div class="col">
                   <div
-                    class="landing-littleVectorFlower d-flex justify-content-center"
+                    class="landing-4steps-flower-2 row align-items-center col"
                   >
-                    <div class="p-0 m-0 g-0 text-center align-self-center h5">
-                      3
+                    <div class="col d-flex justify-content-end">
+                      <div
+                        class="landing-littleVectorFlower d-flex justify-content-center"
+                      >
+                        <div
+                          class="p-0 m-0 g-0 text-center align-self-center h5"
+                        >
+                          3
+                        </div>
+                      </div>
                     </div>
+                    <div class="col">Посмотрите результат</div>
                   </div>
                 </div>
-                <div class="col">Посмотрите результат</div>
-              </div>
-            </div>
 
-            <div>
-              <div class="row align-items-center col">
-                <div class="col">Выберите параметры своего участка</div>
-                <div class="col">
+                <div class="row">
                   <div
-                    class="landing-littleVectorFlower d-flex justify-content-center"
+                    class="landing-4steps-flower-3 row align-items-center col"
                   >
-                    <div class="p-0 m-0 g-0 text-center align-self-center h5">
-                      1
+                    <div class="col text-end">
+                      Выберите параметры своего участка
+                    </div>
+                    <div class="col">
+                      <div
+                        class="landing-littleVectorFlower d-flex justify-content-center"
+                      >
+                        <div
+                          class="p-0 m-0 g-0 text-center align-self-center h5"
+                        >
+                          1
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="row align-items-center col">
-                <div class="col">
                   <div
-                    class="landing-littleVectorFlower d-flex justify-content-center"
+                    class="landing-4steps-flower-4 row align-items-center col"
                   >
-                    <div class="p-0 m-0 g-0 text-center align-self-center h5">
-                      4
+                    <div class="col d-flex justify-content-end">
+                      <div
+                        class="landing-littleVectorFlower d-flex justify-content-center"
+                      >
+                        <div
+                          class="p-0 m-0 g-0 text-center align-self-center h5"
+                        >
+                          4
+                        </div>
+                      </div>
                     </div>
+                    <div class="col">Скачайте материалы</div>
                   </div>
                 </div>
-                <div class="col">Скачайте материалы</div>
               </div>
             </div>
           </div>
+
           <form class="d-flex justify-content-center py-5">
             <RouterLink
               class="btn btn-outline-success text-black bg-white px-4 py-3"
@@ -371,8 +398,29 @@ const position = "right";
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  height: 500px;
+  height: 50vh;
+  width: 80%;
 }
+// Не смог сделать сложный элемент правильно после долгого времени...
+.landing-4steps-flower-1 {
+  position: relative;
+  top: -10vh;
+  left: -5vh;
+}
+.landing-4steps-flower-2 {
+  position: relative;
+  top: -10vh;
+  left: 5vh;
+}
+.landing-4steps-flower-3 {
+  position: relative;
+  left: -18vh;
+}
+.landing-4steps-flower-4 {
+  position: relative;
+  left: 18vh;
+}
+
 .landing-littleVectorFlower {
   background-image: url("@assets/img/LittleVectorFlower.svg");
   background-repeat: no-repeat;
