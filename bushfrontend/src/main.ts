@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-// import "@css/bootstrap.css";
+import "@css/bootstrap.css";
 import PrimeVue from "primevue/config";
 import Aura from "@primevue/themes/aura";
 import "@css/vue-slider.css";
