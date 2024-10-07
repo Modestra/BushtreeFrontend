@@ -37,9 +37,16 @@
                       name="lightnessradio"
                       id="lightnessradio1"
                     />
-                    <label class="form-check-label" for="lightnessradio1">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="lightnessradio1"
+                    >
                       Солнце
                     </label>
+                    <img
+                      src="@assets/img/icon_lightIcon_1_sun.svg"
+                      alt="icon_lightIcon_1_sun"
+                    />
                   </div>
                   <div class="form-check">
                     <input
@@ -49,9 +56,16 @@
                       id="lightnessradio2"
                       checked
                     />
-                    <label class="form-check-label" for="lightnessradio2">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="lightnessradio2"
+                    >
                       Полутень
                     </label>
+                    <img
+                      src="@assets/img/icon_lightIcon_2_halfsun.svg"
+                      alt="icon_lightIcon_2_halfsun"
+                    />
                   </div>
                   <div class="form-check">
                     <input
@@ -60,9 +74,16 @@
                       name="lightnessradio"
                       id="lightnessradio3"
                     />
-                    <label class="form-check-label" for="lightnessradio3">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="lightnessradio3"
+                    >
                       Тень
                     </label>
+                    <img
+                      src="@assets/img/icon_lightIcon_3_cloudyDay.svg"
+                      alt="icon_lightIcon_3_cloudyDay"
+                    />
                   </div>
                 </div>
               </div>
@@ -71,18 +92,35 @@
                 <div
                   class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
                 >
-                  <div class="form-check">
+                  <div
+                    class="form-check"
+                    v-tooltip.top="'ежедневно'"
+                    type="text"
+                    placeholder="Top"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
                       name="wateringMode"
                       id="wateringMode1"
                     />
-                    <label class="form-check-label" for="wateringMode1">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="wateringMode1"
+                    >
                       частый
                     </label>
+                    <img
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
                   </div>
-                  <div class="form-check">
+                  <div
+                    class="form-check"
+                    v-tooltip.top="'через 2-3 дня'"
+                    type="text"
+                    placeholder="Top"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
@@ -90,31 +128,62 @@
                       id="wateringMode2"
                       checked
                     />
-                    <label class="form-check-label" for="wateringMode2">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="wateringMode2"
+                    >
                       умеренный
                     </label>
+                    <img
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
                   </div>
-                  <div class="form-check">
+                  <div
+                    class="form-check"
+                    v-tooltip.top="'раз в неделю'"
+                    type="text"
+                    placeholder="Top"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
                       name="wateringMode"
                       id="wateringMode3"
                     />
-                    <label class="form-check-label" for="wateringMode3">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="wateringMode3"
+                    >
                       редкий
                     </label>
+                    <img
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
                   </div>
-                  <div class="form-check">
+                  <div
+                    class="form-check"
+                    v-tooltip.top="'опрыскивание'"
+                    type="text"
+                    placeholder="Top"
+                  >
                     <input
                       class="form-check-input"
                       type="radio"
                       name="wateringMode"
                       id="wateringMode4"
                     />
-                    <label class="form-check-label" for="wateringMode4">
+                    <label
+                      class="form-check-label h5 fw-normal"
+                      for="wateringMode4"
+                    >
                       сухой
                     </label>
+                    <img
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
                   </div>
                 </div>
               </div>

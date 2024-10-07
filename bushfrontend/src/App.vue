@@ -42,7 +42,10 @@ onMounted(async () => {
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md fixed-top my-1">
       <div class="container glass-effect-1 g-4 py-2 d-flex">
-        <RouterLink class="navbar-brand" to="/" active-class="active"
+        <RouterLink
+          class="navbar-brand"
+          :to="{ name: 'home', hash: '#landing_start' }"
+          active-class="active"
           ><img src="@assets/logo.svg" class=""
         /></RouterLink>
         <button
@@ -66,13 +69,16 @@ onMounted(async () => {
               <RouterLink
                 class="nav-link"
                 aria-current="page"
-                to="/"
+                :to="{ name: 'home', hash: '#landing_4steps' }"
                 active-class="active"
                 >Инструкция</RouterLink
               >
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/results"
+              <RouterLink
+                class="nav-link"
+                active-class="active"
+                :to="{ name: 'home', hash: '#landing_galleria' }"
                 >Готовые решения</RouterLink
               >
             </li>
@@ -80,7 +86,7 @@ onMounted(async () => {
               <RouterLink
                 class="nav-link"
                 active-class="active"
-                to="/"
+                :to="{ name: 'home', hash: '#landing_QaA' }"
                 tabindex="-1"
                 >Вопрос-ответ</RouterLink
               >

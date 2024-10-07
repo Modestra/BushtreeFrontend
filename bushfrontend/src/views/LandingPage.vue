@@ -50,7 +50,7 @@ const position = "right";
 
 <template>
   <div>
-    <div class="landing-hero pt-5" style="height: 120vh">
+    <div class="landing-hero pt-5" style="height: 120vh" id="landing_start">
       <div class="container px-4 py-5 d-flex flex-column" style="height: 100%">
         <h1 class="h1_bigger1 p-4 mr-auto text-center text-uppercase">
           Подберем идеальный цветник для вашего участка
@@ -79,7 +79,7 @@ const position = "right";
       </div>
     </div>
 
-    <div class="py-5 glowBehindBlock-1">
+    <div class="py-5 glowBehindBlock-1" id="landing_galleria">
       <div class="container-custom1920 px-4 pb-5">
         <h2 class="h1 pb-5 mr-auto text-center text-uppercase">
           Готовые решения
@@ -169,7 +169,7 @@ const position = "right";
       </div>
     </div>
 
-    <div class="container-custom1920 px-4 py-5">
+    <div class="container-custom1920 px-4 py-5" id="landing_4steps">
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>
@@ -247,7 +247,7 @@ const position = "right";
       </div>
     </div>
 
-    <div class="container px-4 py-5 glowBehindBlock-1">
+    <div class="container px-4 py-5 glowBehindBlock-1" id="landing_QaA">
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         Ответы на популярные вопросы
       </h2>
