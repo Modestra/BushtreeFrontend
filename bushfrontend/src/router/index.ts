@@ -1,13 +1,25 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import LandingPage from "../views/LandingPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to) {
+    // Если есть хеш в маршруте, прокручиваем к элементу с этим хешем
+    if (to.hash) {
+      return {
+        el: to.hash,
+        top: +60, // смещение на 60 пикселей вверх
+        behavior: "smooth",
+      };
+    }
+    // В противном случае ничего не меняем
+    return { top: 0 }; // или просто return; если не хотите перемещаться
+  },
   routes: [
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: LandingPage,
     },
     {
       path: "/gensettings",

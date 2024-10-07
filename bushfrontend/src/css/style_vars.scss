@@ -1,0 +1,64 @@
+// All main colors
+$primary: #076553;
+$secondary: #1cb4a5;
+$accent: #9d3ead;
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+$bshtr-darkgreen: #001300;
+$bshtr-green-1: #076553;
+$bshtr-green-1-opas25: #07655460;
+$bshtr-green-opt: #053130;
+$bshtr-green-opt2: #0ecba766;
+$bshtr-green-bggrad1: #00453280;
+$bshtr-gray: #4f4f4f;
+$bshtr-contrastgreen: #08b37e;
+$bshtr-lightgray: #cdcdcd;
+$bshtr-white: #ffffff;
+$bshtr-grad1-green1: #07655366;
+$bshtr-grad1-green2: #0ecba766;
+
+@mixin footer-gradient($attribute) {
+  #{$attribute}: -webkit-linear-gradient(
+    $bshtr-green-1,
+    $bshtr-green-opt
+  ) !important;
+  #{$attribute}: -moz-linear-gradient(
+    $bshtr-green-1,
+    $bshtr-green-opt
+  ) !important;
+  #{$attribute}: -ms-linear-gradient(
+    $bshtr-green-1,
+    $bshtr-green-opt
+  ) !important;
+  #{$attribute}: -o-linear-gradient(
+    $bshtr-green-1,
+    $bshtr-green-opt
+  ) !important;
+  #{$attribute}: linear-gradient($bshtr-green-1, $bshtr-green-opt) !important;
+}
+
+@mixin gradient-block-1($attribute) {
+  #{$attribute}: -webkit-linear-gradient(
+    $bshtr-grad1-green1,
+    $bshtr-grad1-green2
+  ) !important;
+  #{$attribute}: -moz-linear-gradient(
+    $bshtr-grad1-green1,
+    $bshtr-grad1-green2
+  ) !important;
+  #{$attribute}: -ms-linear-gradient(
+    $bshtr-grad1-green1,
+    $bshtr-grad1-green2
+  ) !important;
+  #{$attribute}: -o-linear-gradient(
+    $bshtr-grad1-green1,
+    $bshtr-grad1-green2
+  ) !important;
+  #{$attribute}: linear-gradient(
+    $bshtr-grad1-green1,
+    $bshtr-grad1-green2
+  ) !important;
+}

@@ -1,316 +1,496 @@
 <template>
-  <div class="py-2"></div>
-  <div class="container px-4 py-5">
-    <h1>Настройте параметры вашего будущего цветника</h1>
-    <div
-      class="container px-4 py-5 row justify-content-left g-4 py-5 row-cols-1 row-cols-lg-2"
-    >
-      <div class="options-group-1">
-        <h4 class="text-start">Начало цветения</h4>
-        <div class="text-start">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              checked
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Май
-            </label>
+  <div class="py-5"></div>
+
+  <div class="glowBehindBlock-1">
+    <div class="container-custom1920 px-4 py-5">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
+        Настройте параметры вашего будущего цветника
+      </h1>
+      <div>
+        <div class="gensettings p-5 g-4 rounded border-bshtr-green1">
+          <div id="gen_gensettings_fields" style="max-width: 1000px">
+            <div>
+              <div class="options-group-1">
+                <h4 class="text-start">Период цветения</h4>
+                <VueSlider
+                  ref="slider"
+                  v-model="value"
+                  :marks="sliderMarks"
+                  :min="0"
+                  :max="4"
+                  class="m-5 mt-3 mx-0"
+                >
+                </VueSlider>
+              </div>
+            </div>
+            <div class="row">
+              <div class="options-group-2 col py-4">
+                <h4 class="text-start text-truncate">Освещённость</h4>
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                >
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio1"
+                      />
+                    </div>
+
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio1"
+                      style="min-width: 100px"
+                    >
+                      Солнце
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_1_sun.svg"
+                      alt="icon_lightIcon_1_sun"
+                    />
+                  </div>
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio2"
+                        checked
+                      />
+                    </div>
+
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio2"
+                      style="min-width: 100px"
+                    >
+                      Полутень
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_2_halfsun.svg"
+                      alt="icon_lightIcon_2_halfsun"
+                    />
+                  </div>
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio3"
+                      />
+                    </div>
+
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio3"
+                      style="min-width: 100px"
+                    >
+                      Тень
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_3_cloudyDay.svg"
+                      alt="icon_lightIcon_3_cloudyDay"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="options-group-3 col py-4">
+                <h4 class="text-start text-truncate">Режим полива</h4>
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                >
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'ежедневно',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
+                    type="text"
+                    placeholder="Top"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode1"
+                      />
+                    </div>
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode1"
+                    >
+                      частый
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
+                  </div>
+
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'через 2-3 дня',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
+                    type="text"
+                    placeholder="Top"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode2"
+                        checked
+                      />
+                    </div>
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode2"
+                    >
+                      умеренный
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
+                  </div>
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'раз в неделю',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
+                    type="text"
+                    placeholder="Top"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode3"
+                      />
+                    </div>
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode3"
+                    >
+                      редкий
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
+                  </div>
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                    v-tooltip.top="{
+                      value: 'опрыскивание',
+                      pt: {
+                        text: 'bg-white text-black',
+                      },
+                    }"
+                    type="text"
+                    placeholder="Top"
+                  >
+                    <div>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode4"
+                      />
+                    </div>
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode4"
+                    >
+                      сухой
+                    </label>
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="options-group-4 col py-4 pb-0 d-flex flex-wrap justify-content-between"
+              >
+                <div id="formColors1" class="align-self-start w-100">
+                  <h4 class="text-start text-truncate">Основной цвет</h4>
+                  <div
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
+                  >
+                    <div class="" v-for="index in 3" :key="index">
+                      <div>
+                        <input
+                          class="form-check-input p-3 rounded"
+                          type="radio"
+                          name="lightnessradio"
+                          id="lightnessradio1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="formColors2" class="align-self-end w-100">
+                  <h4 class="text-start text-truncate">Дополнительный цвет</h4>
+                  <div
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
+                  >
+                    <div class="" v-for="index in 3" :key="index">
+                      <input
+                        class="form-check-input p-3"
+                        type="checkbox"
+                        id="checkboxNoLabel"
+                        value=""
+                        aria-label="..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5">
+              <button
+                class="btn btn-light btn-outline-success text-black px-4 py-2"
+              >
+                Сгенерировать
+              </button>
+            </div>
           </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Июнь
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Июль
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Август
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Сентябрь
-            </label>
+          <div>
+            <img src="" style="width: 500px" />
           </div>
         </div>
       </div>
-      <div class="options-group-2">
-        <h4 class="text-start">Конец цветения</h4>
-        <div class="text-start">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Май
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              checked
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Июнь
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Июль
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Август
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Сентябрь
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="options-group-3">
-        <h4 class="text-start">Освещённость</h4>
-        <div class="text-start">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Солнце
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              checked
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Полутень
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Тень
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="options-group-4">
-        <h4 class="text-start">Режим полива</h4>
-        <div class="text-start">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Частый (ежедневно)
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              checked
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Умеренный (через 2-3 дня)
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Редкий (раз в неделю)
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Сухой (опрыскивание)
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="options-group-5">
-        <h4 class="text-start">Режим полива</h4>
-        <div class="text-start">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckChecked"
-              checked
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              Checked checkbox
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <button class="btn btn-outline-success">Сгенерировать</button>
     </div>
   </div>
-  <form @submit.prevent="onSubmit">
-    <img class="mb-4" alt="" width="72" height="57" />
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <div class="form-floating">
-      <input
-        type="username"
-        class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
-        v-model="formData.username"
-        ref="username"
-      />
-      <label for="floatingInput">Username</label>
+  <div class="glowBehindBlock-1">
+    <div class="container-custom1920 px-4 py-5">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
+      <div class="row">
+        <div
+          class="col gradient-block-1 p-5 rounded border-bshtr-green1"
+          id="result_text"
+        >
+          <div id="results_1" class="pb-4">
+            <div class="h4 fw-normal pb-2">Период цветения</div>
+            <div class="row">
+              <div class="col">
+                <div class="h5 fw-normal">Начало:</div>
+                <div>май</div>
+              </div>
+              <div class="col">
+                <div class="h5 fw-normal">Конец:</div>
+                <div>июль</div>
+              </div>
+            </div>
+          </div>
+          <div id="results_2" class="row pb-4">
+            <div id="results_2-1" class="col">
+              <div class="h4 fw-normal pb-2">Освещённость</div>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-grow-1 me-3">солнце</div>
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-whatsapp.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="results_2-2" class="col">
+              <div class="h4 fw-normal pb-2">Режим полива</div>
+              <div class="d-flex align-items-center pb-2">
+                <div class="flex-grow-1 me-3">частый</div>
+                <div class="flex-shrink-0">
+                  <img
+                    src="@assets/img/logo-whatsapp.svg"
+                    alt="telegram-logo"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="results_3" class="pb-4">
+            <div class="h4 fw-normal pb-2">Цветовая гамма</div>
+            <div
+              class="d-flex align-items-center pb-2 whiteBlock rounded border-bshtr-contrastgreen p-4"
+            >
+              <div class="flex-grow-1 me-3">частый</div>
+              <div class="flex-shrink-0">
+                <img src="@assets/img/logo-whatsapp.svg" alt="telegram-logo" />
+              </div>
+            </div>
+          </div>
+          <div id="results_4_buttons" class="pb-4">
+            <button
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+            >
+              Редактировать
+            </button>
+            <button
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+            >
+              Скачать материалы
+            </button>
+          </div>
+          <div id="results_5_generate">
+            <button
+              class="btn btn-light btn-outline-success text-black px-4 py-2"
+            >
+              Сгенерировать
+            </button>
+          </div>
+        </div>
+        <div class="col" id="result_pic">
+          <img
+            src="@assets/img/flowerbed-1.png"
+            alt="#"
+            style="max-height: 100%; width: 100%"
+            class="rounded"
+          />
+        </div>
+      </div>
     </div>
-    <div class="form-floating">
-      <input
-        type="Username"
-        class="form-control"
-        id="floatingPassword"
-        placeholder="Password"
-        v-model="formData.date"
-        ref="date"
-      />
-      <label for="floatingPassword">Date</label>
+    <div class="container-custom1920 px-4 py-5 glowBehindBlock-1">
+      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
+        Карта рассадки
+      </h1>
+      <div
+        class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
+        style="height: 50vh"
+      >
+        <div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              1
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              2
+            </div>
+          </div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              3
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              4
+            </div>
+          </div>
+          <div
+            style="
+              min-width: 600px;
+              max-width: 50%;
+              min-height: 100px;
+              max-height: 700px;
+            "
+            class="row"
+          >
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              5
+            </div>
+            <div
+              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
+            >
+              6
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-  </form>
+    <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
+      <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
+      <div class="d-flex flex-wrap justify-content-center">
+        <div
+          class="flower-item py-4 px-4"
+          v-for="index in 6"
+          :key="index"
+          style="max-width: 700px"
+        >
+          <div class="h4 fw-normal px-0">{{ index + ". " }}Щучка дернистая</div>
+          <div class="row g-0">
+            <div class="col border-top-dotted-4f4f4f py-4">
+              Многолетний дерновинный злак, образующий кочки. Стебли
+              прямостоячие с расставленными узлами. Листья длинные,
+              тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
+              что придаёт кочке полукруглый, каскадообразный вид. Общее
+              соцветие — раскидистые метелки длиной 10–25 см. Зацветают
+              зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
+              становятся светло-золотистыми и выгорают до светло-соломенного.
+            </div>
+            <div class="col ps-4" style="max-width: 300px">
+              <img
+                src="@assets/img/flowerbed-1.png"
+                alt="#"
+                style="width: 100%"
+                class="rounded"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style></style>
@@ -318,17 +498,129 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { CreateSession, GetSession } from "../services/sessions";
-import { Seccion } from "../entities/seccion";
+// import { Session } from "../entities/session";
+import { postFlowerComp } from "../services/flowers";
+import { FlowerComp } from "../entities/flowercomp";
+
+import VueSlider from "vue-slider-component";
+
+const value = ref([1, 4]);
+defineExpose({ value });
+const sliderMarks = ref({
+  0: {
+    label: "май",
+  },
+  1: {
+    label: "июнь",
+  },
+  2: {
+    label: "июль",
+  },
+  3: {
+    label: "август",
+  },
+  4: {
+    label: "сентябрь",
+  },
+});
+
+// options: { // all slider options //
+//         dotSize: 14,
+//         width: 'auto',
+//         height: 4,
+//         contained: false,
+//         direction: 'ltr',
+// 	       data: null,
+//         dataLabel: 'label',
+//         dataValue: 'value',
+//         min: 0,
+//         max: 100,
+//         interval: 1,
+//         disabled: false,
+//         clickable: true,
+//         duration: 0.5,
+//         adsorb: false,
+//         lazy: false,
+//         tooltip: 'active',
+//         tooltipPlacement: 'top',
+//         tooltipFormatter: void 0,
+//         useKeyboard: false,
+//         keydownHook: null,
+//         dragOnClick: false,
+//         enableCross: true,
+//         fixed: false,
+//         minRange: void 0,
+//         maxRange: void 0,
+//         order: true,
+//         marks: true,
+//         dotOptions: void 0,
+//         dotAttrs: void 0,
+//         process: true,
+//         dotStyle: void 0,
+//         railStyle: void 0,
+//         processStyle: void 0,
+//         tooltipStyle: void 0,
+//         stepStyle: void 0,
+//         stepActiveStyle: void 0,
+//         labelStyle: void 0,
+//         labelActiveStyle: void 0,
+//       }
 
 GetSession().then((resp) => {
   console.log(resp);
 });
 
-const formData: Ref<Seccion> = ref({
-  username: "",
-  date: "",
+const formData: Ref<FlowerComp> = ref({
+  Name: "",
+  Description: "",
+  Frozen_resistance: "",
+  Sunlight: "",
+  Period_blossom_start: "",
+  Period_blossom_end: "",
+  Height: "",
+  Color_bloss_name: "",
+  Color_bloss_hex: "",
+  Color_leaves_name: "",
+  Color_leaves_hex: "",
 });
+// const formData: Ref<FlowerComp> = ref({
+//   Name: "",
+//   description: "",
+//   frost_resistance_zone: 0,
+//   light: "",
+//   watering: "",
+//   color_main: "",
+//   color_other: "",
+//   period_bloosom_start: "",
+//   period_bloosom_end: ""
+// });
+// {
+//   "name": "string",
+//   "description": "string",
+//   "frost_resistance_zone": 2147483647,
+//   "light": "string",
+//   "watering": "string",
+//   "color_main": "фиолетовый",
+//   "color_other": "белый",
+//   "period_bloosom_start": 2147483647,
+//   "period_bloosom_end": 2147483647
+// }
+// user sends only 2 colors
 async function onSubmit() {
-  CreateSession(formData.value);
+  postFlowerComp(formData.value);
 }
 </script>
+
+<style lang="scss" scoped>
+.gensettings {
+  background-image: url("@assets/img/gen-VectorFlowers.png"),
+    linear-gradient(to top, $bshtr-grad1-green1, $bshtr-grad1-green2);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+
+.whiteBlock {
+  background: #f4f4f4b2;
+}
+</style>
