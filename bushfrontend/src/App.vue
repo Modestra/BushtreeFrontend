@@ -154,9 +154,9 @@ const dialogVisible = ref(false);
       <div
         class="row justify-content-between g-4 my-1 py-1 row-cols-1 row-cols-lg-2 text-white border-top-dotted-f4f4f4"
       >
-        <div class="col">
-          <div>
-            <p class="text-start">© 2024 BushTree. Все права защищены</p>
+        <div class="col d-flex justify-content-start align-items-center">
+          <div class="m-0">
+            <p class="text-start m-0">© 2024 BushTree. Все права защищены</p>
           </div>
         </div>
         <div class="col">
