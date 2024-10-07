@@ -302,12 +302,20 @@
               </div>
             </div>
             <div class="mt-5">
-              <button
+              <!-- <button
                 class="btn btn-light btn-outline-success text-black px-4 py-2"
                 type="submit"
               >
                 Сгенерировать
-              </button>
+              </button> -->
+              <Button
+                class="px-4 py-2"
+                type="submit"
+                label="Сгенерировать"
+                severity="secondary"
+                :loading="loading"
+                @click="load"
+              ></Button>
             </div>
           </div>
           <div>
@@ -331,11 +339,11 @@
             <div class="row">
               <div class="col">
                 <div class="h5 fw-normal">Начало:</div>
-                <div>май</div>
+                <div>{{ formData.period_bloosom_start }}</div>
               </div>
               <div class="col">
                 <div class="h5 fw-normal">Конец:</div>
-                <div>июль</div>
+                <div>{{ formData.period_bloosom_end }}</div>
               </div>
             </div>
           </div>
@@ -343,7 +351,7 @@
             <div id="results_2-1" class="col">
               <div class="h4 fw-normal pb-2">Освещённость</div>
               <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">солнце</div>
+                <div class="flex-grow-1 me-3">{{ formData.light }}</div>
                 <div class="flex-shrink-0">
                   <img
                     src="@assets/img/logo-whatsapp.svg"
@@ -355,7 +363,7 @@
             <div id="results_2-2" class="col">
               <div class="h4 fw-normal pb-2">Режим полива</div>
               <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">частый</div>
+                <div class="flex-grow-1 me-3">{{ formData.watering }}</div>
                 <div class="flex-shrink-0">
                   <img
                     src="@assets/img/logo-whatsapp.svg"
@@ -389,11 +397,19 @@
             </button>
           </div>
           <div id="results_5_generate">
-            <button
+            <!-- <button
               class="btn btn-light btn-outline-success text-black px-4 py-2"
             >
               Сгенерировать
-            </button>
+            </button> -->
+            <Button
+              class="px-4 py-2"
+              type="submit"
+              label="Сгенерировать"
+              severity="secondary"
+              :loading="loading"
+              @click="load"
+            ></Button>
           </div>
         </div>
         <div class="col" id="result_pic">
@@ -521,6 +537,7 @@ import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/flowers";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
+import Button from "primevue/button";
 
 var generationDone = ref();
 
@@ -543,6 +560,15 @@ const sliderMarks = ref({
     label: "сентябрь",
   },
 });
+
+const loading = ref(false);
+
+const load = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
+};
 
 const garden_colors = [
   "белый",
@@ -655,5 +681,12 @@ const gardenSubmit = async () => {
 
 .whiteBlock {
   background: #f4f4f4b2;
+}
+
+.p-button-label {
+  font-weight: normal;
+}
+.p-button-secondary {
+  color: black;
 }
 </style>

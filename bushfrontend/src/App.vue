@@ -70,7 +70,7 @@ const dialogVisible = ref(false);
             <div></div>
             <li class="nav-item">
               <RouterLink
-                class="nav-link"
+                class="nav-link active"
                 aria-current="page"
                 :to="{ name: 'home', hash: '#landing_4steps' }"
                 active-class="active"
@@ -79,7 +79,7 @@ const dialogVisible = ref(false);
             </li>
             <li class="nav-item">
               <RouterLink
-                class="nav-link"
+                class="nav-link active"
                 active-class="active"
                 :to="{ name: 'home', hash: '#landing_galleria' }"
                 >Готовые решения</RouterLink
@@ -87,7 +87,7 @@ const dialogVisible = ref(false);
             </li>
             <li class="nav-item">
               <RouterLink
-                class="nav-link"
+                class="nav-link active"
                 active-class="active"
                 :to="{ name: 'home', hash: '#landing_QaA' }"
                 tabindex="-1"
