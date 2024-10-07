@@ -1,23 +1,26 @@
 <template>
   <div class="py-5"></div>
 
-  <div class="glowBehindBlock-1">
+  <div class="glowBehindBlock-1" v-if="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
       </h1>
       <div>
-        <div class="gensettings p-5 g-4 rounded border-bshtr-green1">
+        <form
+          @submit.prevent="gardenSubmit"
+          class="gensettings p-5 g-4 rounded border-bshtr-green1"
+        >
           <div id="gen_gensettings_fields" style="max-width: 1000px">
             <div>
               <div class="options-group-1">
                 <h4 class="text-start">Период цветения</h4>
                 <VueSlider
                   ref="slider"
-                  v-model="value"
+                  v-model="sliderValue"
                   :marks="sliderMarks"
-                  :min="0"
-                  :max="4"
+                  :min="5"
+                  :max="9"
                   class="m-5 mt-3 mx-0"
                 >
                 </VueSlider>
@@ -38,6 +41,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio1"
+                        v-model="formData.light"
+                        value="солнце"
                       />
                     </div>
 
@@ -63,6 +68,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio2"
+                        v-model="formData.light"
+                        value="полутень"
                         checked
                       />
                     </div>
@@ -89,6 +96,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio3"
+                        v-model="formData.light"
+                        value="тень"
                       />
                     </div>
 
@@ -130,6 +139,7 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode1"
+                        v-model="formData.watering"
                       />
                     </div>
                     <label
@@ -163,6 +173,7 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode2"
+                        v-model="formData.watering"
                         checked
                       />
                     </div>
@@ -196,6 +207,7 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode3"
+                        v-model="formData.watering"
                       />
                     </div>
                     <label
@@ -228,6 +240,7 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode4"
+                        v-model="formData.watering"
                       />
                     </div>
                     <label
@@ -245,37 +258,43 @@
                 </div>
               </div>
               <div
-                class="options-group-4 col py-4 pb-0 d-flex flex-wrap justify-content-between"
+                class="options-group-4 col py-4 pb-0 d-flex flex-column justify-content-between"
               >
                 <div id="formColors1" class="align-self-start w-100">
                   <h4 class="text-start text-truncate">Основной цвет</h4>
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="index in 3" :key="index">
+                    <div class="" v-for="garden in garden_colors" :key="garden">
                       <div>
                         <input
-                          class="form-check-input p-3 rounded"
+                          class="form-check-input p-3 m-1 rounded"
                           type="radio"
-                          name="lightnessradio"
-                          id="lightnessradio1"
+                          name="maincolorradio"
+                          id="maincolorradio"
+                          :value="{ garden }"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div id="formColors2" class="align-self-end w-100">
+                <div id="formColors2" class="align-self-end mt-auto w-100">
                   <h4 class="text-start text-truncate">Дополнительный цвет</h4>
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="index in 3" :key="index">
+                    <div
+                      class=""
+                      v-for="garden1 in garden_colors"
+                      :key="garden1"
+                    >
                       <input
-                        class="form-check-input p-3"
-                        type="checkbox"
+                        class="form-check-input p-3 m-1 rounded"
+                        type="radio"
+                        name="othercolorradio"
                         id="checkboxNoLabel"
-                        value=""
                         aria-label="..."
+                        :value="{ garden1 }"
                       />
                     </div>
                   </div>
@@ -285,6 +304,7 @@
             <div class="mt-5">
               <button
                 class="btn btn-light btn-outline-success text-black px-4 py-2"
+                type="submit"
               >
                 Сгенерировать
               </button>
@@ -293,12 +313,12 @@
           <div>
             <img src="" style="width: 500px" />
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <div class="glowBehindBlock-1">
+  <div class="glowBehindBlock-1" v-if="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
@@ -358,12 +378,12 @@
           </div>
           <div id="results_4_buttons" class="pb-4">
             <button
-              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
             >
               Редактировать
             </button>
             <button
-              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
             >
               Скачать материалы
             </button>
@@ -463,20 +483,16 @@
       <div class="d-flex flex-wrap justify-content-center">
         <div
           class="flower-item py-4 px-4"
-          v-for="index in 6"
-          :key="index"
+          v-for="(flower, index) in flowersGeneratedList[0]"
+          :key="flower"
           style="max-width: 700px"
         >
-          <div class="h4 fw-normal px-0">{{ index + ". " }}Щучка дернистая</div>
+          <div class="h4 fw-normal px-0">
+            {{ index + 1 + ". " }}{{ flower.name }}
+          </div>
           <div class="row g-0">
             <div class="col border-top-dotted-4f4f4f py-4">
-              Многолетний дерновинный злак, образующий кочки. Стебли
-              прямостоячие с расставленными узлами. Листья длинные,
-              тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
-              что придаёт кочке полукруглый, каскадообразный вид. Общее
-              соцветие — раскидистые метелки длиной 10–25 см. Зацветают
-              зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
-              становятся светло-золотистыми и выгорают до светло-соломенного.
+              {{ flower.description.substring(0, 300) + "..." }}
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
@@ -497,33 +513,46 @@
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
-import { CreateSession, GetSession } from "../services/sessions";
+import { GetSession } from "../services/sessions";
+// import { CreateSession } from "../services/sessions";
 // import { Session } from "../entities/session";
-import { postFlowerComp } from "../services/flowers";
-import { FlowerComp } from "../entities/flowercomp";
-
+import { postGarden } from "../services/gardens";
+import { Garden } from "../entities/garden";
+import { postGetFlowersByGarden } from "../services/flowers";
+import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 
-const value = ref([1, 4]);
-defineExpose({ value });
+var generationDone = ref();
+
+const sliderValue = ref([6, 8]);
+defineExpose({ sliderValue });
 const sliderMarks = ref({
-  0: {
+  5: {
     label: "май",
   },
-  1: {
+  6: {
     label: "июнь",
   },
-  2: {
+  7: {
     label: "июль",
   },
-  3: {
+  8: {
     label: "август",
   },
-  4: {
+  9: {
     label: "сентябрь",
   },
 });
 
+const garden_colors = [
+  "белый",
+  "красный",
+  "желтый",
+  "зеленый",
+  "синий",
+  "фиолетовый",
+  "розовый",
+];
 // options: { // all slider options //
 //         dotSize: 14,
 //         width: 'auto',
@@ -570,45 +599,49 @@ GetSession().then((resp) => {
   console.log(resp);
 });
 
-const formData: Ref<FlowerComp> = ref({
-  Name: "",
-  Description: "",
-  Frozen_resistance: "",
-  Sunlight: "",
-  Period_blossom_start: "",
-  Period_blossom_end: "",
-  Height: "",
-  Color_bloss_name: "",
-  Color_bloss_hex: "",
-  Color_leaves_name: "",
-  Color_leaves_hex: "",
+const formData: Ref<Garden> = ref({
+  name: "",
+  description: "",
+  frost_resistance_zone: 1,
+  light: "полутень",
+  watering: "сухой",
+  color_main: "зеленый",
+  color_other: "желтый",
+  period_bloosom_start: sliderValue.value[0],
+  period_bloosom_end: sliderValue.value[1],
 });
-// const formData: Ref<FlowerComp> = ref({
-//   Name: "",
+// const formData: Ref<Garden> = ref({
+//   name: "",
 //   description: "",
-//   frost_resistance_zone: 0,
+//   frost_resistance_zone: 1,
 //   light: "",
 //   watering: "",
 //   color_main: "",
 //   color_other: "",
-//   period_bloosom_start: "",
-//   period_bloosom_end: ""
+//   period_bloosom_start: sliderValue.value[0],
+//   period_bloosom_end: sliderValue.value[1],
 // });
-// {
-//   "name": "string",
-//   "description": "string",
-//   "frost_resistance_zone": 2147483647,
-//   "light": "string",
-//   "watering": "string",
-//   "color_main": "фиолетовый",
-//   "color_other": "белый",
-//   "period_bloosom_start": 2147483647,
-//   "period_bloosom_end": 2147483647
-// }
-// user sends only 2 colors
-async function onSubmit() {
-  postFlowerComp(formData.value);
-}
+const gardenArrayToSend: Ref<Flower> = ref({
+  gardens: "6",
+});
+const flowersGeneratedList = [];
+
+const gardenSubmit = async () => {
+  postGarden(formData.value).then((resp) => {
+    console.log(resp);
+    // generationDone = true;
+    // console.log(generationDone);
+    // postGetFlowersByGarden("2");
+    // postGetFlowersByGarden(resp.data.gardens[0].toString());
+    // console.log(resp.data.gardens[0].toString());
+    // console.log(formData.value.frost_resistance_zone);
+    postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
+      // console.log(resp);
+      flowersGeneratedList.push(resp.data.flowers);
+      console.log(flowersGeneratedList);
+    });
+  });
+};
 </script>
 
 <style lang="scss" scoped>

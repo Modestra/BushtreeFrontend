@@ -111,7 +111,7 @@ const dialogVisible = ref(false);
 
   <RouterView />
 
-  <footer class="footer mt-auto py-3 fullWidthFooterBootstrapFix">
+  <footer class="footer mt-5 py-3 fullWidthFooterBootstrapFix">
     <div class="container pt-2">
       <div
         class="row justify-content-between g-4 py-2 pb-3 row-cols-1 row-cols-lg-2 text-white"
