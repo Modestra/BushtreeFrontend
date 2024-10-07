@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { db, storage } from "@/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, getDownloadURL } from "firebase/storage";
+import Dialog from "primevue/dialog";
 
 onMounted(async () => {
   const starsRef = ref(storage, "images/0.png"); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам
@@ -35,6 +36,8 @@ onMounted(async () => {
       }
     });
 });
+
+const dialogVisible = ref(false);
 </script>
 
 <template>
@@ -157,11 +160,11 @@ onMounted(async () => {
           </div>
         </div>
         <div class="col">
-          <div class="row d-flex align-items-end">
+          <div class="row d-flex justify-content-center align-items-center">
             <div class="col">
-              <div class="row">
+              <div class="row justify-content-center align-items-center">
                 <div class="col">
-                  <p class="text-start col text-truncate">
+                  <p class="text-start col text-truncate m-0">
                     Дизайн и разработка
                   </p>
                 </div>
@@ -174,9 +177,34 @@ onMounted(async () => {
                 </div>
               </div>
             </div>
-            <div class="col">
-              <p>Design by Freepik</p>
+            <div
+              class="col d-flex flex-wrap justify-content-center align-items-center"
+              style="height: 100%"
+            >
+              <button
+                class="text-black p-2 border-0 bg-transparent text-white"
+                style="height: 100%"
+                @click="dialogVisible = true"
+              >
+                Designed by Freepik
+              </button>
             </div>
+            <Dialog
+              v-model:visible="dialogVisible"
+              dismissableMask="true"
+              modal
+              header="www.freepik.com"
+              :style="{ width: '20vw' }"
+              :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+              class="block-darkgreen1 p-4 rounded"
+            >
+              <p class="m-0">
+                <a
+                  href="https://ru.freepik.com/free-vector/gray-neural-network-illustration_3786363.htm#fromView=search&page=1&position=5&uuid=022660f5-adcf-4f0c-95db-ccb3e1b3869b"
+                  >Изображение от rawpixel.com на Freepik</a
+                >
+              </p>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -233,6 +261,10 @@ body {
 
 .gradient-block-1 {
   @include gradient-block-1(background);
+}
+
+.block-darkgreen1 {
+  background-color: $bshtr-darkgreen !important;
 }
 
 .border-bshtr-green1 {
