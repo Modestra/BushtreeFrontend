@@ -272,7 +272,7 @@
                     <div class="" v-for="garden in garden_colors" :key="garden">
                       <div>
                         <input
-                          class="form-check-input p-3 m-1 rounded"
+                          class="form-check-input form-check-input-black p-3 m-1 rounded"
                           :class="{
                             colorPicker_white: garden === 'белый',
                             colorPicker_red: garden === 'красный',
@@ -308,7 +308,7 @@
                       :key="garden1"
                     >
                       <input
-                        class="form-check-input p-3 m-1 rounded"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
                         :class="{
                           colorPicker_white: garden1 === 'белый',
                           colorPicker_red: garden1 === 'красный',
@@ -771,8 +771,11 @@ const gardenSubmit = async () => {
   color: black;
 }
 
+.form-check-input-black:checked {
+  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
 .colorPicker_white {
-  background-color: rgb(219, 219, 219);
+  background-color: rgb(253, 253, 253);
 }
 .colorPicker_red {
   background-color: #ff3030;
