@@ -610,8 +610,6 @@
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
-// import { CreateSession } from "../services/sessions";
-// import { Session } from "../entities/session";
 import { postGarden } from "../services/gardens";
 import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/flowers";
