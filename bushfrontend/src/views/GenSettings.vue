@@ -337,7 +337,7 @@
             </div>
             <div class="mt-5">
               <button
-                class="btn btn-light btn-outline-success text-black px-4 py-2"
+                class="btn btn-outline-success text-black bg-white px-4 py-2"
                 type="submit"
               >
                 Сгенерировать
@@ -479,7 +479,7 @@
           </div>
           <div id="results_5_generate">
             <!-- <button
-              class="btn btn-light btn-outline-success text-black px-4 py-2"
+              class="btn btn-outline-success text-black bg-white px-4 py-2"
             >
               Сгенерировать
             </button> -->
