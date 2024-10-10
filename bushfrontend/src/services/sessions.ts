@@ -15,11 +15,7 @@ export function CreateSession(data: Session) {
 
 //Тест на получение данных
 export function GetSession() {
-  return HTTP.get("/seccions/list", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return true;
 }
 
 // export function GetSession(): Promise<any> {

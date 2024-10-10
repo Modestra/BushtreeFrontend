@@ -1,23 +1,26 @@
 <template>
   <div class="py-5"></div>
 
-  <div class="glowBehindBlock-1">
+  <div class="glowBehindBlock-1" v-if="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
       </h1>
       <div>
-        <div class="gensettings p-5 g-4 rounded border-bshtr-green1">
+        <form
+          @submit.prevent="gardenSubmit"
+          class="gensettings p-5 g-4 rounded border-bshtr-green1"
+        >
           <div id="gen_gensettings_fields" style="max-width: 1000px">
             <div>
               <div class="options-group-1">
                 <h4 class="text-start">Период цветения</h4>
                 <VueSlider
                   ref="slider"
-                  v-model="value"
+                  v-model="sliderValue"
                   :marks="sliderMarks"
-                  :min="0"
-                  :max="4"
+                  :min="5"
+                  :max="9"
                   class="m-5 mt-3 mx-0"
                 >
                 </VueSlider>
@@ -38,6 +41,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio1"
+                        v-model="formData.light"
+                        value="солнце"
                       />
                     </div>
 
@@ -63,6 +68,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio2"
+                        v-model="formData.light"
+                        value="полутень"
                         checked
                       />
                     </div>
@@ -89,6 +96,8 @@
                         type="radio"
                         name="lightnessradio"
                         id="lightnessradio3"
+                        v-model="formData.light"
+                        value="тень"
                       />
                     </div>
 
@@ -130,6 +139,8 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode1"
+                        v-model="formData.watering"
+                        value="частый"
                       />
                     </div>
                     <label
@@ -163,7 +174,9 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode2"
+                        v-model="formData.watering"
                         checked
+                        value="умеренный"
                       />
                     </div>
                     <label
@@ -196,6 +209,8 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode3"
+                        v-model="formData.watering"
+                        value="редкий"
                       />
                     </div>
                     <label
@@ -228,6 +243,8 @@
                         type="radio"
                         name="wateringMode"
                         id="wateringMode4"
+                        v-model="formData.watering"
+                        value="сухой"
                       />
                     </div>
                     <label
@@ -245,37 +262,73 @@
                 </div>
               </div>
               <div
-                class="options-group-4 col py-4 pb-0 d-flex flex-wrap justify-content-between"
+                class="options-group-4 col py-4 pb-0 d-flex flex-column justify-content-between"
               >
                 <div id="formColors1" class="align-self-start w-100">
                   <h4 class="text-start text-truncate">Основной цвет</h4>
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="index in 3" :key="index">
+                    <div class="" v-for="garden in garden_colors" :key="garden">
                       <div>
                         <input
-                          class="form-check-input p-3 rounded"
+                          class="form-check-input form-check-input-black p-3 m-1 rounded"
+                          :class="{
+                            colorPicker_white: garden === 'белый',
+                            colorPicker_red: garden === 'красный',
+                            colorPicker_yellow: garden === 'желтый',
+                            colorPicker_green: garden === 'зеленый',
+                            colorPicker_blue: garden === 'синий',
+                            colorPicker_purple: garden === 'фиолетовый',
+                            colorPicker_pink: garden === 'розовый',
+                          }"
+                          v-tooltip.top="{
+                            value: garden,
+                            pt: {
+                              text: 'bg-white text-black',
+                            },
+                          }"
                           type="radio"
-                          name="lightnessradio"
-                          id="lightnessradio1"
+                          name="maincolorradio"
+                          id="maincolorradio"
+                          :value="{ garden }"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div id="formColors2" class="align-self-end w-100">
+                <div id="formColors2" class="align-self-end mt-auto w-100">
                   <h4 class="text-start text-truncate">Дополнительный цвет</h4>
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="index in 3" :key="index">
+                    <div
+                      class=""
+                      v-for="garden1 in garden_colors"
+                      :key="garden1"
+                    >
                       <input
-                        class="form-check-input p-3"
-                        type="checkbox"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
+                        :class="{
+                          colorPicker_white: garden1 === 'белый',
+                          colorPicker_red: garden1 === 'красный',
+                          colorPicker_yellow: garden1 === 'желтый',
+                          colorPicker_green: garden1 === 'зеленый',
+                          colorPicker_blue: garden1 === 'синий',
+                          colorPicker_purple: garden1 === 'фиолетовый',
+                          colorPicker_pink: garden1 === 'розовый',
+                        }"
+                        v-tooltip.top="{
+                          value: garden1,
+                          pt: {
+                            text: 'bg-white text-black',
+                          },
+                        }"
+                        type="radio"
+                        name="othercolorradio"
                         id="checkboxNoLabel"
-                        value=""
                         aria-label="..."
+                        :value="{ garden1 }"
                       />
                     </div>
                   </div>
@@ -283,22 +336,31 @@
               </div>
             </div>
             <div class="mt-5">
-              <button
+              <!-- <button
                 class="btn btn-light btn-outline-success text-black px-4 py-2"
+                type="submit"
               >
                 Сгенерировать
-              </button>
+              </button> -->
+              <Button
+                class="px-4 py-2"
+                type="submit"
+                label="Сгенерировать"
+                severity="secondary"
+                :loading="loading"
+                @click="load"
+              ></Button>
             </div>
           </div>
           <div>
             <img src="" style="width: 500px" />
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <div class="glowBehindBlock-1">
+  <div class="glowBehindBlock-1" v-if="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
@@ -311,69 +373,124 @@
             <div class="row">
               <div class="col">
                 <div class="h5 fw-normal">Начало:</div>
-                <div>май</div>
+                <div>{{ formData.period_bloosom_start }}</div>
               </div>
               <div class="col">
                 <div class="h5 fw-normal">Конец:</div>
-                <div>июль</div>
+                <div>{{ formData.period_bloosom_end }}</div>
               </div>
             </div>
           </div>
           <div id="results_2" class="row pb-4">
             <div id="results_2-1" class="col">
               <div class="h4 fw-normal pb-2">Освещённость</div>
-              <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">солнце</div>
-                <div class="flex-shrink-0">
-                  <img
-                    src="@assets/img/logo-whatsapp.svg"
-                    alt="telegram-logo"
-                  />
-                </div>
+
+              <div class="d-flex justify-content-start align-items-center mb-2">
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1"
+                  for="lightnessradio1"
+                  style="min-width: 100px"
+                >
+                  {{ formData.light }}
+                </label>
+                <img
+                  class="px-1"
+                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  alt="icon_lightIcon_1_sun"
+                />
               </div>
             </div>
             <div id="results_2-2" class="col">
               <div class="h4 fw-normal pb-2">Режим полива</div>
-              <div class="d-flex align-items-center pb-2">
-                <div class="flex-grow-1 me-3">частый</div>
-                <div class="flex-shrink-0">
-                  <img
-                    src="@assets/img/logo-whatsapp.svg"
-                    alt="telegram-logo"
-                  />
-                </div>
+              <div class="d-flex justify-content-start align-items-center mb-2">
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1"
+                  for="lightnessradio1"
+                  style="min-width: 100px"
+                >
+                  {{ formData.watering }}
+                </label>
+                <img
+                  class="px-1"
+                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  alt="icon_lightIcon_1_sun"
+                />
               </div>
             </div>
           </div>
           <div id="results_3" class="pb-4">
             <div class="h4 fw-normal pb-2">Цветовая гамма</div>
             <div
-              class="d-flex align-items-center pb-2 whiteBlock rounded border-bshtr-contrastgreen p-4"
+              class="d-flex align-items-center justify-content-start p-2 whiteBlock rounded border-bshtr-contrastgreen"
             >
-              <div class="flex-grow-1 me-3">частый</div>
-              <div class="flex-shrink-0">
-                <img src="@assets/img/logo-whatsapp.svg" alt="telegram-logo" />
+              <div class="" v-if="formData.color_main != null">
+                <div
+                  class="border-dark p-3 m-1 rounded"
+                  :class="{
+                    colorPicker_white: formData.color_main === 'белый',
+                    colorPicker_red: formData.color_main === 'красный',
+                    colorPicker_yellow: formData.color_main === 'желтый',
+                    colorPicker_green: formData.color_main === 'зеленый',
+                    colorPicker_blue: formData.color_main === 'синий',
+                    colorPicker_purple: formData.color_main === 'фиолетовый',
+                    colorPicker_pink: formData.color_main === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_main,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
+              </div>
+              <div class="" v-if="formData.color_other != null">
+                <div
+                  class="border-dark p-3 m-1 rounded"
+                  :class="{
+                    colorPicker_white: formData.color_other === 'белый',
+                    colorPicker_red: formData.color_other === 'красный',
+                    colorPicker_yellow: formData.color_other === 'желтый',
+                    colorPicker_green: formData.color_other === 'зеленый',
+                    colorPicker_blue: formData.color_other === 'синий',
+                    colorPicker_purple: formData.color_other === 'фиолетовый',
+                    colorPicker_pink: formData.color_other === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_other,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
               </div>
             </div>
           </div>
           <div id="results_4_buttons" class="pb-4">
             <button
-              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
             >
               Редактировать
             </button>
             <button
-              class="btn btn btn-outline-success text-white px-5 py-2 me-3"
+              class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
             >
               Скачать материалы
             </button>
           </div>
           <div id="results_5_generate">
-            <button
+            <!-- <button
               class="btn btn-light btn-outline-success text-black px-4 py-2"
             >
               Сгенерировать
-            </button>
+            </button> -->
+            <Button
+              class="px-4 py-2"
+              type="submit"
+              label="Сгенерировать"
+              severity="secondary"
+              :loading="loading"
+              @click="load"
+            ></Button>
           </div>
         </div>
         <div class="col" id="result_pic">
@@ -463,20 +580,16 @@
       <div class="d-flex flex-wrap justify-content-center">
         <div
           class="flower-item py-4 px-4"
-          v-for="index in 6"
-          :key="index"
+          v-for="(flower, index) in flowersGeneratedList[0]"
+          :key="flower"
           style="max-width: 700px"
         >
-          <div class="h4 fw-normal px-0">{{ index + ". " }}Щучка дернистая</div>
+          <div class="h4 fw-normal px-0">
+            {{ index + 1 + ". " }}{{ flower.name }}
+          </div>
           <div class="row g-0">
             <div class="col border-top-dotted-4f4f4f py-4">
-              Многолетний дерновинный злак, образующий кочки. Стебли
-              прямостоячие с расставленными узлами. Листья длинные,
-              тёмно-зелёные, до 3 мм шириной, острошероховатые, склоняющиеся,
-              что придаёт кочке полукруглый, каскадообразный вид. Общее
-              соцветие — раскидистые метелки длиной 10–25 см. Зацветают
-              зеленовато-фиолетовым цветом, позже зеленоватым. Далее соцветия
-              становятся светло-золотистыми и выгорают до светло-соломенного.
+              {{ flower.description.substring(0, 300) + "..." }}
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
@@ -497,33 +610,53 @@
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
-import { CreateSession, GetSession } from "../services/sessions";
-// import { Session } from "../entities/session";
-import { postFlowerComp } from "../services/flowers";
-import { FlowerComp } from "../entities/flowercomp";
-
+import { postGarden } from "../services/gardens";
+import { Garden } from "../entities/garden";
+import { postGetFlowersByGarden } from "../services/flowers";
+import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
+import Button from "primevue/button";
 
-const value = ref([1, 4]);
-defineExpose({ value });
+var generationDone = ref();
+
+const sliderValue = ref([6, 8]);
+defineExpose({ sliderValue });
 const sliderMarks = ref({
-  0: {
+  5: {
     label: "май",
   },
-  1: {
+  6: {
     label: "июнь",
   },
-  2: {
+  7: {
     label: "июль",
   },
-  3: {
+  8: {
     label: "август",
   },
-  4: {
+  9: {
     label: "сентябрь",
   },
 });
 
+const loading = ref(false);
+
+const load = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
+};
+
+const garden_colors = [
+  "белый",
+  "красный",
+  "желтый",
+  "зеленый",
+  "синий",
+  "фиолетовый",
+  "розовый",
+];
 // options: { // all slider options //
 //         dotSize: 14,
 //         width: 'auto',
@@ -566,49 +699,49 @@ const sliderMarks = ref({
 //         labelActiveStyle: void 0,
 //       }
 
-GetSession().then((resp) => {
-  console.log(resp);
+const formData: Ref<Garden> = ref({
+  name: "",
+  description: "",
+  frost_resistance_zone: 1,
+  light: "полутень",
+  watering: "сухой",
+  color_main: "зеленый",
+  color_other: "желтый",
+  period_bloosom_start: sliderValue.value[0],
+  period_bloosom_end: sliderValue.value[1],
 });
-
-const formData: Ref<FlowerComp> = ref({
-  Name: "",
-  Description: "",
-  Frozen_resistance: "",
-  Sunlight: "",
-  Period_blossom_start: "",
-  Period_blossom_end: "",
-  Height: "",
-  Color_bloss_name: "",
-  Color_bloss_hex: "",
-  Color_leaves_name: "",
-  Color_leaves_hex: "",
-});
-// const formData: Ref<FlowerComp> = ref({
-//   Name: "",
+// const formData: Ref<Garden> = ref({
+//   name: "",
 //   description: "",
-//   frost_resistance_zone: 0,
+//   frost_resistance_zone: 1,
 //   light: "",
 //   watering: "",
 //   color_main: "",
 //   color_other: "",
-//   period_bloosom_start: "",
-//   period_bloosom_end: ""
+//   period_bloosom_start: sliderValue.value[0],
+//   period_bloosom_end: sliderValue.value[1],
 // });
-// {
-//   "name": "string",
-//   "description": "string",
-//   "frost_resistance_zone": 2147483647,
-//   "light": "string",
-//   "watering": "string",
-//   "color_main": "фиолетовый",
-//   "color_other": "белый",
-//   "period_bloosom_start": 2147483647,
-//   "period_bloosom_end": 2147483647
-// }
-// user sends only 2 colors
-async function onSubmit() {
-  postFlowerComp(formData.value);
-}
+const gardenArrayToSend: Ref<Flower> = ref({
+  gardens: "6",
+});
+const flowersGeneratedList: any[] = [];
+
+const gardenSubmit = async () => {
+  postGarden(formData.value).then((resp) => {
+    console.log(resp);
+    // generationDone = true;
+    // console.log(generationDone);
+    // postGetFlowersByGarden("2");
+    // postGetFlowersByGarden(resp.data.gardens[0].toString());
+    // console.log(resp.data.gardens[0].toString());
+    // console.log(formData.value.frost_resistance_zone);
+    postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
+      // console.log(resp);
+      flowersGeneratedList.push(resp.data.flowers);
+      console.log(flowersGeneratedList);
+    });
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -622,5 +755,37 @@ async function onSubmit() {
 
 .whiteBlock {
   background: #f4f4f4b2;
+}
+
+.p-button-label {
+  font-weight: normal;
+}
+.p-button-secondary {
+  color: black;
+}
+
+.form-check-input-black:checked {
+  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+.colorPicker_white {
+  background-color: rgb(253, 253, 253);
+}
+.colorPicker_red {
+  background-color: #ff3030;
+}
+.colorPicker_yellow {
+  background-color: #fff27c;
+}
+.colorPicker_green {
+  background-color: #207b25;
+}
+.colorPicker_blue {
+  background-color: #3239b4;
+}
+.colorPicker_purple {
+  background-color: #da71ff;
+}
+.colorPicker_pink {
+  background-color: #fe8fc7;
 }
 </style>

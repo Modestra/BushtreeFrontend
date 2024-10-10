@@ -169,7 +169,10 @@ const position = "right";
       </div>
     </div>
 
-    <div class="container-custom1920 px-4 py-5" id="landing_4steps">
+    <div
+      class="container-custom1920 px-4 py-5 glowBehindBlock-1"
+      id="landing_4steps"
+    >
       <h2 class="h1 pb-2 mr-auto text-center text-uppercase">
         4 шага к красивому цветнику
       </h2>
@@ -450,19 +453,19 @@ const position = "right";
 }
 .accordion {
   --bs-accordion-active-bg: transparent;
-  // --bs-accordion-btn-bg: transparent;
+  --bs-accordion-btn-bg: transparent;
 }
 
-.carousel-indicators img {
-  width: 70px;
-  display: block;
-}
-.carousel-indicators button {
-  width: max-content !important;
-}
-.carousel-indicators {
-  position: unset;
-}
+// .carousel-indicators img {
+//   width: 70px;
+//   display: block;
+// }
+// .carousel-indicators button {
+//   width: max-content !important;
+// }
+// .carousel-indicators {
+//   position: unset;
+// }
 
 .p-galleria {
   border-style: none !important;
@@ -490,4 +493,8 @@ const position = "right";
 .p-galleria-thumbnails-viewport {
   height: 100% !important;
 }
+
+// .p-galleria-thumbnail-item-current {
+//   border: solid 2px $bshtr-lightgray;
+// }
 </style>
