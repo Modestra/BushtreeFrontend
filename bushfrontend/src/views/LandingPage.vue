@@ -398,6 +398,7 @@ const position = "right";
 <style lang="scss">
 .landing-hero {
   background-image: url("@assets/img/landing-image-neural-network-generates-flowers.png");
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
