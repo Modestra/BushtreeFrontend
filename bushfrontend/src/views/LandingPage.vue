@@ -130,7 +130,7 @@ const position = "right";
           class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
         >
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -144,7 +144,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -158,7 +158,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">

@@ -609,7 +609,7 @@
 <style></style>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { Ref, ref, onMounted } from "vue";
 import { postGarden } from "../services/gardens";
 import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/flowers";
