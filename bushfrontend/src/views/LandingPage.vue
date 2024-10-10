@@ -2,36 +2,42 @@
 import landigCarousel from "../components/landig-carousel.vue";
 import { ref, onMounted } from "vue";
 import Galleria from "primevue/galleria";
+import img_flowerBed1 from "@assets/img/flowerbed-1.png";
+import img_flowerBed2 from "@assets/img/flowerbed-2.png";
+import img_flowerBed3 from "@assets/img/flowerbed-3.png";
+import img_flowerBed4 from "@assets/img/flowerbed-4.png";
+import img_flowerBed5 from "@assets/img/flowerbed-5.png";
+import img_flowerBed6 from "@assets/img/flowerbed-6.png";
 
 const images = [
   {
-    itemImageSrc: "./src/assets/img/flowerbed-1.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-1.png",
+    itemImageSrc: img_flowerBed1,
+    thumbnailImageSrc: img_flowerBed1,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-2.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-2.png",
+    itemImageSrc: img_flowerBed2,
+    thumbnailImageSrc: img_flowerBed2,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-3.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-3.png",
+    itemImageSrc: img_flowerBed3,
+    thumbnailImageSrc: img_flowerBed3,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-4.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-4.png",
+    itemImageSrc: img_flowerBed4,
+    thumbnailImageSrc: img_flowerBed4,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-5.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-5.png",
+    itemImageSrc: img_flowerBed5,
+    thumbnailImageSrc: img_flowerBed5,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-6.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-6.png",
+    itemImageSrc: img_flowerBed6,
+    thumbnailImageSrc: img_flowerBed6,
     alt: "Image 1",
   },
 ];

@@ -1,7 +1,7 @@
 <template>
   <div class="py-5"></div>
 
-  <div class="glowBehindBlock-1" v-if="!generationDone">
+  <div class="glowBehindBlock-1" v-show="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
@@ -336,12 +336,12 @@
               </div>
             </div>
             <div class="mt-5">
-              <!-- <button
+              <button
                 class="btn btn-light btn-outline-success text-black px-4 py-2"
                 type="submit"
               >
                 Сгенерировать
-              </button> -->
+              </button>
               <Button
                 class="px-4 py-2"
                 type="submit"
@@ -360,7 +360,7 @@
     </div>
   </div>
 
-  <div class="glowBehindBlock-1" v-if="!generationDone">
+  <div class="glowBehindBlock-1" v-show="generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
@@ -609,7 +609,7 @@
 <style></style>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { Ref, ref, onMounted } from "vue";
 import { GetSession } from "../services/sessions";
 // import { CreateSession } from "../services/sessions";
 // import { Session } from "../entities/session";
@@ -620,7 +620,7 @@ import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
 
-var generationDone = ref();
+const generationDone = ref(false);
 
 const sliderValue = ref([6, 8]);
 defineExpose({ sliderValue });
@@ -660,47 +660,6 @@ const garden_colors = [
   "фиолетовый",
   "розовый",
 ];
-// options: { // all slider options //
-//         dotSize: 14,
-//         width: 'auto',
-//         height: 4,
-//         contained: false,
-//         direction: 'ltr',
-// 	       data: null,
-//         dataLabel: 'label',
-//         dataValue: 'value',
-//         min: 0,
-//         max: 100,
-//         interval: 1,
-//         disabled: false,
-//         clickable: true,
-//         duration: 0.5,
-//         adsorb: false,
-//         lazy: false,
-//         tooltip: 'active',
-//         tooltipPlacement: 'top',
-//         tooltipFormatter: void 0,
-//         useKeyboard: false,
-//         keydownHook: null,
-//         dragOnClick: false,
-//         enableCross: true,
-//         fixed: false,
-//         minRange: void 0,
-//         maxRange: void 0,
-//         order: true,
-//         marks: true,
-//         dotOptions: void 0,
-//         dotAttrs: void 0,
-//         process: true,
-//         dotStyle: void 0,
-//         railStyle: void 0,
-//         processStyle: void 0,
-//         tooltipStyle: void 0,
-//         stepStyle: void 0,
-//         stepActiveStyle: void 0,
-//         labelStyle: void 0,
-//         labelActiveStyle: void 0,
-//       }
 
 GetSession().then((resp) => {
   console.log(resp);
@@ -728,11 +687,11 @@ const formData: Ref<Garden> = ref({
 //   period_bloosom_start: sliderValue.value[0],
 //   period_bloosom_end: sliderValue.value[1],
 // });
+
 const gardenArrayToSend: Ref<Flower> = ref({
   gardens: "6",
 });
 const flowersGeneratedList = [];
-
 const gardenSubmit = async () => {
   postGarden(formData.value).then((resp) => {
     console.log(resp);
@@ -742,6 +701,7 @@ const gardenSubmit = async () => {
     // postGetFlowersByGarden(resp.data.gardens[0].toString());
     // console.log(resp.data.gardens[0].toString());
     // console.log(formData.value.frost_resistance_zone);
+    generationDone.value = !generationDone.value;
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
       // console.log(resp);
       flowersGeneratedList.push(resp.data.flowers);
@@ -749,6 +709,41 @@ const gardenSubmit = async () => {
     });
   });
 };
+
+import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
+import { getStorage, getDownloadURL, ref as ref1 } from "firebase/storage";
+
+onMounted(async () => {
+  const starsRef = ref1(storage, "images/0.png"); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам
+  const flowers = [];
+  // Get the download URL
+  getDownloadURL(starsRef)
+    .then((url) => {
+      console.log(url);
+      // Insert url into an <img> tag to "download"
+    })
+    .catch((error) => {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case "storage/object-not-found":
+          // File doesn't exist
+          break;
+        case "storage/unauthorized":
+          // User doesn't have permission to access the object
+          break;
+        case "storage/canceled":
+          // User canceled the upload
+          break;
+
+        // ...
+
+        case "storage/unknown":
+          // Unknown error occurred, inspect the server response
+          break;
+      }
+    });
+});
 </script>
 
 <style lang="scss" scoped>
