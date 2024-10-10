@@ -609,10 +609,7 @@
 <style></style>
 
 <script setup lang="ts">
-import { Ref, ref, onMounted } from "vue";
-import { GetSession } from "../services/sessions";
-// import { CreateSession } from "../services/sessions";
-// import { Session } from "../entities/session";
+import { Ref, ref } from "vue";
 import { postGarden } from "../services/gardens";
 import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/flowers";
@@ -661,10 +658,6 @@ const garden_colors = [
   "розовый",
 ];
 
-GetSession().then((resp) => {
-  console.log(resp);
-});
-
 const formData: Ref<Garden> = ref({
   name: "",
   description: "",
@@ -691,7 +684,8 @@ const formData: Ref<Garden> = ref({
 const gardenArrayToSend: Ref<Flower> = ref({
   gardens: "6",
 });
-const flowersGeneratedList = [];
+const flowersGeneratedList: any[] = [];
+
 const gardenSubmit = async () => {
   postGarden(formData.value).then((resp) => {
     console.log(resp);

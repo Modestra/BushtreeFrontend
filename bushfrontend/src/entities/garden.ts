@@ -6,6 +6,6 @@ export interface Garden {
   watering: string;
   color_main: string;
   color_other: string;
-  period_blossom_start: number;
+  period_bloosom_start: number;
   period_bloosom_end: number;
 }
