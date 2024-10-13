@@ -70,7 +70,6 @@
                         id="lightnessradio2"
                         v-model="formData.light"
                         value="полутень"
-                        checked
                       />
                     </div>
 
@@ -175,7 +174,6 @@
                         name="wateringMode"
                         id="wateringMode2"
                         v-model="formData.watering"
-                        checked
                         value="умеренный"
                       />
                     </div>
@@ -269,31 +267,31 @@
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="garden in garden_colors" :key="garden">
-                      <div>
-                        <input
-                          class="form-check-input form-check-input-black p-3 m-1 rounded"
-                          :class="{
-                            colorPicker_white: garden === 'белый',
-                            colorPicker_red: garden === 'красный',
-                            colorPicker_yellow: garden === 'желтый',
-                            colorPicker_green: garden === 'зеленый',
-                            colorPicker_blue: garden === 'синий',
-                            colorPicker_purple: garden === 'фиолетовый',
-                            colorPicker_pink: garden === 'розовый',
-                          }"
-                          v-tooltip.top="{
-                            value: garden,
-                            pt: {
-                              text: 'bg-white text-black',
-                            },
-                          }"
-                          type="radio"
-                          name="maincolorradio"
-                          id="maincolorradio"
-                          :value="{ garden }"
-                        />
-                      </div>
+                    <div>
+                      <input
+                        v-for="garden in garden_colors"
+                        :key="garden"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
+                        :class="{
+                          colorPicker_white: garden === 'белый',
+                          colorPicker_red: garden === 'красный',
+                          colorPicker_yellow: garden === 'желтый',
+                          colorPicker_green: garden === 'зеленый',
+                          colorPicker_blue: garden === 'синий',
+                          colorPicker_purple: garden === 'фиолетовый',
+                          colorPicker_pink: garden === 'розовый',
+                        }"
+                        v-tooltip.top="{
+                          value: garden,
+                          pt: {
+                            text: 'bg-white text-black',
+                          },
+                        }"
+                        type="radio"
+                        name="maincolorradio"
+                        v-model="formData.color_main"
+                        :value="garden"
+                      />
                     </div>
                   </div>
                 </div>
@@ -326,9 +324,9 @@
                         }"
                         type="radio"
                         name="othercolorradio"
-                        id="checkboxNoLabel"
                         aria-label="..."
-                        :value="{ garden1 }"
+                        v-model="formData.color_other"
+                        :value="garden1"
                       />
                     </div>
                   </div>
@@ -617,7 +615,7 @@ import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
 
-const generationDone = ref(false);
+const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 
 const sliderValue = ref([6, 8]);
 defineExpose({ sliderValue });
@@ -639,15 +637,6 @@ const sliderMarks = ref({
   },
 });
 
-const loading = ref(false);
-
-const load = () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-};
-
 const garden_colors = [
   "белый",
   "красный",
@@ -658,28 +647,38 @@ const garden_colors = [
   "розовый",
 ];
 
-const formData: Ref<Garden> = ref({
-  name: "",
-  description: "",
-  frost_resistance_zone: 1,
-  light: "полутень",
-  watering: "сухой",
-  color_main: "зеленый",
-  color_other: "желтый",
-  period_bloosom_start: sliderValue.value[0],
-  period_bloosom_end: sliderValue.value[1],
-});
 // const formData: Ref<Garden> = ref({
 //   name: "",
 //   description: "",
 //   frost_resistance_zone: 1,
-//   light: "",
-//   watering: "",
-//   color_main: "",
-//   color_other: "",
+//   light: "полутень",
+//   watering: "сухой",
+//   color_main: "зеленый",
+//   color_other: "желтый",
 //   period_bloosom_start: sliderValue.value[0],
 //   period_bloosom_end: sliderValue.value[1],
 // });
+const formData: Ref<Garden> = ref({
+  name: "",
+  description: "",
+  frost_resistance_zone: 1,
+  light: "солнце",
+  watering: "частый",
+  color_main: "белый",
+  color_other: "белый",
+  period_bloosom_start: sliderValue.value[0],
+  period_bloosom_end: sliderValue.value[1],
+});
+
+const loading = ref(false);
+
+const load = () => {
+  loading.value = true;
+  console.log(formData._rawValue);
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
+};
 
 const gardenArrayToSend: Ref<Flower> = ref({
   gardens: "6",
