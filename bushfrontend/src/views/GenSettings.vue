@@ -611,7 +611,7 @@
 <style></style>
 
 <script setup lang="ts">
-import { Ref, ref, onMounted } from "vue";
+import { Ref, ref } from "vue";
 import { postGarden } from "../services/flowers";
 import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/gardens";
