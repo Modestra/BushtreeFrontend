@@ -748,6 +748,8 @@ async function GetStoragePic(storageUrl: string): Promise<string> {
 }
 .p-button-secondary {
   color: black;
+  background: var(--p-button-secondary-background);
+  border: 1px solid var(--p-button-secondary-border-color);
 }
 
 .form-check-input-black:checked {
