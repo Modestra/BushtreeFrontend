@@ -618,7 +618,7 @@ import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
-import img_placeholder from "@assets/img/flowerbed-1.png";
+import img_placeholder from "@assets/img/placeholder_noimage.png";
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
