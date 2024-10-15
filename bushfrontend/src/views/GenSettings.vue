@@ -334,19 +334,19 @@
               </div>
             </div>
             <div class="mt-5">
-              <button
+              <!-- <button
                 class="btn btn-outline-success text-black bg-white px-4 py-2"
                 type="submit"
               >
                 Сгенерировать
-              </button>
+              </button> -->
               <Button
                 class="px-4 py-2"
                 type="submit"
                 label="Сгенерировать"
                 severity="secondary"
                 :loading="loading"
-                @click="load"
+                @click="gardenSubmit"
               ></Button>
             </div>
           </div>
@@ -466,6 +466,7 @@
           <div id="results_4_buttons" class="pb-4">
             <button
               class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
+              @click="switchToGeneration"
             >
               Редактировать
             </button>
@@ -487,7 +488,7 @@
               label="Сгенерировать"
               severity="secondary"
               :loading="loading"
-              @click="load"
+              @click="gardenSubmit"
             ></Button>
           </div>
         </div>
@@ -575,7 +576,10 @@
     </div>
     <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
-      <div class="d-flex flex-wrap justify-content-center">
+      <div
+        class="d-flex flex-wrap justify-content-center"
+        v-if="flowersGeneratedList[0]?.length > 2"
+      >
         <div
           class="flower-item py-4 px-4"
           v-for="(flower, index) in flowersGeneratedList[0]"
@@ -591,8 +595,8 @@
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
-                src="@assets/img/flowerbed-1.png"
-                alt="#"
+                :src="flower.id"
+                :alt="flower.id"
                 style="width: 100%"
                 class="rounded"
               />
@@ -616,6 +620,9 @@ import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
+const switchToGeneration = async () => {
+  generationDone.value = !generationDone.value;
+};
 
 const sliderValue = ref([6, 8]);
 defineExpose({ sliderValue });
@@ -647,17 +654,6 @@ const garden_colors = [
   "розовый",
 ];
 
-// const formData: Ref<Garden> = ref({
-//   name: "",
-//   description: "",
-//   frost_resistance_zone: 1,
-//   light: "полутень",
-//   watering: "сухой",
-//   color_main: "зеленый",
-//   color_other: "желтый",
-//   period_bloosom_start: sliderValue.value[0],
-//   period_bloosom_end: sliderValue.value[1],
-// });
 const formData: Ref<Garden> = ref({
   name: "",
   description: "",
@@ -670,35 +666,28 @@ const formData: Ref<Garden> = ref({
   period_bloosom_end: sliderValue.value[1],
 });
 
-const loading = ref(false);
-
-const load = () => {
-  loading.value = true;
-  console.log(formData._rawValue);
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-};
-
 const gardenArrayToSend: Ref<Flower> = ref({
-  gardens: "6",
+  gardens: "3", // дефолтный цветник если ничо не работает
 });
 const flowersGeneratedList: any[] = [];
+const loading = ref(false);
 
 const gardenSubmit = async () => {
+  loading.value = true;
   postGarden(formData.value).then((resp) => {
-    console.log(resp);
-    // generationDone = true;
-    // console.log(generationDone);
-    // postGetFlowersByGarden("2");
-    // postGetFlowersByGarden(resp.data.gardens[0].toString());
-    // console.log(resp.data.gardens[0].toString());
-    // console.log(formData.value.frost_resistance_zone);
-    generationDone.value = !generationDone.value;
+    // console.log(resp);
+    // console.log(resp);
+    // console.log(resp);
+    loading.value = false;
+    generationDone.value = true;
+    gardenArrayToSend.gardens = resp.data.gardens[0].toString(); //gardenArrayToSend.value НЕ РАБОТАЕТ!!!!
+    // console.log(gardenArrayToSend.value);
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
-      // console.log(resp);
       flowersGeneratedList.push(resp.data.flowers);
+      // console.log(flowersGeneratedList);
+      console.log(flowersGeneratedList[0]?.[0].id);
       console.log(flowersGeneratedList);
+      console.log(`images/${flowersGeneratedList[0]?.[0].id}.png`.toString());
     });
   });
 };
@@ -706,37 +695,61 @@ const gardenSubmit = async () => {
 import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
 import { getStorage, getDownloadURL, ref as ref1 } from "firebase/storage";
 
-onMounted(async () => {
-  const starsRef = ref1(storage, "images/0.png"); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам
-  const flowers = [];
-  // Get the download URL
-  getDownloadURL(starsRef)
+async function GetFlowerPic() {
+  const flowerId = flowersGeneratedList[0]?.[0].id;
+  const storageRef = ref1(storage, `images/${flowerId}.png`.toString()); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам === ref1(storage, "images/0.png")
+  getDownloadURL(storageRef)
     .then((url) => {
       console.log(url);
-      // Insert url into an <img> tag to "download"
     })
     .catch((error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
       switch (error.code) {
         case "storage/object-not-found":
-          // File doesn't exist
           break;
         case "storage/unauthorized":
-          // User doesn't have permission to access the object
           break;
         case "storage/canceled":
-          // User canceled the upload
           break;
-
-        // ...
-
         case "storage/unknown":
-          // Unknown error occurred, inspect the server response
           break;
       }
     });
-});
+}
+
+// onMounted(async () => {
+//   const starsRef = ref1(
+//     storage,
+//     `images/${flowersGeneratedList[0]?.[0].id}.png`.toString()
+//   ); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам === ref1(storage, "images/0.png")
+//   const flowers = [];
+//   // Get the download URL
+//   getDownloadURL(starsRef)
+//     .then((url) => {
+//       console.log(url);
+//       // Insert url into an <img> tag to "download"
+//     })
+//     .catch((error) => {
+//       // A full list of error codes is available at
+//       // https://firebase.google.com/docs/storage/web/handle-errors
+//       switch (error.code) {
+//         case "storage/object-not-found":
+//           // File doesn't exist
+//           break;
+//         case "storage/unauthorized":
+//           // User doesn't have permission to access the object
+//           break;
+//         case "storage/canceled":
+//           // User canceled the upload
+//           break;
+
+//         // ...
+
+//         case "storage/unknown":
+//           // Unknown error occurred, inspect the server response
+//           break;
+//       }
+//     });
+// });
 </script>
 
 <style lang="scss" scoped>
