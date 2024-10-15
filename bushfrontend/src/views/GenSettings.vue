@@ -494,8 +494,8 @@
         </div>
         <div class="col" id="result_pic">
           <img
-            src="@assets/img/flowerbed-1.png"
-            alt="#"
+            :src="gardenArrayToSend.storageUrl"
+            :alt="gardenArrayToSend.storageUrl"
             style="max-height: 100%; width: 100%"
             class="rounded"
           />
@@ -595,7 +595,7 @@
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
-                :src="flower.id"
+                :src="flower.storageUrl"
                 :alt="flower.id"
                 style="width: 100%"
                 class="rounded"
@@ -612,9 +612,9 @@
 
 <script setup lang="ts">
 import { Ref, ref, onMounted } from "vue";
-import { postGarden } from "../services/gardens";
+import { postGarden } from "../services/flowers";
 import { Garden } from "../entities/garden";
-import { postGetFlowersByGarden } from "../services/flowers";
+import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
@@ -654,7 +654,7 @@ const garden_colors = [
   "розовый",
 ];
 
-const formData: Ref<Garden> = ref({
+const formData: Ref<Flower> = ref({
   name: "",
   description: "",
   frost_resistance_zone: 1,
@@ -666,7 +666,7 @@ const formData: Ref<Garden> = ref({
   period_bloosom_end: sliderValue.value[1],
 });
 
-const gardenArrayToSend: Ref<Flower> = ref({
+const gardenArrayToSend: Ref<Garden> = ref({
   gardens: "3", // дефолтный цветник если ничо не работает
 });
 let flowersGeneratedList: Ref<any[]> = ref([]);
@@ -677,14 +677,14 @@ const gardenSubmit = async () => {
   postGarden(formData.value).then((resp) => {
     loading.value = false;
     generationDone.value = true;
-    gardenArrayToSend.gardens = resp.data.gardens[0].toString();
+    gardenArrayToSend.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
       flowersGeneratedList.value = resp.data.flowers;
       console.log(
         flowersGeneratedList.value.map((value) => {
-          GetFlowerPic(value.id)
+          GetStoragePic(value.id)
             .then((resp) => {
-              Object.defineProperty(value, "flowerid", {
+              Object.defineProperty(value, "storageUrl", {
                 value: resp,
                 writable: true,
               });
@@ -696,15 +696,31 @@ const gardenSubmit = async () => {
         })
       );
     });
+    console.log(gardenArrayToSend.value.gardens);
+    console.log(
+      gardenArrayToSend.value.gardens((value) => {
+        GetStoragePic(value.id)
+          .then((resp) => {
+            Object.defineProperty(value, "storageUrl", {
+              value: resp,
+              writable: true,
+            });
+          })
+          .catch((error: any) => {
+            console.error(error);
+          });
+        return value;
+      })
+    );
   });
 };
 
 import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
 import { getDownloadURL, ref as ref1 } from "firebase/storage";
 
-async function GetFlowerPic(flowerid: string): Promise<string> {
+async function GetStoragePic(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const storageRef = ref1(storage, `images/${flowerid}.png`.toString());
+    const storageRef = ref1(storage, `images/${storageUrl}.png`.toString());
     getDownloadURL(storageRef)
       .then((url) => {
         resolve(url);
