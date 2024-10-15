@@ -677,7 +677,8 @@ const gardenSubmit = async () => {
   postGarden(formData.value).then((resp) => {
     loading.value = false;
     generationDone.value = true;
-    gardenArrayToSend.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
+    gardenArrayToSend.value.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
+    console.log(gardenArrayToSend.value);
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
       flowersGeneratedList.value = resp.data.flowers;
       console.log(
@@ -696,22 +697,6 @@ const gardenSubmit = async () => {
         })
       );
     });
-    console.log(gardenArrayToSend.value.gardens);
-    console.log(
-      gardenArrayToSend.value.gardens((value) => {
-        GetStoragePic(value.id)
-          .then((resp) => {
-            Object.defineProperty(value, "storageUrl", {
-              value: resp,
-              writable: true,
-            });
-          })
-          .catch((error: any) => {
-            console.error(error);
-          });
-        return value;
-      })
-    );
   });
 };
 

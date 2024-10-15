@@ -1,3 +1,3 @@
 export interface Garden {
-  gardens: Array<String>;
+  gardens: string;
 }
