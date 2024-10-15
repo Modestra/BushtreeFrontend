@@ -2,36 +2,42 @@
 import landigCarousel from "../components/landig-carousel.vue";
 import { ref, onMounted } from "vue";
 import Galleria from "primevue/galleria";
+import img_flowerBed1 from "@assets/img/flowerbed-1.png";
+import img_flowerBed2 from "@assets/img/flowerbed-2.png";
+import img_flowerBed3 from "@assets/img/flowerbed-3.png";
+import img_flowerBed4 from "@assets/img/flowerbed-4.png";
+import img_flowerBed5 from "@assets/img/flowerbed-5.png";
+import img_flowerBed6 from "@assets/img/flowerbed-6.png";
 
 const images = [
   {
-    itemImageSrc: "./src/assets/img/flowerbed-1.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-1.png",
+    itemImageSrc: img_flowerBed1,
+    thumbnailImageSrc: img_flowerBed1,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-2.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-2.png",
+    itemImageSrc: img_flowerBed2,
+    thumbnailImageSrc: img_flowerBed2,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-3.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-3.png",
+    itemImageSrc: img_flowerBed3,
+    thumbnailImageSrc: img_flowerBed3,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-4.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-4.png",
+    itemImageSrc: img_flowerBed4,
+    thumbnailImageSrc: img_flowerBed4,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-5.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-5.png",
+    itemImageSrc: img_flowerBed5,
+    thumbnailImageSrc: img_flowerBed5,
     alt: "Image 1",
   },
   {
-    itemImageSrc: "./src/assets/img/flowerbed-6.png",
-    thumbnailImageSrc: "./src/assets/img/flowerbed-6.png",
+    itemImageSrc: img_flowerBed6,
+    thumbnailImageSrc: img_flowerBed6,
     alt: "Image 1",
   },
 ];
@@ -124,7 +130,7 @@ const position = "right";
           class="row justify-content-center g-4 py-5 row-cols-1 row-cols-lg-3"
         >
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -138,7 +144,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -152,7 +158,7 @@ const position = "right";
             </div>
           </div>
           <div
-            class="card gradient-block-1 text-bg-dark mb-3 border-bshtr-green1 m-2"
+            class="card gradient-block-1 mb-3 border-bshtr-green1 m-2"
             style="max-width: 30rem"
           >
             <div class="card-body px-2">
@@ -392,6 +398,7 @@ const position = "right";
 <style lang="scss">
 .landing-hero {
   background-image: url("@assets/img/landing-image-neural-network-generates-flowers.png");
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }

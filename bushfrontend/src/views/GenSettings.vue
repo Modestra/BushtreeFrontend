@@ -1,7 +1,7 @@
 <template>
   <div class="py-5"></div>
 
-  <div class="glowBehindBlock-1" v-if="!generationDone">
+  <div class="glowBehindBlock-1" v-show="!generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
@@ -70,7 +70,6 @@
                         id="lightnessradio2"
                         v-model="formData.light"
                         value="полутень"
-                        checked
                       />
                     </div>
 
@@ -175,7 +174,6 @@
                         name="wateringMode"
                         id="wateringMode2"
                         v-model="formData.watering"
-                        checked
                         value="умеренный"
                       />
                     </div>
@@ -269,31 +267,31 @@
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div class="" v-for="garden in garden_colors" :key="garden">
-                      <div>
-                        <input
-                          class="form-check-input form-check-input-black p-3 m-1 rounded"
-                          :class="{
-                            colorPicker_white: garden === 'белый',
-                            colorPicker_red: garden === 'красный',
-                            colorPicker_yellow: garden === 'желтый',
-                            colorPicker_green: garden === 'зеленый',
-                            colorPicker_blue: garden === 'синий',
-                            colorPicker_purple: garden === 'фиолетовый',
-                            colorPicker_pink: garden === 'розовый',
-                          }"
-                          v-tooltip.top="{
-                            value: garden,
-                            pt: {
-                              text: 'bg-white text-black',
-                            },
-                          }"
-                          type="radio"
-                          name="maincolorradio"
-                          id="maincolorradio"
-                          :value="{ garden }"
-                        />
-                      </div>
+                    <div>
+                      <input
+                        v-for="garden in garden_colors"
+                        :key="garden"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
+                        :class="{
+                          colorPicker_white: garden === 'белый',
+                          colorPicker_red: garden === 'красный',
+                          colorPicker_yellow: garden === 'желтый',
+                          colorPicker_green: garden === 'зеленый',
+                          colorPicker_blue: garden === 'синий',
+                          colorPicker_purple: garden === 'фиолетовый',
+                          colorPicker_pink: garden === 'розовый',
+                        }"
+                        v-tooltip.top="{
+                          value: garden,
+                          pt: {
+                            text: 'bg-white text-black',
+                          },
+                        }"
+                        type="radio"
+                        name="maincolorradio"
+                        v-model="formData.color_main"
+                        :value="garden"
+                      />
                     </div>
                   </div>
                 </div>
@@ -326,9 +324,9 @@
                         }"
                         type="radio"
                         name="othercolorradio"
-                        id="checkboxNoLabel"
                         aria-label="..."
-                        :value="{ garden1 }"
+                        v-model="formData.color_other"
+                        :value="garden1"
                       />
                     </div>
                   </div>
@@ -337,7 +335,7 @@
             </div>
             <div class="mt-5">
               <!-- <button
-                class="btn btn-light btn-outline-success text-black px-4 py-2"
+                class="btn btn-outline-success text-black bg-white px-4 py-2"
                 type="submit"
               >
                 Сгенерировать
@@ -348,7 +346,7 @@
                 label="Сгенерировать"
                 severity="secondary"
                 :loading="loading"
-                @click="load"
+                @click="gardenSubmit"
               ></Button>
             </div>
           </div>
@@ -360,7 +358,7 @@
     </div>
   </div>
 
-  <div class="glowBehindBlock-1" v-if="!generationDone">
+  <div class="glowBehindBlock-1" v-show="generationDone">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
@@ -468,6 +466,7 @@
           <div id="results_4_buttons" class="pb-4">
             <button
               class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
+              @click="switchToGeneration"
             >
               Редактировать
             </button>
@@ -479,7 +478,7 @@
           </div>
           <div id="results_5_generate">
             <!-- <button
-              class="btn btn-light btn-outline-success text-black px-4 py-2"
+              class="btn btn-outline-success text-black bg-white px-4 py-2"
             >
               Сгенерировать
             </button> -->
@@ -489,14 +488,14 @@
               label="Сгенерировать"
               severity="secondary"
               :loading="loading"
-              @click="load"
+              @click="gardenSubmit"
             ></Button>
           </div>
         </div>
         <div class="col" id="result_pic">
           <img
-            src="@assets/img/flowerbed-1.png"
-            alt="#"
+            :src="gardenArrayToSend.storageUrl || img_placeholder"
+            :alt="gardenArrayToSend.storageUrl || img_placeholder"
             style="max-height: 100%; width: 100%"
             class="rounded"
           />
@@ -577,10 +576,13 @@
     </div>
     <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
-      <div class="d-flex flex-wrap justify-content-center">
+      <div
+        class="d-flex flex-wrap justify-content-center"
+        v-if="flowersGeneratedList.length > 2"
+      >
         <div
           class="flower-item py-4 px-4"
-          v-for="(flower, index) in flowersGeneratedList[0]"
+          v-for="(flower, index) in flowersGeneratedList"
           :key="flower"
           style="max-width: 700px"
         >
@@ -593,8 +595,8 @@
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
-                src="@assets/img/flowerbed-1.png"
-                alt="#"
+                :src="flower.storageUrl || img_placeholder"
+                :alt="flower.id"
                 style="width: 100%"
                 class="rounded"
               />
@@ -610,14 +612,18 @@
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
-import { postGarden } from "../services/gardens";
+import { postGarden } from "../services/flowers";
 import { Garden } from "../entities/garden";
-import { postGetFlowersByGarden } from "../services/flowers";
+import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
+import img_placeholder from "@assets/img/placeholder_noimage.png";
 
-var generationDone = ref();
+const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
+const switchToGeneration = async () => {
+  generationDone.value = !generationDone.value;
+};
 
 const sliderValue = ref([6, 8]);
 defineExpose({ sliderValue });
@@ -639,15 +645,6 @@ const sliderMarks = ref({
   },
 });
 
-const loading = ref(false);
-
-const load = () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-};
-
 const garden_colors = [
   "белый",
   "красный",
@@ -657,91 +654,80 @@ const garden_colors = [
   "фиолетовый",
   "розовый",
 ];
-// options: { // all slider options //
-//         dotSize: 14,
-//         width: 'auto',
-//         height: 4,
-//         contained: false,
-//         direction: 'ltr',
-// 	       data: null,
-//         dataLabel: 'label',
-//         dataValue: 'value',
-//         min: 0,
-//         max: 100,
-//         interval: 1,
-//         disabled: false,
-//         clickable: true,
-//         duration: 0.5,
-//         adsorb: false,
-//         lazy: false,
-//         tooltip: 'active',
-//         tooltipPlacement: 'top',
-//         tooltipFormatter: void 0,
-//         useKeyboard: false,
-//         keydownHook: null,
-//         dragOnClick: false,
-//         enableCross: true,
-//         fixed: false,
-//         minRange: void 0,
-//         maxRange: void 0,
-//         order: true,
-//         marks: true,
-//         dotOptions: void 0,
-//         dotAttrs: void 0,
-//         process: true,
-//         dotStyle: void 0,
-//         railStyle: void 0,
-//         processStyle: void 0,
-//         tooltipStyle: void 0,
-//         stepStyle: void 0,
-//         stepActiveStyle: void 0,
-//         labelStyle: void 0,
-//         labelActiveStyle: void 0,
-//       }
 
-const formData: Ref<Garden> = ref({
+const formData: Ref<Flower> = ref({
   name: "",
   description: "",
   frost_resistance_zone: 1,
-  light: "полутень",
-  watering: "сухой",
-  color_main: "зеленый",
-  color_other: "желтый",
+  light: "солнце",
+  watering: "частый",
+  color_main: "белый",
+  color_other: "белый",
   period_bloosom_start: sliderValue.value[0],
   period_bloosom_end: sliderValue.value[1],
 });
-// const formData: Ref<Garden> = ref({
-//   name: "",
-//   description: "",
-//   frost_resistance_zone: 1,
-//   light: "",
-//   watering: "",
-//   color_main: "",
-//   color_other: "",
-//   period_bloosom_start: sliderValue.value[0],
-//   period_bloosom_end: sliderValue.value[1],
-// });
-const gardenArrayToSend: Ref<Flower> = ref({
-  gardens: "6",
+
+const gardenArrayToSend: Ref<Garden> = ref({
+  gardens: "3", // дефолтный цветник если ничо не работает
 });
-const flowersGeneratedList: any[] = [];
+let flowersGeneratedList: Ref<any[]> = ref([]);
+const loading = ref(false);
 
 const gardenSubmit = async () => {
+  loading.value = true;
   postGarden(formData.value).then((resp) => {
-    console.log(resp);
-    // generationDone = true;
-    // console.log(generationDone);
-    // postGetFlowersByGarden("2");
-    // postGetFlowersByGarden(resp.data.gardens[0].toString());
-    // console.log(resp.data.gardens[0].toString());
-    // console.log(formData.value.frost_resistance_zone);
+    loading.value = false;
+    generationDone.value = true;
+    gardenArrayToSend.value.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
+    console.log(gardenArrayToSend.value);
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
-      // console.log(resp);
-      flowersGeneratedList.push(resp.data.flowers);
-      console.log(flowersGeneratedList);
+      flowersGeneratedList.value = resp.data.flowers;
+      console.log(
+        flowersGeneratedList.value.map((value) => {
+          GetStoragePic(value.id)
+            .then((resp) => {
+              value["storageUrl"] = resp;
+            })
+            .catch((error: any) => {
+              console.error(error);
+            });
+          return value;
+        })
+      );
     });
   });
 };
+
+import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
+import { getDownloadURL, ref as ref1 } from "firebase/storage";
+
+async function GetStoragePic(storageUrl: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const storageRef = ref1(storage, `images/${storageUrl}.png`.toString());
+    getDownloadURL(storageRef)
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "storage/object-not-found":
+            reject("Не удалось найти изображение. Используется заменитель");
+            break;
+          case "storage/unauthorized":
+            reject(
+              "Пользователь не имеет достаточно прав для получения изображения"
+            );
+            break;
+          case "storage/canceled":
+            reject("Служба Firebase отказала в доступе");
+            break;
+          case "storage/unknown":
+            reject("Неизвестный запрос");
+            break;
+        }
+      });
+  });
+}
 </script>
 
 <style lang="scss" scoped>
