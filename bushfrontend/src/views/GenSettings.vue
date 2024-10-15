@@ -595,7 +595,7 @@
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
-                :src="flower.storageUrl"
+                :src="flower.storageUrl || img_flowerBed1"
                 :alt="flower.id"
                 style="width: 100%"
                 class="rounded"
@@ -618,6 +618,7 @@ import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
+import img_flowerBed1 from "@assets/img/flowerbed-1.png";
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
@@ -685,10 +686,7 @@ const gardenSubmit = async () => {
         flowersGeneratedList.value.map((value) => {
           GetStoragePic(value.id)
             .then((resp) => {
-              Object.defineProperty(value, "storageUrl", {
-                value: resp,
-                writable: true,
-              });
+              value["storageUrl"] = resp;
             })
             .catch((error: any) => {
               console.error(error);
