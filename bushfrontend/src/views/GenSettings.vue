@@ -669,7 +669,7 @@ const formData: Ref<Garden> = ref({
 const gardenArrayToSend: Ref<Flower> = ref({
   gardens: "3", // дефолтный цветник если ничо не работает
 });
-let flowersGeneratedList: any[] = [];
+let flowersGeneratedList: Ref<any[]> = ref([]);
 const loading = ref(false);
 
 const gardenSubmit = async () => {
@@ -679,9 +679,9 @@ const gardenSubmit = async () => {
     generationDone.value = true;
     gardenArrayToSend.gardens = resp.data.gardens[0].toString();
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
-      flowersGeneratedList = resp.data.flowers;
+      flowersGeneratedList.value = resp.data.flowers;
       console.log(
-        flowersGeneratedList.map((value) => {
+        flowersGeneratedList.value.map((value) => {
           GetFlowerPic(value.id)
             .then((resp) => {
               Object.defineProperty(value, "flowerid", {
