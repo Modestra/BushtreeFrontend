@@ -669,87 +669,66 @@ const formData: Ref<Garden> = ref({
 const gardenArrayToSend: Ref<Flower> = ref({
   gardens: "3", // дефолтный цветник если ничо не работает
 });
-const flowersGeneratedList: any[] = [];
+let flowersGeneratedList: any[] = [];
 const loading = ref(false);
 
 const gardenSubmit = async () => {
   loading.value = true;
   postGarden(formData.value).then((resp) => {
-    // console.log(resp);
-    // console.log(resp);
-    // console.log(resp);
     loading.value = false;
     generationDone.value = true;
-    gardenArrayToSend.gardens = resp.data.gardens[0].toString(); //gardenArrayToSend.value НЕ РАБОТАЕТ!!!!
-    // console.log(gardenArrayToSend.value);
+    gardenArrayToSend.gardens = resp.data.gardens[0].toString();
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
-      flowersGeneratedList.push(resp.data.flowers);
-      // console.log(flowersGeneratedList);
-      console.log(flowersGeneratedList[0]?.[0].id);
-      console.log(flowersGeneratedList);
-      console.log(`images/${flowersGeneratedList[0]?.[0].id}.png`.toString());
+      flowersGeneratedList = resp.data.flowers;
+      console.log(
+        flowersGeneratedList.map((value) => {
+          GetFlowerPic(value.id)
+            .then((resp) => {
+              Object.defineProperty(value, "flowerid", {
+                value: resp,
+                writable: true,
+              });
+            })
+            .catch((error: any) => {
+              console.error(error);
+            });
+          return value;
+        })
+      );
     });
   });
 };
 
 import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
-import { getStorage, getDownloadURL, ref as ref1 } from "firebase/storage";
+import { getDownloadURL, ref as ref1 } from "firebase/storage";
 
-async function GetFlowerPic() {
-  const flowerId = flowersGeneratedList[0]?.[0].id;
-  const storageRef = ref1(storage, `images/${flowerId}.png`.toString()); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам === ref1(storage, "images/0.png")
-  getDownloadURL(storageRef)
-    .then((url) => {
-      console.log(url);
-    })
-    .catch((error) => {
-      switch (error.code) {
-        case "storage/object-not-found":
-          break;
-        case "storage/unauthorized":
-          break;
-        case "storage/canceled":
-          break;
-        case "storage/unknown":
-          break;
-      }
-    });
+async function GetFlowerPic(flowerid: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const storageRef = ref1(storage, `images/${flowerid}.png`.toString());
+    getDownloadURL(storageRef)
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "storage/object-not-found":
+            reject("Не удалось найти изображение. Используется заменитель");
+            break;
+          case "storage/unauthorized":
+            reject(
+              "Пользователь не имеет достаточно прав для получения изображения"
+            );
+            break;
+          case "storage/canceled":
+            reject("Служба Firebase отказала в доступе");
+            break;
+          case "storage/unknown":
+            reject("Неизвестный запрос");
+            break;
+        }
+      });
+  });
 }
-
-// onMounted(async () => {
-//   const starsRef = ref1(
-//     storage,
-//     `images/${flowersGeneratedList[0]?.[0].id}.png`.toString()
-//   ); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам === ref1(storage, "images/0.png")
-//   const flowers = [];
-//   // Get the download URL
-//   getDownloadURL(starsRef)
-//     .then((url) => {
-//       console.log(url);
-//       // Insert url into an <img> tag to "download"
-//     })
-//     .catch((error) => {
-//       // A full list of error codes is available at
-//       // https://firebase.google.com/docs/storage/web/handle-errors
-//       switch (error.code) {
-//         case "storage/object-not-found":
-//           // File doesn't exist
-//           break;
-//         case "storage/unauthorized":
-//           // User doesn't have permission to access the object
-//           break;
-//         case "storage/canceled":
-//           // User canceled the upload
-//           break;
-
-//         // ...
-
-//         case "storage/unknown":
-//           // Unknown error occurred, inspect the server response
-//           break;
-//       }
-//     });
-// });
 </script>
 
 <style lang="scss" scoped>
