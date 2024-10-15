@@ -578,11 +578,11 @@
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
       <div
         class="d-flex flex-wrap justify-content-center"
-        v-if="flowersGeneratedList[0]?.length > 2"
+        v-if="flowersGeneratedList.length > 2"
       >
         <div
           class="flower-item py-4 px-4"
-          v-for="(flower, index) in flowersGeneratedList[0]"
+          v-for="(flower, index) in flowersGeneratedList"
           :key="flower"
           style="max-width: 700px"
         >
