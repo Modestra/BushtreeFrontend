@@ -438,7 +438,7 @@
             </div>
           </div>
           <div id="results_3" class="pb-4">
-            <div class="h3 fw-normal pb-3">Цветовая гамма</div>
+            <div class="h3 fw-normal pb-2">Цветовая гамма</div>
             <div
               class="d-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen"
               style="max-width: 150px"
