@@ -778,6 +778,7 @@ async function GetStoragePic(storageUrl: string): Promise<string> {
   bottom: 10vh;
   color: white;
   aspect-ratio: 1;
+  z-index: 1000;
 }
 
 .whiteBlock {

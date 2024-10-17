@@ -219,6 +219,7 @@ const dialogVisible = ref(false);
   left: 0;
   width: 100%;
   @include footer-gradient(background);
+  z-index: 10;
 }
 .glass-effect-1 {
   /* From https://css.glass */
