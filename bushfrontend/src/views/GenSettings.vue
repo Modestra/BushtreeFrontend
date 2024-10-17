@@ -371,27 +371,29 @@
           id="result_text"
         >
           <div id="results_1" class="pb-4">
-            <div class="h4 fw-normal pb-2">Период цветения</div>
+            <div class="h3 fw-normal pb-3">Период цветения</div>
             <div class="row">
               <div class="col">
-                <div class="h5 fw-normal">Начало:</div>
-                <div>
+                <div class="h4 fw-normal">Начало:</div>
+                <div class="h5 fw-normal">
                   {{ sliderMarks[formData.period_bloosom_start].label }}
                 </div>
               </div>
               <div class="col">
-                <div class="h5 fw-normal">Конец:</div>
-                <div>{{ sliderMarks[formData.period_bloosom_end].label }}</div>
+                <div class="h4 fw-normal">Конец:</div>
+                <div class="h5 fw-normal">
+                  {{ sliderMarks[formData.period_bloosom_end].label }}
+                </div>
               </div>
             </div>
           </div>
           <div id="results_2" class="row pb-4">
             <div id="results_2-1" class="col">
-              <div class="h4 fw-normal pb-2">Освещённость</div>
+              <div class="h3 fw-normal pb-2">Освещённость</div>
 
               <div class="d-flex justify-content-start align-items-center mb-2">
                 <label
-                  class="form-check-label h5 fw-normal m-0 px-1"
+                  class="form-check-label h4 fw-normal m-0 px-1"
                   for="lightnessradio1"
                   style="min-width: 100px"
                 >
@@ -408,9 +410,10 @@
               </div>
             </div>
             <div id="results_2-2" class="col">
-              <div class="h4 fw-normal pb-2">Режим полива</div>
+              <div class="h3 fw-normal pb-2">Режим полива</div>
               <div
                 class="d-flex justify-content-start align-items-center mb-2"
+                style="max-width: 180px"
                 v-tooltip.top="{
                   value:
                     generationResults_watering?.[formData.watering].tooltip,
@@ -420,7 +423,7 @@
                 }"
               >
                 <label
-                  class="form-check-label h5 fw-normal m-0 px-1"
+                  class="form-check-label h4 fw-normal m-0 px-1"
                   for="lightnessradio1"
                   style="min-width: 100px"
                 >
@@ -435,14 +438,14 @@
             </div>
           </div>
           <div id="results_3" class="pb-4">
-            <div class="h4 fw-normal pb-2">Цветовая гамма</div>
+            <div class="h3 fw-normal pb-3">Цветовая гамма</div>
             <div
               class="d-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen"
-              style="max-width: 120px"
+              style="max-width: 150px"
             >
               <div class="" v-if="formData.color_main != null">
                 <div
-                  class="border-dark p-3 m-1 rounded"
+                  class="border-dark p-4 m-1 rounded border-bshtr-green1"
                   :class="{
                     colorPicker_white: formData.color_main === 'белый',
                     colorPicker_red: formData.color_main === 'красный',
@@ -462,7 +465,7 @@
               </div>
               <div class="" v-if="formData.color_other != null">
                 <div
-                  class="border-dark p-3 m-1 rounded"
+                  class="border-dark p-4 m-1 rounded border-bshtr-green1"
                   :class="{
                     colorPicker_white: formData.color_other === 'белый',
                     colorPicker_red: formData.color_other === 'красный',
