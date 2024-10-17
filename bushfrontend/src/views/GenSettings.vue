@@ -441,7 +441,7 @@
             <div class="h3 fw-normal pb-2">Цветовая гамма</div>
             <div
               class="d-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen"
-              style="max-width: 150px"
+              style="max-width: 154px"
             >
               <div class="" v-if="formData.color_main != null">
                 <div
@@ -531,12 +531,12 @@
       <div
         class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
       >
-        <div id="pic_gardenMap" style="max-height: 500px">
+        <div id="pic_gardenMap" style="max-height: 500px" class="py-4">
           <img
             :src="pic_gardenMap"
             :alt="pic_gardenMap"
             class="rounded"
-            style="max-height: 500px"
+            style="height: 100%"
           />
         </div>
       </div>
