@@ -1,5 +1,5 @@
 <template>
-  <div class="py-5"></div>
+  <div class="py-5" id="generationPage_top"></div>
 
   <div class="glowBehindBlock-1" v-show="!generationDone">
     <div class="container-custom1920 px-4 py-5">
@@ -358,7 +358,11 @@
     </div>
   </div>
 
-  <div class="glowBehindBlock-1" v-show="generationDone">
+  <div
+    class="glowBehindBlock-1"
+    v-show="generationDone"
+    id="generationBlock_whenDone"
+  >
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
@@ -395,14 +399,26 @@
                 </label>
                 <img
                   class="px-1"
-                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  :src="
+                    generationResults_shadow?.[formData.light].icon ||
+                    img_icon_shadow_sun
+                  "
                   alt="icon_lightIcon_1_sun"
                 />
               </div>
             </div>
             <div id="results_2-2" class="col">
               <div class="h4 fw-normal pb-2">Режим полива</div>
-              <div class="d-flex justify-content-start align-items-center mb-2">
+              <div
+                class="d-flex justify-content-start align-items-center mb-2"
+                v-tooltip.top="{
+                  value:
+                    generationResults_watering?.[formData.watering].tooltip,
+                  pt: {
+                    text: 'bg-white text-black',
+                  },
+                }"
+              >
                 <label
                   class="form-check-label h5 fw-normal m-0 px-1"
                   for="lightnessradio1"
@@ -552,6 +568,15 @@
         </div>
       </div>
     </div>
+    <div id="anchorButton_toTop">
+      <RouterLink
+        class="nav-link active"
+        aria-current="page"
+        :to="{ name: 'gensettings', hash: '#generationPage_top' }"
+        active-class="active"
+        >Инструкция</RouterLink
+      >
+    </div>
   </div>
 </template>
 
@@ -566,6 +591,9 @@ import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
 import img_placeholder from "@assets/img/placeholder_noimage.png";
+import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
+import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
+import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
@@ -612,6 +640,39 @@ const formData: Ref<Flower> = ref({
   color_other: "белый",
   period_bloosom_start: sliderValue.value[0],
   period_bloosom_end: sliderValue.value[1],
+});
+
+const generationResults_shadow = ref({
+  солнце: {
+    label: "Cолнце",
+    icon: img_icon_shadow_sun,
+  },
+  полутень: {
+    label: "Полутень",
+    icon: img_icon_shadow_halfsun,
+  },
+  тень: {
+    label: "Тень",
+    icon: img_icon_shadow_cloudyDay,
+  },
+});
+const generationResults_watering = ref({
+  частый: {
+    label: "частый",
+    tooltip: "ежедневно",
+  },
+  умеренный: {
+    label: "умеренный",
+    tooltip: "через 2-3 дня",
+  },
+  редкий: {
+    label: "редкий",
+    tooltip: "раз в неделю",
+  },
+  сухой: {
+    label: "сухой",
+    tooltip: "опрыскивание",
+  },
 });
 
 const gardenArrayToSend: Ref<Garden> = ref({
