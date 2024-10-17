@@ -371,11 +371,13 @@
             <div class="row">
               <div class="col">
                 <div class="h5 fw-normal">Начало:</div>
-                <div>{{ formData.period_bloosom_start }}</div>
+                <div>
+                  {{ sliderMarks[formData.period_bloosom_start].label }}
+                </div>
               </div>
               <div class="col">
                 <div class="h5 fw-normal">Конец:</div>
-                <div>{{ formData.period_bloosom_end }}</div>
+                <div>{{ sliderMarks[formData.period_bloosom_end].label }}</div>
               </div>
             </div>
           </div>
@@ -492,10 +494,10 @@
             ></Button>
           </div>
         </div>
-        <div class="col" id="result_pic">
+        <div class="col" id="pic_garden">
           <img
-            :src="gardenArrayToSend.storageUrl || img_placeholder"
-            :alt="gardenArrayToSend.storageUrl || img_placeholder"
+            :src="pic_garden"
+            :alt="pic_garden"
             style="max-height: 100%; width: 100%"
             class="rounded"
           />
@@ -508,69 +510,14 @@
       </h1>
       <div
         class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
-        style="height: 50vh"
       >
-        <div>
-          <div
-            style="
-              min-width: 600px;
-              max-width: 50%;
-              min-height: 100px;
-              max-height: 700px;
-            "
-            class="row"
-          >
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              1
-            </div>
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              2
-            </div>
-          </div>
-          <div
-            style="
-              min-width: 600px;
-              max-width: 50%;
-              min-height: 100px;
-              max-height: 700px;
-            "
-            class="row"
-          >
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              3
-            </div>
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              4
-            </div>
-          </div>
-          <div
-            style="
-              min-width: 600px;
-              max-width: 50%;
-              min-height: 100px;
-              max-height: 700px;
-            "
-            class="row"
-          >
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              5
-            </div>
-            <div
-              class="whiteBlock rounded col m-3 d-flex align-items-center justify-content-center text-black fw-normal h3"
-            >
-              6
-            </div>
-          </div>
+        <div id="pic_gardenMap" style="max-height: 500px">
+          <img
+            :src="pic_gardenMap"
+            :alt="pic_gardenMap"
+            class="rounded"
+            style="max-height: 500px"
+          />
         </div>
       </div>
     </div>
@@ -672,6 +619,8 @@ const gardenArrayToSend: Ref<Garden> = ref({
 });
 let flowersGeneratedList: Ref<any[]> = ref([]);
 const loading = ref(false);
+const pic_garden = ref(img_placeholder);
+const pic_gardenMap = ref(img_placeholder);
 
 const gardenSubmit = async () => {
   loading.value = true;
@@ -692,6 +641,18 @@ const gardenSubmit = async () => {
               console.error(error);
             });
           return value;
+        })
+      );
+      console.log(
+        GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
+          pic_garden.value = resp;
+          // работает корректно, проверено
+        })
+      );
+      console.log(
+        GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
+          pic_gardenMap.value = resp;
+          // тут потом будет другая функция, чтобы получить карту цветника
         })
       );
     });
