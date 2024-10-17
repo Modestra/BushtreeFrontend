@@ -294,4 +294,10 @@ body {
     font-size: 3rem;
   }
 }
+
+.svgIcon_whiteFill {
+  fill: white !important;
+  stroke: #fff !important;
+  filter: brightness(0) invert(1) !important;
+}
 </style>

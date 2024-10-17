@@ -398,7 +398,7 @@
                   {{ formData.light }}
                 </label>
                 <img
-                  class="px-1"
+                  class="px-1 svgIcon_whiteFill"
                   :src="
                     generationResults_shadow?.[formData.light].icon ||
                     img_icon_shadow_sun
@@ -427,8 +427,8 @@
                   {{ formData.watering }}
                 </label>
                 <img
-                  class="px-1"
-                  src="@assets/img/icon_lightIcon_1_sun.svg"
+                  class="px-1 svgIcon_whiteFill"
+                  src="@assets/img/icon_note_circle.svg"
                   alt="icon_lightIcon_1_sun"
                 />
               </div>
