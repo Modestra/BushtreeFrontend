@@ -618,11 +618,13 @@ const gardenArrayToSend: Ref<Garden> = ref({
   gardens: "3", // дефолтный цветник если ничо не работает
 });
 let flowersGeneratedList: Ref<any[]> = ref([]);
+
 const loading = ref(false);
 const pic_garden = ref(img_placeholder);
 const pic_gardenMap = ref(img_placeholder);
 
 const gardenSubmit = async () => {
+  // при нажатии кнопки генерации
   loading.value = true;
   postGarden(formData.value).then((resp) => {
     loading.value = false;
