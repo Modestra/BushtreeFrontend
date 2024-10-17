@@ -437,8 +437,8 @@
           <div id="results_3" class="pb-4">
             <div class="h4 fw-normal pb-2">Цветовая гамма</div>
             <div
-              class="d-flex align-items-center justify-content-start p-2 whiteBlock rounded border-bshtr-contrastgreen"
-              style="max-width: 100px"
+              class="d-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen"
+              style="max-width: 120px"
             >
               <div class="" v-if="formData.color_main != null">
                 <div
