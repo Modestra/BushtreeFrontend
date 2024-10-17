@@ -569,18 +569,27 @@
       </div>
     </div>
     <div id="anchorButton_toTop">
-      <RouterLink
-        class="nav-link active"
-        aria-current="page"
-        :to="{ name: 'gensettings', hash: '#generationPage_top' }"
-        active-class="active"
-        >Инструкция</RouterLink
+      <Button
+        raised
+        rounded
+        class="px-4 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1"
+        type="submit"
+        label="Наверх"
       >
+        <RouterLink
+          class="nav-link active"
+          aria-current="page"
+          :to="{ name: 'gensettings', hash: '#generationPage_top' }"
+          active-class="active"
+        >
+          <img
+            class="px-1"
+            src="@assets/img/icon_arrow-up-Bold.svg"
+            alt="icon_arrow-up-Bold" /></RouterLink
+      ></Button>
     </div>
   </div>
 </template>
-
-<style></style>
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
@@ -761,6 +770,14 @@ async function GetStoragePic(storageUrl: string): Promise<string> {
   background-repeat: no-repeat;
   background-position: right;
   background-size: contain;
+}
+
+.floatingButtonAnchor_1 {
+  position: fixed;
+  right: 10vw;
+  bottom: 10vh;
+  color: white;
+  aspect-ratio: 1;
 }
 
 .whiteBlock {
