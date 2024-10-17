@@ -438,6 +438,7 @@
             <div class="h4 fw-normal pb-2">Цветовая гамма</div>
             <div
               class="d-flex align-items-center justify-content-start p-2 whiteBlock rounded border-bshtr-contrastgreen"
+              style="max-width: 100px"
             >
               <div class="" v-if="formData.color_main != null">
                 <div
@@ -603,6 +604,7 @@ import img_placeholder from "@assets/img/placeholder_noimage.png";
 import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
+import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
@@ -690,7 +692,7 @@ const gardenArrayToSend: Ref<Garden> = ref({
 let flowersGeneratedList: Ref<any[]> = ref([]);
 
 const loading = ref(false);
-const pic_garden = ref(img_placeholder);
+const pic_garden = ref(img_flowerBedPlaceholder);
 const pic_gardenMap = ref(img_placeholder);
 
 const gardenSubmit = async () => {
@@ -715,17 +717,20 @@ const gardenSubmit = async () => {
           return value;
         })
       );
+      // console.log(
+      //   GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
+      //     pic_garden.value = resp;
+      //     // работает корректно, проверено
+      //   })
+      // );
+      // console.log(gardenArrayToSend.value.gardens);
       console.log(
-        GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
-          pic_garden.value = resp;
-          // работает корректно, проверено
-        })
-      );
-      console.log(
-        GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
-          pic_gardenMap.value = resp;
-          // тут потом будет другая функция, чтобы получить карту цветника
-        })
+        GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+          (resp) => {
+            pic_gardenMap.value = resp;
+            // тут потом будет другая функция, чтобы получить карту цветника
+          }
+        )
       );
     });
   });
@@ -737,6 +742,33 @@ import { getDownloadURL, ref as ref1 } from "firebase/storage";
 async function GetStoragePic(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const storageRef = ref1(storage, `images/${storageUrl}.png`.toString());
+    getDownloadURL(storageRef)
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "storage/object-not-found":
+            reject("Не удалось найти изображение. Используется заменитель");
+            break;
+          case "storage/unauthorized":
+            reject(
+              "Пользователь не имеет достаточно прав для получения изображения"
+            );
+            break;
+          case "storage/canceled":
+            reject("Служба Firebase отказала в доступе");
+            break;
+          case "storage/unknown":
+            reject("Неизвестный запрос");
+            break;
+        }
+      });
+  });
+}
+async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const storageRef = ref1(storage, `gardens/${storageUrl}.png`.toString());
     getDownloadURL(storageRef)
       .then((url) => {
         resolve(url);
