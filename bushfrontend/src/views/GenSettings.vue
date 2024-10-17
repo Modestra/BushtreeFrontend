@@ -485,7 +485,7 @@
               </div>
             </div>
           </div>
-          <div id="results_4_buttons" class="pb-4">
+          <div id="results_4_buttons" class="py-4">
             <button
               class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
               @click="switchToGeneration"
