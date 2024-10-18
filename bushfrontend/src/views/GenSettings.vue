@@ -531,7 +531,11 @@
       <div
         class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
       >
-        <div id="pic_gardenMap" style="max-height: 500px" class="py-4">
+        <div
+          id="pic_gardenMap"
+          style="min-height: 300px; max-height: 500px"
+          class="py-4"
+        >
           <img
             :src="pic_gardenMap"
             :alt="pic_gardenMap"
