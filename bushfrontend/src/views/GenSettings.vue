@@ -578,8 +578,7 @@
     <div id="anchorButton_toTop">
       <Button
         raised
-        rounded
-        class="px-4 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1"
+        class="px-3 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1"
         type="submit"
         label="Наверх"
       >
