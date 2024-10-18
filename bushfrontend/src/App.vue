@@ -196,7 +196,7 @@ const dialogVisible = ref(false);
               header="www.freepik.com"
               :style="{ width: '20vw' }"
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-              class="block-darkgreen1 p-4 rounded"
+              class="block-darkgreen1 p-4 rounded border-2px-bshtr-green1"
             >
               <p class="m-0">
                 <a
@@ -269,6 +269,9 @@ body {
 }
 
 .border-bshtr-green1 {
+  border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
+}
+.border-2px-bshtr-green1 {
   border: var(--bs-border-width) var(--bs-border-style) $bshtr-green-1 !important;
 }
 

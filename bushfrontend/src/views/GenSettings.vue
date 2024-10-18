@@ -413,7 +413,7 @@
               <div class="h3 fw-normal pb-2 text-truncate">Режим полива</div>
               <div
                 class="d-flex justify-content-start align-items-center mb-2"
-                style="max-width: 180px"
+                style="max-width: 224px"
                 v-tooltip.top="{
                   value:
                     generationResults_watering?.[formData.watering].tooltip,
