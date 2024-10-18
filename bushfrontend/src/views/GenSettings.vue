@@ -300,12 +300,10 @@
                   <div
                     class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
                   >
-                    <div
-                      class=""
-                      v-for="garden1 in garden_colors"
-                      :key="garden1"
-                    >
+                    <div>
                       <input
+                        v-for="garden1 in garden_colors"
+                        :key="garden1"
                         class="form-check-input form-check-input-black p-3 m-1 rounded"
                         :class="{
                           colorPicker_white: garden1 === 'белый',
@@ -364,14 +362,14 @@
     id="generationBlock_whenDone"
   >
     <div class="container-custom1920 px-4 py-5">
-      <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">Результат</h1>
+      <h1 class="pb-4 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
         <div
-          class="col gradient-block-1 p-5 rounded border-bshtr-green1"
+          class="col gradient-block-1 p-5 rounded border-bshtr-green1 mt-4"
           id="result_text"
         >
           <div id="results_1" class="pb-4">
-            <div class="h3 fw-normal pb-3">Период цветения</div>
+            <div class="h3 fw-normal pb-3 text-truncate">Период цветения</div>
             <div class="row">
               <div class="col">
                 <div class="h4 fw-normal">Начало:</div>
@@ -388,7 +386,7 @@
             </div>
           </div>
           <div id="results_2" class="row pb-4">
-            <div id="results_2-1" class="col">
+            <div id="results_2-1" class="col mb-2">
               <div class="h3 fw-normal pb-2">Освещённость</div>
 
               <div class="d-flex justify-content-start align-items-center mb-2">
@@ -410,7 +408,7 @@
               </div>
             </div>
             <div id="results_2-2" class="col">
-              <div class="h3 fw-normal pb-2">Режим полива</div>
+              <div class="h3 fw-normal pb-2 text-truncate">Режим полива</div>
               <div
                 class="d-flex justify-content-start align-items-center mb-2"
                 style="max-width: 180px"
@@ -514,7 +512,7 @@
             ></Button>
           </div>
         </div>
-        <div class="col" id="pic_garden">
+        <div class="col mt-4" id="pic_garden" style="min-width: 50%">
           <img
             :src="pic_garden"
             :alt="pic_garden"
