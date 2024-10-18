@@ -559,7 +559,16 @@
           <div class="row g-0">
             <div class="col-8 border-top-dotted-4f4f4f py-4">
               {{
-                flower.description.split("\.", 4).slice(0, 4).join(". ") + "."
+                flower.description.length > 120
+                  ? flower.description.slice(0, 120) +
+                    flower.description
+                      .slice(120)
+                      .split("\.", 3)
+                      .slice(0, 3)
+                      .join(". ") +
+                    "."
+                  : flower.description.split("\.", 4).slice(0, 4).join(". ") +
+                    "."
               }}
             </div>
             <div class="col ps-4" style="max-width: 300px">
