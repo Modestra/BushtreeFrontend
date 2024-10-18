@@ -556,8 +556,10 @@
             {{ index + 1 + ". " }}{{ flower.name }}
           </div>
           <div class="row g-0">
-            <div class="col border-top-dotted-4f4f4f py-4">
-              {{ flower.description.substring(0, 300) + "..." }}
+            <div class="col-8 border-top-dotted-4f4f4f py-4">
+              {{
+                flower.description.split("\.", 5).slice(0, 5).join(". ") + "..."
+              }}
             </div>
             <div class="col ps-4" style="max-width: 300px">
               <img
