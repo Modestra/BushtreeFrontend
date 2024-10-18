@@ -391,20 +391,22 @@
 
               <div class="d-flex justify-content-start align-items-center mb-2">
                 <label
-                  class="form-check-label h4 fw-normal m-0 px-1"
+                  class="form-check-label h4 fw-normal m-0 px-1 align-text-top"
                   for="lightnessradio1"
                   style="min-width: 100px"
                 >
                   {{ formData.light }}
                 </label>
-                <img
-                  class="px-1 svgIcon_whiteFill"
-                  :src="
-                    generationResults_shadow?.[formData.light].icon ||
-                    img_icon_shadow_sun
-                  "
-                  alt="icon_lightIcon_1_sun"
-                />
+                <div style="height: 100%">
+                  <img
+                    class="px-1 svgIcon_whiteFill"
+                    :src="
+                      generationResults_shadow?.[formData.light].icon ||
+                      img_icon_shadow_sun
+                    "
+                    alt="icon_lightIcon_1_sun"
+                  />
+                </div>
               </div>
             </div>
             <div id="results_2-2" class="col">
