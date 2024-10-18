@@ -530,17 +530,14 @@
       </h1>
       <div
         class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
+        style="min-height: 300px; max-height: 500px"
       >
-        <div
-          id="pic_gardenMap"
-          style="min-height: 300px; max-height: 500px"
-          class="py-4"
-        >
+        <div id="pic_gardenMap" style="height: 80%" class="py-4">
           <img
+            style="height: 300px; width: 100%"
             :src="pic_gardenMap"
             :alt="pic_gardenMap"
             class="rounded"
-            style="height: 100%"
           />
         </div>
       </div>
@@ -724,6 +721,17 @@ const gardenSubmit = async () => {
           return value;
         })
       );
+      setTimeout(() => {
+        // Code to execute after 2 seconds
+        console.log(
+          GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+            (resp) => {
+              pic_gardenMap.value = resp;
+              // тут потом будет другая функция, чтобы получить карту цветника
+            }
+          )
+        );
+      }, 2000);
       // console.log(
       //   GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
       //     pic_garden.value = resp;
@@ -731,14 +739,15 @@ const gardenSubmit = async () => {
       //   })
       // );
       // console.log(gardenArrayToSend.value.gardens);
-      console.log(
-        GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
-          (resp) => {
-            pic_gardenMap.value = resp;
-            // тут потом будет другая функция, чтобы получить карту цветника
-          }
-        )
-      );
+
+      // console.log(
+      //   GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+      //     (resp) => {
+      //       pic_gardenMap.value = resp;
+      //       // тут потом будет другая функция, чтобы получить карту цветника
+      //     }
+      //   )
+      // );
     });
   });
 };
