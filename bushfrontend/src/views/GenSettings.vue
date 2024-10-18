@@ -446,7 +446,7 @@
             >
               <div class="" v-if="formData.color_main != null">
                 <div
-                  class="border-dark p-4 m-1 rounded border-bshtr-green1"
+                  class="border-dark p-3 m-1 rounded border-bshtr-green1"
                   :class="{
                     colorPicker_white: formData.color_main === 'белый',
                     colorPicker_red: formData.color_main === 'красный',
@@ -466,7 +466,7 @@
               </div>
               <div class="" v-if="formData.color_other != null">
                 <div
-                  class="border-dark p-4 m-1 rounded border-bshtr-green1"
+                  class="border-dark p-3 m-1 rounded border-bshtr-green1"
                   :class="{
                     colorPicker_white: formData.color_other === 'белый',
                     colorPicker_red: formData.color_other === 'красный',
@@ -487,6 +487,21 @@
             </div>
           </div>
           <div id="results_4_buttons" class="py-4">
+            <!-- <Button
+              class="px-4 py-2"
+              type="submit"
+              label="Редактировать"
+              severity="Success"
+              :loading="loading"
+              @click="switchToGeneration"
+            ></Button>
+            <Button
+              class="px-4 py-2"
+              type="submit"
+              label="Скачать материалы"
+              severity="Success"
+              :loading="loading"
+            ></Button> -->
             <button
               class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
               @click="switchToGeneration"
@@ -591,18 +606,13 @@
         class="px-3 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1"
         type="submit"
         label="Наверх"
+        @click="scrollToTopSmoothly"
       >
-        <RouterLink
-          class="nav-link active"
-          aria-current="page"
-          :to="{ name: 'gensettings', hash: '#generationPage_top' }"
-          active-class="active"
-        >
-          <img
-            class="px-1"
-            src="@assets/img/icon_arrow-up-Bold.svg"
-            alt="icon_arrow-up-Bold" /></RouterLink
-      ></Button>
+        <img
+          class="px-1"
+          src="@assets/img/icon_arrow-up-Bold.svg"
+          alt="icon_arrow-up-Bold"
+      /></Button>
     </div>
   </div>
 </template>
@@ -620,6 +630,18 @@ import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
+
+const scrollToTopSmoothly = () => {
+  if (typeof window !== "undefined") {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth", // Adds smooth scrolling effect
+    });
+  } else {
+    console.error("Window object is not available.");
+  }
+};
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
@@ -715,6 +737,7 @@ const gardenSubmit = async () => {
   loading.value = true;
   postGarden(formData.value).then((resp) => {
     loading.value = false;
+    scrollToTopSmoothly();
     generationDone.value = true;
     gardenArrayToSend.value.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
     console.log(gardenArrayToSend.value);
