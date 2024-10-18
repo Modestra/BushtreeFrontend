@@ -374,14 +374,14 @@
             <div class="h3 fw-normal pb-3 text-truncate">Период цветения</div>
             <div class="row">
               <div class="col">
-                <div class="h4 fw-normal">Начало:</div>
-                <div class="h5 fw-normal">
+                <div class="h5 fw-normal">Начало:</div>
+                <div class="h6 fw-normal">
                   {{ sliderMarks[formData.period_bloosom_start].label }}
                 </div>
               </div>
               <div class="col">
-                <div class="h4 fw-normal">Конец:</div>
-                <div class="h5 fw-normal">
+                <div class="h5 fw-normal">Конец:</div>
+                <div class="h6 fw-normal">
                   {{ sliderMarks[formData.period_bloosom_end].label }}
                 </div>
               </div>
@@ -393,7 +393,7 @@
 
               <div class="d-flex justify-content-start align-items-center mb-2">
                 <label
-                  class="form-check-label h4 fw-normal m-0 px-1 align-text-top"
+                  class="form-check-label h5 fw-normal m-0 px-1 align-text-top"
                   for="lightnessradio1"
                   style="min-width: 100px"
                 >
@@ -418,7 +418,7 @@
                 style="max-width: 224px"
               >
                 <label
-                  class="form-check-label h4 fw-normal m-0 px-1"
+                  class="form-check-label h5 fw-normal m-0 px-1"
                   for="lightnessradio1"
                   style="min-width: 64px"
                 >
