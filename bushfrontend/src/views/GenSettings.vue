@@ -27,10 +27,11 @@
               </div>
             </div>
             <div class="row">
-              <div class="options-group-2 col py-4">
+              <div class="options-group-2 col py-4 d-flex flex-column">
                 <h4 class="text-start text-truncate">Освещённость</h4>
                 <div
-                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
+                  style="flex-grow: 1"
                 >
                   <div
                     class="form-check d-flex justify-content-start align-items-center mb-2"
@@ -115,22 +116,15 @@
                   </div>
                 </div>
               </div>
-              <div class="options-group-3 col py-4">
+              <div class="options-group-3 col py-4 d-flex flex-column">
                 <h4 class="text-start text-truncate">Режим полива</h4>
                 <div
-                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen h-100"
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
+                  style="flex-grow: 1"
                 >
                   <div
                     class="form-check d-flex justify-content-start align-items-center mb-2"
                     style="max-width: 280px"
-                    v-tooltip.top="{
-                      value: 'ежедневно',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }"
-                    type="text"
-                    placeholder="Top"
                   >
                     <div>
                       <input
@@ -152,20 +146,20 @@
                       class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'ежедневно',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
                     />
                   </div>
 
                   <div
                     class="form-check d-flex justify-content-start align-items-center mb-2"
                     style="max-width: 280px"
-                    v-tooltip.top="{
-                      value: 'через 2-3 дня',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }"
-                    type="text"
-                    placeholder="Top"
                   >
                     <div>
                       <input
@@ -187,19 +181,19 @@
                       class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'через 2-3 дня',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
                     />
                   </div>
                   <div
                     class="form-check d-flex justify-content-start align-items-center mb-2"
                     style="max-width: 280px"
-                    v-tooltip.top="{
-                      value: 'раз в неделю',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }"
-                    type="text"
-                    placeholder="Top"
                   >
                     <div>
                       <input
@@ -221,19 +215,19 @@
                       class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'раз в неделю',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
                     />
                   </div>
                   <div
                     class="form-check d-flex justify-content-start align-items-center mb-2"
                     style="max-width: 280px"
-                    v-tooltip.top="{
-                      value: 'опрыскивание',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }"
-                    type="text"
-                    placeholder="Top"
                   >
                     <div>
                       <input
@@ -255,12 +249,20 @@
                       class="px-1"
                       src="@assets/img/icon_note_circle.svg"
                       alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'опрыскивание',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
                     />
                   </div>
                 </div>
               </div>
               <div
-                class="options-group-4 col py-4 pb-0 d-flex flex-column justify-content-between"
+                class="options-group-4 col py-4 d-flex flex-column justify-content-between"
               >
                 <div id="formColors1" class="align-self-start w-100">
                   <h4 class="text-start text-truncate">Основной цвет</h4>
@@ -414,13 +416,6 @@
               <div
                 class="d-flex justify-content-start align-items-center mb-2"
                 style="max-width: 224px"
-                v-tooltip.top="{
-                  value:
-                    generationResults_watering?.[formData.watering].tooltip,
-                  pt: {
-                    text: 'bg-white text-black',
-                  },
-                }"
               >
                 <label
                   class="form-check-label h4 fw-normal m-0 px-1"
@@ -433,6 +428,13 @@
                   class="px-1 svgIcon_whiteFill"
                   src="@assets/img/icon_note_circle.svg"
                   alt="icon_lightIcon_1_sun"
+                  v-tooltip.top="{
+                    value:
+                      generationResults_watering?.[formData.watering].tooltip,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
                 />
               </div>
             </div>
