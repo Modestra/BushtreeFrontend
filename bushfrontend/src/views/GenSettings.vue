@@ -425,7 +425,7 @@
                 <label
                   class="form-check-label h4 fw-normal m-0 px-1"
                   for="lightnessradio1"
-                  style="min-width: 100px"
+                  style="min-width: 64px"
                 >
                   {{ formData.watering }}
                 </label>
