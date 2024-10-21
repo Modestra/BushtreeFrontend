@@ -632,6 +632,7 @@ import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import fontkit from "@pdf-lib/fontkit";
 
 const scrollToTopSmoothly = () => {
   if (typeof window !== "undefined") {
@@ -848,7 +849,7 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
 
 // Constants
 const FONT_SIZE = 30;
-const TEXT_COLOR = rgb(0, 0.53, 0.71);
+const TEXT_COLOR = rgb(0, 0, 0);
 const TEXT_CONTENT = "Creating PDFs in JavaScript is awesome!";
 const PDF_TEXT_UNCHANGEBLE = [
   "Результат",
@@ -861,8 +862,19 @@ const FILE_NAME = "bushtree-материалы-генерации.pdf";
 // Function to create and download a PDF
 const createAndDownloadPdf = async () => {
   try {
+    // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
+    const url2 =
+      "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
+    const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
+
     const pdfDoc = await PDFDocument.create();
-    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+    let fontCustom;
+    if (fontBytes) {
+      pdfDoc.registerFontkit(fontkit);
+      await pdfDoc.embedFont(fontBytes);
+      fontCustom = await pdfDoc.embedFont(fontBytes);
+    }
+    // const fontCustom = await pdfDoc.embedFont(StandardFonts.TimesRoman);
     const page = pdfDoc.addPage();
     const page2 = pdfDoc.addPage();
     const { width, height } = page.getSize();
@@ -870,14 +882,14 @@ const createAndDownloadPdf = async () => {
       x: 150,
       y: height - 4 * FONT_SIZE - 100,
       size: FONT_SIZE,
-      font: timesRomanFont,
+      font: fontCustom,
       color: TEXT_COLOR,
     });
     page.drawText(PDF_TEXT_UNCHANGEBLE[1], {
       x: 150,
       y: height - 4 * FONT_SIZE - 300,
       size: FONT_SIZE,
-      font: timesRomanFont,
+      font: fontCustom,
       color: TEXT_COLOR,
     });
     flowersGeneratedList.value.forEach((element, index) => {
@@ -885,12 +897,12 @@ const createAndDownloadPdf = async () => {
         x: 150,
         y: height - (index + 4) * FONT_SIZE - 100,
         size: FONT_SIZE,
-        font: timesRomanFont,
+        font: fontCustom,
         color: TEXT_COLOR,
       });
     });
 
-    drawTextOnPage(page, timesRomanFont);
+    drawTextOnPage(page, fontCustom);
 
     const pdfBytes = await pdfDoc.save();
     downloadPdf(pdfBytes, FILE_NAME);
