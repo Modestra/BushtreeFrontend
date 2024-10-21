@@ -624,8 +624,11 @@ const createAndDownloadPdf = async () => {
       "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
     const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
 
-
-    const jpgUrl = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab";
+    const jpgUrl = img_placeholder;
+    try {
+      const jpgUrl = flowersGeneratedList.value[0].storageUrl.toString();
+    } catch (error) {
+    }
     console.log(flowersGeneratedList.value[0].storageUrl.toString())
     const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
 
