@@ -18,6 +18,7 @@
     "eslint-plugin-vue": "^9.27.0",
     "firebase": "^10.14.0",
     "jest": "^29.7.0",
+    "pdf-lib": "^1.17.1",
     "prettier": "^3.3.3",
     "primevue": "^4.0.7",
     "sass": "^1.78.0",

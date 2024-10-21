@@ -510,6 +510,7 @@
             </button>
             <button
               class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2"
+              @click="createAndDownloadPdf"
             >
               Скачать материалы
             </button>
@@ -630,6 +631,7 @@ import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 const scrollToTopSmoothly = () => {
   if (typeof window !== "undefined") {
@@ -843,6 +845,84 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
       });
   });
 }
+
+// Constants
+const FONT_SIZE = 30;
+const TEXT_COLOR = rgb(0, 0.53, 0.71);
+const TEXT_CONTENT = "Creating PDFs in JavaScript is awesome!";
+const PDF_TEXT_UNCHANGEBLE = [
+  "Результат",
+  "Карта рассадки",
+  "Цветы",
+  "Здесь вы можете посмотреть список цветов и растений, которые мы собрали специально для вас.",
+];
+const FILE_NAME = "bushtree-материалы-генерации.pdf";
+
+// Function to create and download a PDF
+const createAndDownloadPdf = async () => {
+  try {
+    const pdfDoc = await PDFDocument.create();
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+    const page = pdfDoc.addPage();
+    const page2 = pdfDoc.addPage();
+    const { width, height } = page.getSize();
+    page.drawText(PDF_TEXT_UNCHANGEBLE[0], {
+      x: 150,
+      y: height - 4 * FONT_SIZE - 100,
+      size: FONT_SIZE,
+      font: timesRomanFont,
+      color: TEXT_COLOR,
+    });
+    page.drawText(PDF_TEXT_UNCHANGEBLE[1], {
+      x: 150,
+      y: height - 4 * FONT_SIZE - 300,
+      size: FONT_SIZE,
+      font: timesRomanFont,
+      color: TEXT_COLOR,
+    });
+    flowersGeneratedList.value.forEach((element, index) => {
+      page.drawText(PDF_TEXT_UNCHANGEBLE[3], {
+        x: 150,
+        y: height - (index + 4) * FONT_SIZE - 100,
+        size: FONT_SIZE,
+        font: timesRomanFont,
+        color: TEXT_COLOR,
+      });
+    });
+
+    drawTextOnPage(page, timesRomanFont);
+
+    const pdfBytes = await pdfDoc.save();
+    downloadPdf(pdfBytes, FILE_NAME);
+  } catch (error) {
+    console.error("Error creating PDF:", error);
+  }
+};
+
+// Function to draw text on the PDF page
+const drawTextOnPage = (page, font) => {
+  const { width, height } = page.getSize();
+  page.drawText(TEXT_CONTENT, {
+    x: 50,
+    y: height - 4 * FONT_SIZE,
+    size: FONT_SIZE,
+    font: font,
+    color: TEXT_COLOR,
+  });
+};
+
+// Function to trigger the download of the PDF
+const downloadPdf = (pdfBytes, fileName) => {
+  const blob = new Blob([pdfBytes], { type: "application/pdf" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
 </script>
 
 <style lang="scss" scoped>
