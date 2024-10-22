@@ -1,7 +1,7 @@
 <template>
   <div class="py-5" id="generationPage_top"></div>
 
-  <div class="glowBehindBlock-1" v-show="!generationDone">
+  <div class="glowBehindBlock-1" v-show="!generationDone" id="genNotDoneDiv">
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Настройте параметры вашего будущего цветника
@@ -324,7 +324,8 @@
           </div>
         </div>
         <div class="col mt-4" id="pic_garden" style="min-width: 50%">
-          <img :src="pic_garden" :alt="pic_garden" style="max-height: 100%; width: 100%" class="rounded" />
+          <img :src="pic_garden" :alt="pic_garden" style="max-height: 100%; width: 100%" class="rounded"
+            id="generated_garden_pic" />
         </div>
       </div>
     </div>
@@ -335,7 +336,8 @@
       <div class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
         style="min-height: 300px; max-height: 500px">
         <div id="pic_gardenMap" style="height: 80%" class="py-4">
-          <img style="height: 300px; width: 100%" :src="pic_gardenMap" :alt="pic_gardenMap" class="rounded" />
+          <img style="height: 300px; width: 100%" :src="pic_gardenMap" :alt="pic_gardenMap" class="rounded"
+            id="generated_garden_mapPic" />
         </div>
       </div>
     </div>
@@ -390,8 +392,10 @@ import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import fontkit from "@pdf-lib/fontkit";
+// import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+// import fontkit from "@pdf-lib/fontkit";
+import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
 
 const scrollToTopSmoothly = () => {
   if (typeof window !== "undefined") {
@@ -605,228 +609,216 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
       });
   });
 }
-// async function getDownloadURLTEST() {
-//   try {
-//     // Get the download URL for 'images/stars.jpg'
-//     const url = await getDownloadURL(ref1(storage, 'images/stars.jpg'));
 
-//     // Download the image as a blob
-//     const blob = await fetchBlob(url);
 
-//     // Set the image source for the <img> element
-//     const img = document.getElementById('myimg');
-//     img.setAttribute('src', url);
 
-//     // Optionally, you can handle the blob here if needed
-//     // e.g., createObjectURL(blob) for further use
-//   } catch (error) {
-//     // Handle any errors
-//     console.error('Error fetching the download URL:', error);
-//   }
+// const createAndDownloadPdf = async () => {
+//   const pdf = new jsPDF('p', 'pt', 'a4');  // orientation, unit, format
+
+//   const width = pdf.internal.pageSize.getWidth();
+//   const height = pdf.internal.pageSize.getHeight();
+//   const data = document.getElementById('generated_garden_pic');
+//   // console.log(data);
+
+//   html2canvas(data).then((canvas) => {
+//     // Few necessary setting options
+//     const imgWidth = 208;
+//     const pageHeight = 295;
+//     const imgHeight = canvas.height * imgWidth / canvas.width;
+//     const heightLeft = imgHeight;
+
+//     const contentDataURL = canvas.toDataURL('image/png');
+//     const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+//     const position = 0;
+//     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+//     pdf.save('ikismail.pdf'); // Generated PDF
+//   });
 // }
-
-// // Helper function to fetch the image as a blob
-// async function fetchBlob(url) {
-//   const response = await fetch(url);
-//   if (!response.ok) {
-//     throw new Error('Network response was not ok');
-//   }
-//   return await response.blob();
-// }
-// const reader = new FileReader();
-// reader.onload = (event) => {
-//   const base64String = event.target.result;
-//   // Use the base64String here
-// };
-// reader.readAsDataURL(blob);
-
-
-// Constants
-const FONT_SIZE = 14;
-const FONT_SIZE_FLOWERNAME = 18;
-const FONT_SIZE_H1 = 28;
-const TEXT_COLOR = rgb(0, 0, 0);
-const FILE_NAME = "bushtree-материалы-генерации.pdf";
-
-
-const pdfTextToCenter = ["Результат", "Карта рассадки", "Цветы", "Здесь вы можете посмотреть список цветов и растений,", "которые мы собрали специально для вас."];
-
-// Function to create and download a PDF
 const createAndDownloadPdf = async () => {
-  try {
-    // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
-    const url2 =
-      "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
-    const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
+  const pdf = new jsPDF('p', 'pt', 'a4');  // orientation, unit, format
 
-
-
-
-    const pdfDoc = await PDFDocument.create();
-    let fontCustom;
-    if (fontBytes) {
-      pdfDoc.registerFontkit(fontkit);
-      await pdfDoc.embedFont(fontBytes);
-      fontCustom = await pdfDoc.embedFont(fontBytes);
+  var htmlElement = document.getElementById('generated_garden_pic');
+  // you need to load html2canvas (and dompurify if you pass a string to html)
+  const opt = {
+    callback: function (pdf) {
+      pdf.save("Test.pdf");
+      // to open the generated PDF in browser window
+      // window.open(pdf.output('bloburl'));
+    },
+    margin: [72, 72, 72, 72],
+    autoPaging: 'text',
+    html2canvas: {
+      allowTaint: true,
+      dpi: 300,
+      letterRendering: true,
+      logging: false,
+      scale: .8
     }
-    const width_text1_pdfTextToCenter = pdfTextToCenter[0].length * (FONT_SIZE_H1 / 2);
-    const width_text2_pdfTextToCenter = pdfTextToCenter[1].length * (FONT_SIZE_H1 / 2);
-    const width_text3_pdfTextToCenter = pdfTextToCenter[2].length * (FONT_SIZE_H1 / 2);
-    const width_text4_pdfTextToCenter = pdfTextToCenter[3].length * (FONT_SIZE / 2);
-    const width_text5_pdfTextToCenter = pdfTextToCenter[4].length * (FONT_SIZE / 2);
-    // const fontCustom = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-    const page = pdfDoc.addPage();
-    const { width, height } = page.getSize();
-    page.drawText(pdfTextToCenter[0], {
-      x: (page.getWidth() - width_text1_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE_H1,
-      size: FONT_SIZE_H1,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-    // картинка
-    page.drawText(pdfTextToCenter[1], {
-      x: (page.getWidth() - width_text2_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE_H1 - 350,
-      size: FONT_SIZE_H1,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
+  };
 
-
-    const page2 = pdfDoc.addPage();
-    page2.drawText(pdfTextToCenter[2], {
-      x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE_H1 + 40,
-      size: FONT_SIZE_H1,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-    page2.drawText(pdfTextToCenter[3], {
-      x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE - 60,
-      size: FONT_SIZE,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-    page2.drawText(pdfTextToCenter[4], {
-      x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE - 60 - FONT_SIZE,
-      size: FONT_SIZE,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-
-    const pages = [];
-    for (let i = 0; i < (flowersGeneratedList.value.length / 2); i++) {
-      const page3 = pdfDoc.addPage();
-      pages.push(page3);
-      pages[i].drawText(flowersGeneratedList.value[i].name, {
-        x: 150,
-        y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
-        size: FONT_SIZE_FLOWERNAME,
-        font: fontCustom,
-        color: TEXT_COLOR,
-      });
-      pages[i].drawText(flowersGeneratedList.value[i].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
-        x: 150,
-        y: height - 4 * FONT_SIZE - 300,
-        size: FONT_SIZE,
-        font: fontCustom,
-        color: TEXT_COLOR,
-        maxWidth: 500, wordBreaks: [" "]
-      });
-
-      // textField.setText([`${flowersGeneratedList.value[1].description.toString()}`].join('\n'))
-      // pages[i].drawText(flowersGeneratedList.value[i + 1].name, {
-      //   x: 250,
-      //   y: height - 4 * FONT_SIZE_FLOWERNAME - 200,
-      //   size: FONT_SIZE_FLOWERNAME,
-      //   font: fontCustom,
-      //   color: TEXT_COLOR,
-      // });
-      // pages[i].drawText(flowersGeneratedList.value[i + 1].description, {
-      //   x: 250,
-      //   y: height - 4 * FONT_SIZE - 400,
-      //   size: FONT_SIZE,
-      //   font: fontCustom,
-      //   color: TEXT_COLOR,
-      // });
-    }
-
-
-
-
-
-
-
-
-
-
-    // flowersGeneratedList.value.forEach((element, index) => {
-    //   page.drawText(PDF_TEXT_UNCHANGEBLE[3], {
-    //     x: 150,
-    //     y: height - (index + 4) * FONT_SIZE - 100,
-    //     size: FONT_SIZE,
-    //     font: fontCustom,
-    //     color: TEXT_COLOR,
-    //   });
-    // });
-
-
-
-
-    // // // const jpgUrl = img_placeholder;
-    // // const jpgUrl = flowersGeneratedList.value[0].storageUrl.toString();
-    // // // try {
-    // // //   const 
-    // // // } catch (error) {
-    // // // }
-    // console.log(flowersGeneratedList.value[0].storageUrl.toString())
-    // // const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
-    // const pic_gardenMap21d12 = ref()
-
-    // GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
-    //   (resp) => {
-    //     pic_gardenMap21d12.value = resp;
-    //     // тут потом будет другая функция, чтобы получить карту цветника
-    //   }
-    // )
-
-
-    const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab.jpg"
-    const arrayBuffer = await fetch(url).then(res => res.arrayBuffer())
-    const jpgImage = await pdfDoc.embedJpg(arrayBuffer);
-    const jpgDims = 300;
-
-    page.drawImage(jpgImage, {
-      x: page.getWidth() / 2 - jpgDims / 2,
-      y: page.getHeight() / 2 - jpgDims / 2 + 250,
-      width: jpgDims,
-      height: jpgDims,
-    });
-
-    const pdfBytes = await pdfDoc.save();
-    downloadPdf(pdfBytes, FILE_NAME);
-  } catch (error) {
-    console.error("Error creating PDF:", error);
-  }
-};
-
-// Function to trigger the download of the PDF
-const downloadPdf = (pdfBytes, fileName) => {
-  const blob = new Blob([pdfBytes], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-};
+  pdf.html(htmlElement, opt);
+}
 
 createAndDownloadPdf()
+
+// // Constants
+// const FONT_SIZE = 14;
+// const FONT_SIZE_FLOWERNAME = 18;
+// const FONT_SIZE_H1 = 28;
+// const TEXT_COLOR = rgb(0, 0, 0);
+// const FILE_NAME = "bushtree-материалы-генерации.pdf";
+
+
+// const pdfTextToCenter = ["Результат", "Карта рассадки", "Цветы", "Здесь вы можете посмотреть список цветов и растений,", "которые мы собрали специально для вас."];
+
+// // Function to create and download a PDF
+// const createAndDownloadPdf = async () => {
+//   try {
+//     // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
+//     const url2 =
+//       "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
+//     const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
+
+
+
+
+//     const pdfDoc = await PDFDocument.create();
+//     let fontCustom;
+//     if (fontBytes) {
+//       pdfDoc.registerFontkit(fontkit);
+//       await pdfDoc.embedFont(fontBytes);
+//       fontCustom = await pdfDoc.embedFont(fontBytes);
+//     }
+//     const width_text1_pdfTextToCenter = pdfTextToCenter[0].length * (FONT_SIZE_H1 / 2);
+//     const width_text2_pdfTextToCenter = pdfTextToCenter[1].length * (FONT_SIZE_H1 / 2);
+//     const width_text3_pdfTextToCenter = pdfTextToCenter[2].length * (FONT_SIZE_H1 / 2);
+//     const width_text4_pdfTextToCenter = pdfTextToCenter[3].length * (FONT_SIZE / 2);
+//     const width_text5_pdfTextToCenter = pdfTextToCenter[4].length * (FONT_SIZE / 2);
+//     // const fontCustom = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+//     const page = pdfDoc.addPage();
+//     const { width, height } = page.getSize();
+//     page.drawText(pdfTextToCenter[0], {
+//       x: (page.getWidth() - width_text1_pdfTextToCenter) / 2,
+//       y: height - 4 * FONT_SIZE_H1,
+//       size: FONT_SIZE_H1,
+//       font: fontCustom,
+//       color: TEXT_COLOR,
+//     });
+//     if (typeof html2canvas === "function") {
+//       const canvas = await html2canvas(document.getElementById("generated_garden_pic"), { useCORS: true })
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdfImage = await pdfDoc.embedPng(imgData);
+//       page.drawImage(pdfImage, { x: 20, y: 160, width: 170, height: 100 });
+//     } else {
+//       console.error("html2canvas is not loaded correctly.");
+//     }
+//     page.drawText(pdfTextToCenter[1], {
+//       x: (page.getWidth() - width_text2_pdfTextToCenter) / 2,
+//       y: height - 4 * FONT_SIZE_H1 - 350,
+//       size: FONT_SIZE_H1,
+//       font: fontCustom,
+//       color: TEXT_COLOR,
+//     });
+//     if (typeof html2canvas === "function") {
+//       const canvas = await html2canvas(document.getElementById("generated_garden_mapPic"), { useCORS: true })
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdfImage = await pdfDoc.embedPng(imgData);
+//       page.drawImage(pdfImage, { x: 20, y: 160, width: 170, height: 100 });
+//     } else {
+//       console.error("html2canvas is not loaded correctly.");
+//     }
+
+//     const page2 = pdfDoc.addPage();
+//     page2.drawText(pdfTextToCenter[2], {
+//       x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
+//       y: height - 4 * FONT_SIZE_H1 + 40,
+//       size: FONT_SIZE_H1,
+//       font: fontCustom,
+//       color: TEXT_COLOR,
+//     });
+//     page2.drawText(pdfTextToCenter[3], {
+//       x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
+//       y: height - 4 * FONT_SIZE - 60,
+//       size: FONT_SIZE,
+//       font: fontCustom,
+//       color: TEXT_COLOR,
+//     });
+//     page2.drawText(pdfTextToCenter[4], {
+//       x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
+//       y: height - 4 * FONT_SIZE - 60 - FONT_SIZE,
+//       size: FONT_SIZE,
+//       font: fontCustom,
+//       color: TEXT_COLOR,
+//     });
+
+//     const pages = [];
+//     for (let i = 0; i < (flowersGeneratedList.value.length / 2); i++) {
+//       const page3 = pdfDoc.addPage();
+//       pages.push(page3);
+//       pages[i].drawText(flowersGeneratedList.value[i].name, {
+//         x: 150,
+//         y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+//         size: FONT_SIZE_FLOWERNAME,
+//         font: fontCustom,
+//         color: TEXT_COLOR,
+//       });
+//       pages[i].drawText(flowersGeneratedList.value[i].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
+//         x: 150,
+//         y: height - 4 * FONT_SIZE - 300,
+//         size: FONT_SIZE,
+//         font: fontCustom,
+//         color: TEXT_COLOR,
+//         maxWidth: 500, wordBreaks: [" "]
+//       });
+
+//       // textField.setText([`${flowersGeneratedList.value[1].description.toString()}`].join('\n'))
+//       // pages[i].drawText(flowersGeneratedList.value[i + 1].name, {
+//       //   x: 250,
+//       //   y: height - 4 * FONT_SIZE_FLOWERNAME - 200,
+//       //   size: FONT_SIZE_FLOWERNAME,
+//       //   font: fontCustom,
+//       //   color: TEXT_COLOR,
+//       // });
+//       // pages[i].drawText(flowersGeneratedList.value[i + 1].description, {
+//       //   x: 250,
+//       //   y: height - 4 * FONT_SIZE - 400,
+//       //   size: FONT_SIZE,
+//       //   font: fontCustom,
+//       //   color: TEXT_COLOR,
+//       // });
+//     }
+
+
+//     if (typeof html2canvas === "function") {
+//       const canvas = await html2canvas(document.getElementById("flower-number-0"), { useCORS: true })
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdfImage = await pdfDoc.embedPng(btoa(canvas));
+//       page.drawImage(pdfImage, { x: 20, y: 160, width: 170, height: 100 });
+//     } else {
+//       console.error("html2canvas is not loaded correctly.");
+//     }
+
+//     const pdfBytes = await pdfDoc.save();
+//     downloadPdf(pdfBytes, FILE_NAME);
+//   } catch (error) {
+//     console.error("Error creating PDF:", error);
+//   }
+// };
+
+// // Function to trigger the download of the PDF
+// const downloadPdf = (pdfBytes, fileName) => {
+//   const blob = new Blob([pdfBytes], { type: "application/pdf" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = fileName;
+//   document.body.appendChild(a);
+//   a.click();
+//   document.body.removeChild(a);
+//   URL.revokeObjectURL(url);
+// };
+
+// createAndDownloadPdf()
 </script>
 
 <style lang="scss" scoped>
