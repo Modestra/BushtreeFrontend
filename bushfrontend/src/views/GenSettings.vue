@@ -362,7 +362,7 @@
                   "."
               }}
             </div>
-            <div class="col ps-4" style="max-width: 300px">
+            <div class="col ps-4" style="max-width: 300px" :id="`flower-number-${index}`">
               <img :src="flower.storageUrl || img_placeholder" :alt="flower.id" style="width: 100%" class="rounded" />
             </div>
           </div>
@@ -605,6 +605,41 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
       });
   });
 }
+// async function getDownloadURLTEST() {
+//   try {
+//     // Get the download URL for 'images/stars.jpg'
+//     const url = await getDownloadURL(ref1(storage, 'images/stars.jpg'));
+
+//     // Download the image as a blob
+//     const blob = await fetchBlob(url);
+
+//     // Set the image source for the <img> element
+//     const img = document.getElementById('myimg');
+//     img.setAttribute('src', url);
+
+//     // Optionally, you can handle the blob here if needed
+//     // e.g., createObjectURL(blob) for further use
+//   } catch (error) {
+//     // Handle any errors
+//     console.error('Error fetching the download URL:', error);
+//   }
+// }
+
+// // Helper function to fetch the image as a blob
+// async function fetchBlob(url) {
+//   const response = await fetch(url);
+//   if (!response.ok) {
+//     throw new Error('Network response was not ok');
+//   }
+//   return await response.blob();
+// }
+// const reader = new FileReader();
+// reader.onload = (event) => {
+//   const base64String = event.target.result;
+//   // Use the base64String here
+// };
+// reader.readAsDataURL(blob);
+
 
 // Constants
 const FONT_SIZE = 14;
@@ -624,13 +659,6 @@ const createAndDownloadPdf = async () => {
       "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
     const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
 
-    const jpgUrl = img_placeholder;
-    try {
-      const jpgUrl = flowersGeneratedList.value[0].storageUrl.toString();
-    } catch (error) {
-    }
-    console.log(flowersGeneratedList.value[0].storageUrl.toString())
-    const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
 
 
 
@@ -745,14 +773,37 @@ const createAndDownloadPdf = async () => {
     //   });
     // });
 
-    const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
-    const jpgDims = jpgImage.scale(0.5);
+
+
+
+    // // // const jpgUrl = img_placeholder;
+    // // const jpgUrl = flowersGeneratedList.value[0].storageUrl.toString();
+    // // // try {
+    // // //   const 
+    // // // } catch (error) {
+    // // // }
+    // console.log(flowersGeneratedList.value[0].storageUrl.toString())
+    // // const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer())
+    // const pic_gardenMap21d12 = ref()
+
+    // GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+    //   (resp) => {
+    //     pic_gardenMap21d12.value = resp;
+    //     // тут потом будет другая функция, чтобы получить карту цветника
+    //   }
+    // )
+
+
+    const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab.jpg"
+    const arrayBuffer = await fetch(url).then(res => res.arrayBuffer())
+    const jpgImage = await pdfDoc.embedJpg(arrayBuffer);
+    const jpgDims = 300;
 
     page.drawImage(jpgImage, {
-      x: page.getWidth() / 2 - jpgDims.width / 2,
-      y: page.getHeight() / 2 - jpgDims.height / 2 + 250,
-      width: jpgDims.width,
-      height: jpgDims.height,
+      x: page.getWidth() / 2 - jpgDims / 2,
+      y: page.getHeight() / 2 - jpgDims / 2 + 250,
+      width: jpgDims,
+      height: jpgDims,
     });
 
     const pdfBytes = await pdfDoc.save();
