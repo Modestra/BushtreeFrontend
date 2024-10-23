@@ -798,18 +798,18 @@ const createAndDownloadPdf = async () => {
   }
 };
 
-// Function to trigger the download of the PDF
-const downloadPdf = (pdfBytes, fileName) => {
-  const blob = new Blob([pdfBytes], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-};
+// // Function to trigger the download of the PDF
+// const downloadPdf = (pdfBytes, fileName) => {
+//   const blob = new Blob([pdfBytes], { type: "application/pdf" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = fileName;
+//   document.body.appendChild(a);
+//   a.click();
+//   document.body.removeChild(a);
+//   URL.revokeObjectURL(url);
+// };
 
 createAndDownloadPdf()
 </script>
