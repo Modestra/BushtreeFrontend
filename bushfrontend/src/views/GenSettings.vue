@@ -532,12 +532,13 @@ const gardenSubmit = async () => {
           )
         );
       }, 2000);
-      // console.log(
-      //   GetStoragePic(gardenArrayToSend.value.gardens).then((resp) => {
-      //     pic_garden.value = resp;
-      //     // работает корректно, проверено
-      //   })
-      // );
+      console.log(
+        GetStoragePicGardenBed(gardenArrayToSend.value.gardens).then(
+          (resp) => {
+            pic_garden.value = resp;
+            // работает корректно, проверено
+          })
+      );
       // console.log(gardenArrayToSend.value.gardens);
 
       // console.log(
@@ -585,6 +586,33 @@ async function GetStoragePic(storageUrl: string): Promise<string> {
 async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const storageRef = ref1(storage, `gardens/${storageUrl}.png`.toString());
+    getDownloadURL(storageRef)
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "storage/object-not-found":
+            reject("Не удалось найти изображение. Используется заменитель");
+            break;
+          case "storage/unauthorized":
+            reject(
+              "Пользователь не имеет достаточно прав для получения изображения"
+            );
+            break;
+          case "storage/canceled":
+            reject("Служба Firebase отказала в доступе");
+            break;
+          case "storage/unknown":
+            reject("Неизвестный запрос");
+            break;
+        }
+      });
+  });
+}
+async function GetStoragePicGardenBed(storageUrl: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const storageRef = ref1(storage, `flowerbands/${storageUrl}/1.png`.toString());
     getDownloadURL(storageRef)
       .then((url) => {
         resolve(url);
@@ -704,12 +732,35 @@ const createAndDownloadPdf = async () => {
       font: fontCustom,
       color: TEXT_COLOR,
     });
+
+    const url_pic_garden = pic_garden.value.toString();
+    const arrayBuffer_pic_garden = await fetch(url_pic_garden).then(res => res.arrayBuffer())
+    const jpgImage_pic_garden = await pdfDoc.embedPng(arrayBuffer_pic_garden);
+    const jpgDims_pic_garden = 300;
+    page.drawImage(jpgImage_pic_garden, {
+      x: page.getWidth() / 2 - jpgDims_pic_garden / 2,
+      y: page.getHeight() / 2 - jpgDims_pic_garden / 2 + 200,
+      width: jpgDims_pic_garden,
+      height: jpgDims_pic_garden,
+    });
+
     page.drawText(pdfTextToCenter[1], {
       x: (page.getWidth() - width_text2_pdfTextToCenter) / 2,
       y: height - 4 * FONT_SIZE_H1 - 350,
       size: FONT_SIZE_H1,
       font: fontCustom,
       color: TEXT_COLOR,
+    });
+
+    const url_pic_gardenMap = pic_gardenMap.value.toString();
+    const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(res => res.arrayBuffer())
+    const jpgImage_pic_gardenMap = await pdfDoc.embedPng(arrayBuffer_pic_gardenMap);
+    const jpgDims_pic_gardenMap = 300;
+    page.drawImage(jpgImage_pic_gardenMap, {
+      x: page.getWidth() / 2 - jpgDims_pic_gardenMap / 2,
+      y: page.getHeight() / 2 - jpgDims_pic_gardenMap / 2 - 150,
+      width: jpgDims_pic_gardenMap,
+      height: jpgDims_pic_gardenMap,
     });
 
     const page2 = pdfDoc.addPage();
@@ -755,6 +806,17 @@ const createAndDownloadPdf = async () => {
         maxWidth: 500, wordBreaks: [" "]
       });
 
+      const url_pic_flower = pic_gardenMap.value.toString();
+      const arrayBuffer_pic_flower = await fetch(url_pic_flower).then(res => res.arrayBuffer())
+      const jpgImage_pic_flower = await pdfDoc.embedPng(arrayBuffer_pic_flower);
+      const jpgDims_pic_flower = 300;
+      pages[i].drawImage(jpgImage_pic_flower, {
+        x: page.getWidth() / 2 - jpgDims_pic_flower / 2,
+        y: page.getHeight() / 2 - jpgDims_pic_flower / 2 - 150,
+        width: jpgDims_pic_flower,
+        height: jpgDims_pic_flower,
+      });
+
       // textField.setText([`${flowersGeneratedList.value[1].description.toString()}`].join('\n'))
       // pages[i].drawText(flowersGeneratedList.value[i + 1].name, {
       //   x: 250,
@@ -773,23 +835,20 @@ const createAndDownloadPdf = async () => {
     }
 
 
-    const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab"
-    const arrayBuffer = await fetch(url, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': '*'
-      },
-    }).then(res => res.arrayBuffer())
-    const jpgImage = await pdfDoc.embedJpg(arrayBuffer);
-    const jpgDims = 300;
+    // const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab"
+    // const arrayBuffer = await fetch(url, {
+    //   headers: { // забавный факт - с этими заголовками не работают даже картинки из примеров, хотя без них они загружаются P S ЗАСТАВИЛИ РАБОТАТЬ - проблема была на стороне Firestore, для бакета нужно прописать cors
+    //   },
+    // }).then(res => res.arrayBuffer())
+    // const jpgImage = await pdfDoc.embedPng(arrayBuffer);
+    // const jpgDims = 300;
 
-    page.drawImage(jpgImage, {
-      x: page.getWidth() / 2 - jpgDims / 2,
-      y: page.getHeight() / 2 - jpgDims / 2 + 250,
-      width: jpgDims,
-      height: jpgDims,
-    });
+    // page.drawImage(jpgImage, {
+    //   x: page.getWidth() / 2 - jpgDims / 2,
+    //   y: page.getHeight() / 2 - jpgDims / 2 + 250,
+    //   width: jpgDims,
+    //   height: jpgDims,
+    // });
 
     const pdfBytes = await pdfDoc.save();
     downloadPdf(pdfBytes, FILE_NAME);
@@ -798,20 +857,18 @@ const createAndDownloadPdf = async () => {
   }
 };
 
-// // Function to trigger the download of the PDF
-// const downloadPdf = (pdfBytes, fileName) => {
-//   const blob = new Blob([pdfBytes], { type: "application/pdf" });
-//   const url = URL.createObjectURL(blob);
-//   const a = document.createElement("a");
-//   a.href = url;
-//   a.download = fileName;
-//   document.body.appendChild(a);
-//   a.click();
-//   document.body.removeChild(a);
-//   URL.revokeObjectURL(url);
-// };
-
-createAndDownloadPdf()
+// Function to trigger the download of the PDF
+const downloadPdf = (pdfBytes, fileName) => {
+  const blob = new Blob([pdfBytes], { type: "application/pdf" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
 </script>
 
 <style lang="scss" scoped>
