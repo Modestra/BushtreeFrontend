@@ -763,75 +763,125 @@ const createAndDownloadPdf = async () => {
       height: jpgDims_pic_gardenMap,
     });
 
-    const page2 = pdfDoc.addPage();
-    page2.drawText(pdfTextToCenter[2], {
-      x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE_H1 + 40,
-      size: FONT_SIZE_H1,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-    page2.drawText(pdfTextToCenter[3], {
-      x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE - 60,
-      size: FONT_SIZE,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
-    page2.drawText(pdfTextToCenter[4], {
-      x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE - 60 - FONT_SIZE,
-      size: FONT_SIZE,
-      font: fontCustom,
-      color: TEXT_COLOR,
-    });
+    // const page2 = pdfDoc.addPage();
+    // page2.drawText(pdfTextToCenter[2], {
+    //   x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
+    //   y: height - 4 * FONT_SIZE_H1 + 40,
+    //   size: FONT_SIZE_H1,
+    //   font: fontCustom,
+    //   color: TEXT_COLOR,
+    // });
+    // page2.drawText(pdfTextToCenter[3], {
+    //   x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
+    //   y: height - 4 * FONT_SIZE - 60,
+    //   size: FONT_SIZE,
+    //   font: fontCustom,
+    //   color: TEXT_COLOR,
+    // });
+    // page2.drawText(pdfTextToCenter[4], {
+    //   x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
+    //   y: height - 4 * FONT_SIZE - 60 - FONT_SIZE,
+    //   size: FONT_SIZE,
+    //   font: fontCustom,
+    //   color: TEXT_COLOR,
+    // });
 
+    // Костыль чтобы сгенерить страницы, так как нельзя двигаться на 2 в цикле генерации
+    function pairArray(a) {
+      var temp = a.slice();
+      var arr = [];
+
+      while (temp.length) {
+        arr.push(temp.splice(0, 2));
+      }
+
+      return arr;
+    }
+    var newArr = pairArray(flowersGeneratedList.value);
+    // console.log(newArr[0]?.[0])
+    // список того что НЕ РАБОТАЕТ ТУТ: итерация на +2 (вызывает ошибку библы pdf), вложенный цикл (вызывает ошибку библы pdf)
     const pages = [];
-    for (let i = 0; i < (flowersGeneratedList.value.length / 2); i++) {
+    for (let i = 0; i < (newArr.length); i++) {
       const page3 = pdfDoc.addPage();
       pages.push(page3);
-      pages[i].drawText(flowersGeneratedList.value[i].name, {
-        x: 150,
+
+      page3.drawText(pdfTextToCenter[2], {
+        x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
+        y: height - 4 * FONT_SIZE_H1 + 60,
+        size: FONT_SIZE_H1,
+        font: fontCustom,
+        color: TEXT_COLOR,
+      });
+      page3.drawText(pdfTextToCenter[3], {
+        x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
+        y: height - 4 * FONT_SIZE - 40,
+        size: FONT_SIZE,
+        font: fontCustom,
+        color: TEXT_COLOR,
+      });
+      page3.drawText(pdfTextToCenter[4], {
+        x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
+        y: height - 4 * FONT_SIZE - 40 - FONT_SIZE,
+        size: FONT_SIZE,
+        font: fontCustom,
+        color: TEXT_COLOR,
+      });
+
+      pages[i].drawText(newArr[i]?.[0].name, {
+        x: 50,
         y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
         size: FONT_SIZE_FLOWERNAME,
         font: fontCustom,
         color: TEXT_COLOR,
+        maxWidth: 228, wordBreaks: [" "]
       });
-      pages[i].drawText(flowersGeneratedList.value[i].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
-        x: 150,
-        y: height - 4 * FONT_SIZE - 300,
+      pages[i].drawText(newArr[i]?.[0].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
+        x: 50,
+        y: height - 4 * FONT_SIZE - 180 - 200,
         size: FONT_SIZE,
         font: fontCustom,
         color: TEXT_COLOR,
-        maxWidth: 500, wordBreaks: [" "]
+        maxWidth: 228, wordBreaks: [" "]
       });
 
-      const url_pic_flower = pic_gardenMap.value.toString();
+      const url_pic_flower = newArr[i]?.[0].storageUrl || img_placeholder;
       const arrayBuffer_pic_flower = await fetch(url_pic_flower).then(res => res.arrayBuffer())
       const jpgImage_pic_flower = await pdfDoc.embedPng(arrayBuffer_pic_flower);
-      const jpgDims_pic_flower = 300;
+      const jpgDims_pic_flower = 200;
       pages[i].drawImage(jpgImage_pic_flower, {
-        x: page.getWidth() / 2 - jpgDims_pic_flower / 2,
-        y: page.getHeight() / 2 - jpgDims_pic_flower / 2 - 150,
+        x: page.getWidth() / 2 - jpgDims_pic_flower / 2 - 150,
+        y: page.getHeight() / 2 - jpgDims_pic_flower / 2 + 110,
         width: jpgDims_pic_flower,
         height: jpgDims_pic_flower,
       });
 
-      // textField.setText([`${flowersGeneratedList.value[1].description.toString()}`].join('\n'))
-      // pages[i].drawText(flowersGeneratedList.value[i + 1].name, {
-      //   x: 250,
-      //   y: height - 4 * FONT_SIZE_FLOWERNAME - 200,
-      //   size: FONT_SIZE_FLOWERNAME,
-      //   font: fontCustom,
-      //   color: TEXT_COLOR,
-      // });
-      // pages[i].drawText(flowersGeneratedList.value[i + 1].description, {
-      //   x: 250,
-      //   y: height - 4 * FONT_SIZE - 400,
-      //   size: FONT_SIZE,
-      //   font: fontCustom,
-      //   color: TEXT_COLOR,
-      // });
+      pages[i].drawText(newArr[i]?.[1].name, {
+        x: 350 - 20,
+        y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+        size: FONT_SIZE_FLOWERNAME,
+        font: fontCustom,
+        color: TEXT_COLOR,
+        maxWidth: 228, wordBreaks: [" "]
+      });
+      pages[i].drawText(newArr[i]?.[1].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
+        x: 350 - 20,
+        y: height - 4 * FONT_SIZE - 180 - 200,
+        size: FONT_SIZE,
+        font: fontCustom,
+        color: TEXT_COLOR,
+        maxWidth: 228, wordBreaks: [" "]
+      });
+
+      const url_pic_flower_1 = newArr[i]?.[1].storageUrl || img_placeholder
+      const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(res => res.arrayBuffer())
+      const jpgImage_pic_flower_1 = await pdfDoc.embedPng(arrayBuffer_pic_flower_1);
+      const jpgDims_pic_flower_1 = 200;
+      pages[i].drawImage(jpgImage_pic_flower_1, {
+        x: page.getWidth() / 2 - jpgDims_pic_flower_1 / 2 + 150 - 20,
+        y: page.getHeight() / 2 - jpgDims_pic_flower_1 / 2 + 110,
+        width: jpgDims_pic_flower_1,
+        height: jpgDims_pic_flower_1,
+      });
     }
 
 
