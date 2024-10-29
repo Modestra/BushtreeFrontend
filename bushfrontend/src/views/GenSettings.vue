@@ -727,7 +727,7 @@ const createAndDownloadPdf = async () => {
     const { width, height } = page.getSize();
     page.drawText(pdfTextToCenter[0], {
       x: (page.getWidth() - width_text1_pdfTextToCenter) / 2,
-      y: height - 4 * FONT_SIZE_H1,
+      y: height - 4 * FONT_SIZE_H1 + 60,
       size: FONT_SIZE_H1,
       font: fontCustom,
       color: TEXT_COLOR,
@@ -736,12 +736,15 @@ const createAndDownloadPdf = async () => {
     const url_pic_garden = pic_garden.value.toString();
     const arrayBuffer_pic_garden = await fetch(url_pic_garden).then(res => res.arrayBuffer())
     const jpgImage_pic_garden = await pdfDoc.embedPng(arrayBuffer_pic_garden);
-    const jpgDims_pic_garden = 300;
+    // const jpgDims_pic_garden = 300;
+    const imageDims = jpgImage_pic_garden.scale(0.3);
     page.drawImage(jpgImage_pic_garden, {
-      x: page.getWidth() / 2 - jpgDims_pic_garden / 2,
-      y: page.getHeight() / 2 - jpgDims_pic_garden / 2 + 200,
-      width: jpgDims_pic_garden,
-      height: jpgDims_pic_garden,
+      x: page.getWidth() / 2 - imageDims.width / 2,
+      y: page.getHeight() / 2 - imageDims.height / 2 + 200,
+      width: imageDims.width,
+      height: imageDims.height,
+      // width: jpgDims_pic_garden,
+      // height: jpgDims_pic_garden,
     });
 
     page.drawText(pdfTextToCenter[1], {
@@ -752,14 +755,19 @@ const createAndDownloadPdf = async () => {
       color: TEXT_COLOR,
     });
 
-    const url_pic_gardenMap = pic_gardenMap.value.toString();
+    const url_pic_gardenMap = await GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+      (resp) => {
+        return resp;
+        // тут потом будет другая функция, чтобы получить карту цветника
+      }
+    );
     const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(res => res.arrayBuffer())
     const jpgImage_pic_gardenMap = await pdfDoc.embedPng(arrayBuffer_pic_gardenMap);
-    const jpgDims_pic_gardenMap = 300;
+    const jpgDims_pic_gardenMap = 220;
     page.drawImage(jpgImage_pic_gardenMap, {
-      x: page.getWidth() / 2 - jpgDims_pic_gardenMap / 2,
-      y: page.getHeight() / 2 - jpgDims_pic_gardenMap / 2 - 150,
-      width: jpgDims_pic_gardenMap,
+      x: page.getWidth() / 2 - 500 / 2,
+      y: page.getHeight() / 2 - jpgDims_pic_gardenMap / 2 - 200,
+      width: 500,
       height: jpgDims_pic_gardenMap,
     });
 
@@ -789,6 +797,13 @@ const createAndDownloadPdf = async () => {
     // Костыль чтобы сгенерить страницы, так как нельзя двигаться на 2 в цикле генерации
     function pairArray(a) {
       var temp = a.slice();
+      let index = 1;
+      temp.map(function (ele) {
+
+        ele.FlowerCurrentIndex = index;
+        index++;
+        return
+      });
       var arr = [];
 
       while (temp.length) {
@@ -798,7 +813,7 @@ const createAndDownloadPdf = async () => {
       return arr;
     }
     var newArr = pairArray(flowersGeneratedList.value);
-    // console.log(newArr[0]?.[0])
+    console.log(newArr)
     // список того что НЕ РАБОТАЕТ ТУТ: итерация на +2 (вызывает ошибку библы pdf), вложенный цикл (вызывает ошибку библы pdf)
     const pages = [];
     for (let i = 0; i < (newArr.length); i++) {
@@ -827,7 +842,7 @@ const createAndDownloadPdf = async () => {
         color: TEXT_COLOR,
       });
 
-      pages[i].drawText(newArr[i]?.[0].name, {
+      pages[i].drawText(newArr[i]?.[0].FlowerCurrentIndex + " " + newArr[i]?.[0].name, {
         x: 50,
         y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
         size: FONT_SIZE_FLOWERNAME,
@@ -855,7 +870,7 @@ const createAndDownloadPdf = async () => {
         height: jpgDims_pic_flower,
       });
 
-      pages[i].drawText(newArr[i]?.[1].name, {
+      pages[i].drawText(newArr[i]?.[1].FlowerCurrentIndex + " " + newArr[i]?.[1].name, {
         x: 350 - 20,
         y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
         size: FONT_SIZE_FLOWERNAME,
