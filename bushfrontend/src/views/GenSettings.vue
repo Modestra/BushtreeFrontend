@@ -381,6 +381,13 @@
         <img class="px-1" src="@assets/img/icon_arrow-up-Bold.svg" alt="icon_arrow-up-Bold" /></Button>
     </div>
   </div>
+  <Dialog v-model:visible="dialogVisibleGen" dismissableMask="true" modal header="Пожалуйста, подождите"
+    style="color:white" :style="{ width: '20vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+    class="block-darkgreen1 p-4 rounded border-2px-bshtr-green1">
+    <p class="m-0">
+      Собираем ваш цветник в PDF!
+    </p>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
@@ -391,6 +398,7 @@ import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
+import Dialog from "primevue/dialog";
 import img_placeholder from "@assets/img/placeholder_noimage.png";
 import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
@@ -400,6 +408,8 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
+
+const dialogVisibleGen = ref(false);
 
 const scrollToTopSmoothly = () => {
   if (typeof window !== "undefined") {
@@ -706,6 +716,7 @@ const pdfTextToCenter = ["Результат", "Карта рассадки", "�
 // Function to create and download a PDF
 const createAndDownloadPdf = async () => {
   loading.value = true;
+  dialogVisibleGen.value = true;
   try {
     // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
     const url2 =
@@ -926,6 +937,7 @@ const createAndDownloadPdf = async () => {
     console.error("Error creating PDF:", error);
   }
   loading.value = false;
+  dialogVisibleGen.value = false;
 };
 
 // Function to trigger the download of the PDF
