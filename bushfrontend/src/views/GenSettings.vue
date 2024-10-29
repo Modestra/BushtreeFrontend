@@ -306,12 +306,16 @@
               severity="Success"
               :loading="loading"
             ></Button> -->
-            <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="switchToGeneration">
+            <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="switchToGeneration">
               Редактировать
-            </button>
-            <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="createAndDownloadPdf">
+            </button> -->
+            <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Редактировать"
+              severity="success" :loading="loading" @click="switchToGeneration"></Button>
+            <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="createAndDownloadPdf">
               Скачать материалы
-            </button>
+            </button> -->
+            <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Скачать материалы"
+              severity="success" :loading="loading" @click="createAndDownloadPdf"></Button>
           </div>
           <div id="results_5_generate">
             <!-- <button
@@ -701,6 +705,7 @@ const pdfTextToCenter = ["Результат", "Карта рассадки", "�
 
 // Function to create and download a PDF
 const createAndDownloadPdf = async () => {
+  loading.value = true;
   try {
     // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
     const url2 =
@@ -920,6 +925,7 @@ const createAndDownloadPdf = async () => {
   } catch (error) {
     console.error("Error creating PDF:", error);
   }
+  loading.value = false;
 };
 
 // Function to trigger the download of the PDF
@@ -998,5 +1004,27 @@ const downloadPdf = (pdfBytes, fileName) => {
 
 .colorPicker_pink {
   background-color: #fe8fc7;
+}
+
+
+.p-button-success {
+  background: transparent;
+  border: 2px solid #08b37e;
+}
+
+.p-button-success:not(:disabled) {
+  background: transparent;
+  border: 2px solid #08b37e;
+  color: var(--p-button-success-hover-color);
+}
+
+.p-button-success:not(:disabled):hover {
+  background: #089e6f;
+  border: 2px solid #089e6f;
+  color: var(--p-button-success-hover-color);
+}
+
+.p-button-label {
+  font-weight: normal;
 }
 </style>
