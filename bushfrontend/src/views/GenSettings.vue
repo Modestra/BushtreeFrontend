@@ -535,23 +535,24 @@ const gardenSubmit = async () => {
           return value;
         })
       );
-      setTimeout(() => {
-        // Code to execute after 2 seconds
-        console.log(
-          GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
-            (resp) => {
-              pic_gardenMap.value = resp;
-              // тут потом будет другая функция, чтобы получить карту цветника
-            }
-          )
-        );
-      }, 2000);
+      // setTimeout(() => {
+      //   // Code to execute after 2 seconds
+
+      // }, 2000);
       console.log(
         GetStoragePicGardenBed(gardenArrayToSend.value.gardens).then(
           (resp) => {
             pic_garden.value = resp;
             // работает корректно, проверено
           })
+      );
+      console.log(
+        GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+          (resp) => {
+            pic_gardenMap.value = resp;
+            // тут потом будет другая функция, чтобы получить карту цветника
+          }
+        )
       );
       // console.log(gardenArrayToSend.value.gardens);
 
@@ -626,7 +627,7 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
 }
 async function GetStoragePicGardenBed(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const storageRef = ref1(storage, `flowerbands/${storageUrl}/1.png`.toString());
+    const storageRef = ref1(storage, `flowerbands/${storageUrl}/${storageUrl}.png`.toString());
     getDownloadURL(storageRef)
       .then((url) => {
         resolve(url);
