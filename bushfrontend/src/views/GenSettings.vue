@@ -571,6 +571,31 @@ const gardenSubmit = async () => {
 import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
 import { getDownloadURL, ref as ref1 } from "firebase/storage";
 
+// НЕ УДАЛЯТЬ! Функция чтобы проверять картинки на базе НЕ УДАЛЯТЬ!
+// async function CountingMissingPics() {
+//   // const missingPics = [];
+
+//   // for (let i = 0; i < 7411; i++) {
+//   //   try {
+//   //     await GetStoragePic(i.toString());
+//   //   } catch (error) {
+//   //     // If there's an error, push the index into missingPics
+//   //     missingPics.push(i);
+//   //   }
+//   // }
+
+//   // console.log(missingPics);
+
+
+//   console.log(
+//     GetStoragePic("25").then(
+//       (resp) => {
+//         console.log("Всё класс");
+//       })
+//   );
+// }
+// CountingMissingPics();
+
 async function GetStoragePic(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const storageRef = ref1(storage, `images/${storageUrl}.png`.toString());
