@@ -7,135 +7,274 @@
         Настройте параметры вашего будущего цветника
       </h1>
       <div>
-        <form @submit.prevent="gardenSubmit" class="gensettings p-5 g-4 rounded border-bshtr-green1">
+        <form
+          @submit.prevent="gardenSubmit"
+          class="gensettings p-5 g-4 rounded border-bshtr-green1"
+        >
           <div id="gen_gensettings_fields" style="max-width: 1000px">
             <div>
               <div class="options-group-1">
                 <h4 class="text-start">Период цветения</h4>
-                <VueSlider ref="slider" v-model="sliderValue" :marks="sliderMarks" :min="5" :max="9"
-                  class="m-5 mt-3 mx-0">
+                <VueSlider
+                  ref="slider"
+                  v-model="sliderValue"
+                  :marks="sliderMarks"
+                  :min="5"
+                  :max="9"
+                  class="m-5 mt-3 mx-0"
+                >
                 </VueSlider>
               </div>
             </div>
             <div class="row">
               <div class="options-group-2 col py-4 d-flex flex-column">
                 <h4 class="text-start text-truncate">Освещённость</h4>
-                <div class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
-                  style="flex-grow: 1">
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2">
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
+                  style="flex-grow: 1"
+                >
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio1"
-                        v-model="formData.light" value="солнце" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio1"
+                        v-model="formData.light"
+                        value="солнце"
+                      />
                     </div>
 
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1"
-                      style="min-width: 100px">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio1"
+                      style="min-width: 100px"
+                    >
                       Солнце
                     </label>
-                    <img class="px-1" src="@assets/img/icon_lightIcon_1_sun.svg" alt="icon_lightIcon_1_sun" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_1_sun.svg"
+                      alt="icon_lightIcon_1_sun"
+                    />
                   </div>
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2">
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio2"
-                        v-model="formData.light" value="полутень" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio2"
+                        v-model="formData.light"
+                        value="полутень"
+                      />
                     </div>
 
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio2"
-                      style="min-width: 100px">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio2"
+                      style="min-width: 100px"
+                    >
                       Полутень
                     </label>
-                    <img class="px-1" src="@assets/img/icon_lightIcon_2_halfsun.svg" alt="icon_lightIcon_2_halfsun" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_2_halfsun.svg"
+                      alt="icon_lightIcon_2_halfsun"
+                    />
                   </div>
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2">
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio3"
-                        v-model="formData.light" value="тень" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="lightnessradio"
+                        id="lightnessradio3"
+                        v-model="formData.light"
+                        value="тень"
+                      />
                     </div>
 
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio3"
-                      style="min-width: 100px">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="lightnessradio3"
+                      style="min-width: 100px"
+                    >
                       Тень
                     </label>
-                    <img class="px-1" src="@assets/img/icon_lightIcon_3_cloudyDay.svg"
-                      alt="icon_lightIcon_3_cloudyDay" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_lightIcon_3_cloudyDay.svg"
+                      alt="icon_lightIcon_3_cloudyDay"
+                    />
                   </div>
                 </div>
               </div>
               <div class="options-group-3 col py-4 d-flex flex-column">
                 <h4 class="text-start text-truncate">Режим полива</h4>
-                <div class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
-                  style="flex-grow: 1">
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
+                <div
+                  class="text-start whiteBlock text-black p-3 rounded border-bshtr-contrastgreen"
+                  style="flex-grow: 1"
+                >
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode1"
-                        v-model="formData.watering" value="частый" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode1"
+                        v-model="formData.watering"
+                        value="частый"
+                      />
                     </div>
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode1">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode1"
+                    >
                       частый
                     </label>
-                    <img class="px-1" src="@assets/img/icon_note_circle.svg" alt="icon_note_circle" v-tooltip.top="{
-                      value: 'ежедневно',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }" type="text" placeholder="Top" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'ежедневно',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
+                    />
                   </div>
 
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode2"
-                        v-model="formData.watering" value="умеренный" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode2"
+                        v-model="formData.watering"
+                        value="умеренный"
+                      />
                     </div>
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode2">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode2"
+                    >
                       умеренный
                     </label>
-                    <img class="px-1" src="@assets/img/icon_note_circle.svg" alt="icon_note_circle" v-tooltip.top="{
-                      value: 'через 2-3 дня',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }" type="text" placeholder="Top" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'через 2-3 дня',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
+                    />
                   </div>
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode3"
-                        v-model="formData.watering" value="редкий" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode3"
+                        v-model="formData.watering"
+                        value="редкий"
+                      />
                     </div>
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode3">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode3"
+                    >
                       редкий
                     </label>
-                    <img class="px-1" src="@assets/img/icon_note_circle.svg" alt="icon_note_circle" v-tooltip.top="{
-                      value: 'раз в неделю',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }" type="text" placeholder="Top" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'раз в неделю',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
+                    />
                   </div>
-                  <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
+                  <div
+                    class="form-check d-flex justify-content-start align-items-center mb-2"
+                    style="max-width: 280px"
+                  >
                     <div>
-                      <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode4"
-                        v-model="formData.watering" value="сухой" />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="wateringMode"
+                        id="wateringMode4"
+                        v-model="formData.watering"
+                        value="сухой"
+                      />
                     </div>
-                    <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode4">
+                    <label
+                      class="form-check-label h5 fw-normal m-0 px-1"
+                      for="wateringMode4"
+                    >
                       сухой
                     </label>
-                    <img class="px-1" src="@assets/img/icon_note_circle.svg" alt="icon_note_circle" v-tooltip.top="{
-                      value: 'опрыскивание',
-                      pt: {
-                        text: 'bg-white text-black',
-                      },
-                    }" type="text" placeholder="Top" />
+                    <img
+                      class="px-1"
+                      src="@assets/img/icon_note_circle.svg"
+                      alt="icon_note_circle"
+                      v-tooltip.top="{
+                        value: 'опрыскивание',
+                        pt: {
+                          text: 'bg-white text-black',
+                        },
+                      }"
+                      type="text"
+                      placeholder="Top"
+                    />
                   </div>
                 </div>
               </div>
-              <div class="options-group-4 col py-4 d-flex flex-column justify-content-between">
+              <div
+                class="options-group-4 col py-4 d-flex flex-column justify-content-between"
+              >
                 <div id="formColors1" class="align-self-start w-100">
                   <h4 class="text-start text-truncate">Основной цвет</h4>
                   <div
-                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around">
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
+                  >
                     <div>
-                      <input v-for="garden in garden_colors" :key="garden"
-                        class="form-check-input form-check-input-black p-3 m-1 rounded" :class="{
+                      <input
+                        v-for="garden in garden_colors"
+                        :key="garden"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
+                        :class="{
                           colorPicker_white: garden === 'белый',
                           colorPicker_red: garden === 'красный',
                           colorPicker_yellow: garden === 'желтый',
@@ -143,22 +282,32 @@
                           colorPicker_blue: garden === 'синий',
                           colorPicker_purple: garden === 'фиолетовый',
                           colorPicker_pink: garden === 'розовый',
-                        }" v-tooltip.top="{
+                        }"
+                        v-tooltip.top="{
                           value: garden,
                           pt: {
                             text: 'bg-white text-black',
                           },
-                        }" type="radio" name="maincolorradio" v-model="formData.color_main" :value="garden" />
+                        }"
+                        type="radio"
+                        name="maincolorradio"
+                        v-model="formData.color_main"
+                        :value="garden"
+                      />
                     </div>
                   </div>
                 </div>
                 <div id="formColors2" class="align-self-end mt-auto w-100">
                   <h4 class="text-start text-truncate">Дополнительный цвет</h4>
                   <div
-                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around">
+                    class="whiteBlock p-2 rounded border-bshtr-contrastgreen d-flex flex-wrap justify-content-around"
+                  >
                     <div>
-                      <input v-for="garden1 in garden_colors" :key="garden1"
-                        class="form-check-input form-check-input-black p-3 m-1 rounded" :class="{
+                      <input
+                        v-for="garden1 in garden_colors"
+                        :key="garden1"
+                        class="form-check-input form-check-input-black p-3 m-1 rounded"
+                        :class="{
                           colorPicker_white: garden1 === 'белый',
                           colorPicker_red: garden1 === 'красный',
                           colorPicker_yellow: garden1 === 'желтый',
@@ -166,13 +315,19 @@
                           colorPicker_blue: garden1 === 'синий',
                           colorPicker_purple: garden1 === 'фиолетовый',
                           colorPicker_pink: garden1 === 'розовый',
-                        }" v-tooltip.top="{
+                        }"
+                        v-tooltip.top="{
                           value: garden1,
                           pt: {
                             text: 'bg-white text-black',
                           },
-                        }" type="radio" name="othercolorradio" aria-label="..." v-model="formData.color_other"
-                        :value="garden1" />
+                        }"
+                        type="radio"
+                        name="othercolorradio"
+                        aria-label="..."
+                        v-model="formData.color_other"
+                        :value="garden1"
+                      />
                     </div>
                   </div>
                 </div>
@@ -185,8 +340,14 @@
               >
                 Сгенерировать
               </button> -->
-              <Button class="px-4 py-2" type="submit" label="Сгенерировать" severity="secondary" :loading="loading"
-                @click="gardenSubmit"></Button>
+              <Button
+                class="px-4 py-2"
+                type="submit"
+                label="Сгенерировать"
+                severity="secondary"
+                :loading="loading"
+                @click="gardenSubmit"
+              ></Button>
             </div>
           </div>
           <div>
@@ -197,11 +358,18 @@
     </div>
   </div>
 
-  <div class="glowBehindBlock-1" v-show="generationDone" id="generationBlock_whenDone">
+  <div
+    class="glowBehindBlock-1"
+    v-show="generationDone"
+    id="generationBlock_whenDone"
+  >
     <div class="container-custom1920 px-4 py-5">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Результат</h1>
       <div class="row">
-        <div class="col gradient-block-1 p-5 rounded border-bshtr-green1 mt-4" id="result_text">
+        <div
+          class="col gradient-block-1 p-5 rounded border-bshtr-green1 mt-4"
+          id="result_text"
+        >
           <div id="results_1" class="pb-4">
             <div class="h3 fw-normal pb-3 text-truncate">Период цветения</div>
             <div class="row">
@@ -224,69 +392,97 @@
               <div class="h3 fw-normal pb-2">Освещённость</div>
 
               <div class="d-flex justify-content-start align-items-center mb-2">
-                <label class="form-check-label h5 fw-normal m-0 px-1 align-text-top" for="lightnessradio1"
-                  style="min-width: 100px">
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1 align-text-top"
+                  for="lightnessradio1"
+                  style="min-width: 100px"
+                >
                   {{ formData.light }}
                 </label>
                 <div style="height: 100%">
-                  <img class="px-1 svgIcon_whiteFill" :src="generationResults_shadow?.[formData.light].icon ||
-                    img_icon_shadow_sun
-                    " alt="icon_lightIcon_1_sun" />
+                  <img
+                    class="px-1 svgIcon_whiteFill"
+                    :src="
+                      generationResults_shadow?.[formData.light].icon ||
+                      img_icon_shadow_sun
+                    "
+                    alt="icon_lightIcon_1_sun"
+                  />
                 </div>
               </div>
             </div>
             <div id="results_2-2" class="col">
               <div class="h3 fw-normal pb-2 text-truncate">Режим полива</div>
-              <div class="d-flex justify-content-start align-items-center mb-2" style="max-width: 224px">
-                <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1" style="min-width: 64px">
+              <div
+                class="d-flex justify-content-start align-items-center mb-2"
+                style="max-width: 224px"
+              >
+                <label
+                  class="form-check-label h5 fw-normal m-0 px-1"
+                  for="lightnessradio1"
+                  style="min-width: 64px"
+                >
                   {{ formData.watering }}
                 </label>
-                <img class="px-1 svgIcon_whiteFill" src="@assets/img/icon_note_circle.svg" alt="icon_lightIcon_1_sun"
+                <img
+                  class="px-1 svgIcon_whiteFill"
+                  src="@assets/img/icon_note_circle.svg"
+                  alt="icon_lightIcon_1_sun"
                   v-tooltip.top="{
                     value:
                       generationResults_watering?.[formData.watering].tooltip,
                     pt: {
                       text: 'bg-white text-black',
                     },
-                  }" />
+                  }"
+                />
               </div>
             </div>
           </div>
           <div id="results_3" class="pb-4">
             <div class="h3 fw-normal pb-2">Цветовая гамма</div>
             <div
-              class="d-inline-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen">
+              class="d-inline-flex align-items-center justify-content-start p-3 py-2 whiteBlock rounded border-bshtr-contrastgreen"
+            >
               <div class="" v-if="formData.color_main != null">
-                <div class="border-dark p-3 m-1 rounded border-bshtr-green1" :class="{
-                  colorPicker_white: formData.color_main === 'белый',
-                  colorPicker_red: formData.color_main === 'красный',
-                  colorPicker_yellow: formData.color_main === 'желтый',
-                  colorPicker_green: formData.color_main === 'зеленый',
-                  colorPicker_blue: formData.color_main === 'синий',
-                  colorPicker_purple: formData.color_main === 'фиолетовый',
-                  colorPicker_pink: formData.color_main === 'розовый',
-                }" v-tooltip.top="{
-                  value: formData.color_main,
-                  pt: {
-                    text: 'bg-white text-black',
-                  },
-                }"></div>
+                <div
+                  class="border-dark p-3 m-1 rounded border-bshtr-green1"
+                  :class="{
+                    colorPicker_white: formData.color_main === 'белый',
+                    colorPicker_red: formData.color_main === 'красный',
+                    colorPicker_yellow: formData.color_main === 'желтый',
+                    colorPicker_green: formData.color_main === 'зеленый',
+                    colorPicker_blue: formData.color_main === 'синий',
+                    colorPicker_purple: formData.color_main === 'фиолетовый',
+                    colorPicker_pink: formData.color_main === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_main,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
               </div>
               <div class="" v-if="formData.color_other != null">
-                <div class="border-dark p-3 m-1 rounded border-bshtr-green1" :class="{
-                  colorPicker_white: formData.color_other === 'белый',
-                  colorPicker_red: formData.color_other === 'красный',
-                  colorPicker_yellow: formData.color_other === 'желтый',
-                  colorPicker_green: formData.color_other === 'зеленый',
-                  colorPicker_blue: formData.color_other === 'синий',
-                  colorPicker_purple: formData.color_other === 'фиолетовый',
-                  colorPicker_pink: formData.color_other === 'розовый',
-                }" v-tooltip.top="{
-                  value: formData.color_other,
-                  pt: {
-                    text: 'bg-white text-black',
-                  },
-                }"></div>
+                <div
+                  class="border-dark p-3 m-1 rounded border-bshtr-green1"
+                  :class="{
+                    colorPicker_white: formData.color_other === 'белый',
+                    colorPicker_red: formData.color_other === 'красный',
+                    colorPicker_yellow: formData.color_other === 'желтый',
+                    colorPicker_green: formData.color_other === 'зеленый',
+                    colorPicker_blue: formData.color_other === 'синий',
+                    colorPicker_purple: formData.color_other === 'фиолетовый',
+                    colorPicker_pink: formData.color_other === 'розовый',
+                  }"
+                  v-tooltip.top="{
+                    value: formData.color_other,
+                    pt: {
+                      text: 'bg-white text-black',
+                    },
+                  }"
+                ></div>
               </div>
             </div>
           </div>
@@ -309,13 +505,25 @@
             <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="switchToGeneration">
               Редактировать
             </button> -->
-            <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Редактировать"
-              severity="success" :loading="loading" @click="switchToGeneration"></Button>
+            <Button
+              class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal"
+              type="submit"
+              label="Редактировать"
+              severity="success"
+              :loading="loading"
+              @click="switchToGeneration"
+            ></Button>
             <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="createAndDownloadPdf">
               Скачать материалы
             </button> -->
-            <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Скачать материалы"
-              severity="success" :loading="loading" @click="createAndDownloadPdf"></Button>
+            <Button
+              class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal"
+              type="submit"
+              label="Скачать материалы"
+              severity="success"
+              :loading="loading"
+              @click="createAndDownloadPdf"
+            ></Button>
           </div>
           <div id="results_5_generate">
             <!-- <button
@@ -323,13 +531,24 @@
             >
               Сгенерировать
             </button> -->
-            <Button class="px-4 py-2" type="submit" label="Сгенерировать" severity="secondary" :loading="loading"
-              @click="gardenSubmit"></Button>
+            <Button
+              class="px-4 py-2"
+              type="submit"
+              label="Сгенерировать"
+              severity="secondary"
+              :loading="loading"
+              @click="gardenSubmit"
+            ></Button>
           </div>
         </div>
         <div class="col mt-4" id="pic_garden" style="min-width: 50%">
-          <img :src="pic_garden" :alt="pic_garden" style="max-height: 100%; width: 100%" class="rounded"
-            id="generated_garden_pic" />
+          <img
+            :src="pic_garden"
+            :alt="pic_garden"
+            style="max-height: 100%; width: 100%"
+            class="rounded"
+            id="generated_garden_pic"
+          />
         </div>
       </div>
     </div>
@@ -337,19 +556,33 @@
       <h1 class="pb-4 mb-5 mr-auto text-center text-uppercase">
         Карта рассадки
       </h1>
-      <div class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
-        style="min-height: 300px; max-height: 500px">
+      <div
+        class="gradient-block-1 rounded p-4 d-flex align-items-center justify-content-center"
+        style="min-height: 300px; max-height: 500px"
+      >
         <div id="pic_gardenMap" style="height: 80%" class="py-4">
-          <img style="height: 300px; width: 100%" :src="pic_gardenMap" :alt="pic_gardenMap" class="rounded"
-            id="generated_garden_mapPic" />
+          <img
+            style="height: 300px; width: 100%"
+            :src="pic_gardenMap"
+            :alt="pic_gardenMap"
+            class="rounded"
+            id="generated_garden_mapPic"
+          />
         </div>
       </div>
     </div>
     <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
-      <div class="d-flex flex-wrap justify-content-center" v-if="flowersGeneratedList.length > 2">
-        <div class="flower-item py-4 px-4" v-for="(flower, index) in flowersGeneratedList" :key="flower"
-          style="max-width: 700px">
+      <div
+        class="d-flex flex-wrap justify-content-center"
+        v-if="flowersGeneratedList.length > 2"
+      >
+        <div
+          class="flower-item py-4 px-4"
+          v-for="(flower, index) in flowersGeneratedList"
+          :key="flower"
+          style="max-width: 700px"
+        >
           <div class="h4 fw-normal px-0">
             {{ index + 1 + ". " }}{{ flower.name }}
           </div>
@@ -358,35 +591,58 @@
               {{
                 flower.description.length > 120
                   ? flower.description.slice(0, 120) +
-                  flower.description
-                    .slice(120)
-                    .split("\.", 3)
-                    .slice(0, 3)
-                    .join(". ") +
-                  "."
+                    flower.description
+                      .slice(120)
+                      .split("\.", 3)
+                      .slice(0, 3)
+                      .join(". ") +
+                    "."
                   : flower.description.split("\.", 4).slice(0, 4).join(". ") +
-                  "."
+                    "."
               }}
             </div>
-            <div class="col ps-4" style="max-width: 300px" :id="`flower-number-${index}`">
-              <img :src="flower.storageUrl || img_placeholder" :alt="flower.id" style="width: 100%" class="rounded" />
+            <div
+              class="col ps-4"
+              style="max-width: 300px"
+              :id="`flower-number-${index}`"
+            >
+              <img
+                :src="flower.storageUrl || img_placeholder"
+                :alt="flower.id"
+                style="width: 100%"
+                class="rounded"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
     <div id="anchorButton_toTop">
-      <Button raised class="px-3 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1" type="submit"
-        label="Наверх" @click="scrollToTopSmoothly">
-        <img class="px-1" src="@assets/img/icon_arrow-up-Bold.svg" alt="icon_arrow-up-Bold" /></Button>
+      <Button
+        raised
+        class="px-3 py-2 floatingButtonAnchor_1 gradient-block-1 border-bshtr-green1"
+        type="submit"
+        label="Наверх"
+        @click="scrollToTopSmoothly"
+      >
+        <img
+          class="px-1"
+          src="@assets/img/icon_arrow-up-Bold.svg"
+          alt="icon_arrow-up-Bold"
+      /></Button>
     </div>
   </div>
-  <Dialog v-model:visible="dialogVisibleGen" dismissableMask="true" modal header="Пожалуйста, подождите"
-    style="color:white" :style="{ width: '20vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-    class="block-darkgreen1 p-4 rounded border-2px-bshtr-green1">
-    <p class="m-0">
-      Собираем ваш цветник в PDF!
-    </p>
+  <Dialog
+    v-model:visible="dialogVisibleGen"
+    dismissableMask="true"
+    modal
+    header="Пожалуйста, подождите"
+    style="color: white"
+    :style="{ width: '20vw' }"
+    :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+    class="block-darkgreen1 p-4 rounded border-2px-bshtr-green1"
+  >
+    <p class="m-0">Собираем ваш цветник в PDF!</p>
   </Dialog>
 </template>
 
@@ -406,7 +662,7 @@ import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.sv
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 const dialogVisibleGen = ref(false);
@@ -540,11 +796,10 @@ const gardenSubmit = async () => {
 
       // }, 2000);
       console.log(
-        GetStoragePicGardenBed(gardenArrayToSend.value.gardens).then(
-          (resp) => {
-            pic_garden.value = resp;
-            // работает корректно, проверено
-          })
+        GetStoragePicGardenBed(gardenArrayToSend.value.gardens).then((resp) => {
+          pic_garden.value = resp;
+          // работает корректно, проверено
+        })
       );
       console.log(
         GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
@@ -570,34 +825,7 @@ const gardenSubmit = async () => {
 
 import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
 import { getDownloadURL, ref as ref1 } from "firebase/storage";
-
-async function GetStoragePic(storageUrl: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const storageRef = ref1(storage, `images/${storageUrl}.png`.toString());
-    getDownloadURL(storageRef)
-      .then((url) => {
-        resolve(url);
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "storage/object-not-found":
-            reject("Не удалось найти изображение. Используется заменитель");
-            break;
-          case "storage/unauthorized":
-            reject(
-              "Пользователь не имеет достаточно прав для получения изображения"
-            );
-            break;
-          case "storage/canceled":
-            reject("Служба Firebase отказала в доступе");
-            break;
-          case "storage/unknown":
-            reject("Неизвестный запрос");
-            break;
-        }
-      });
-  });
-}
+import { GetStoragePic } from "../services/storage";
 async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const storageRef = ref1(storage, `gardens/${storageUrl}.png`.toString());
@@ -627,7 +855,10 @@ async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
 }
 async function GetStoragePicGardenBed(storageUrl: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const storageRef = ref1(storage, `flowerbands/${storageUrl}/${storageUrl}.png`.toString());
+    const storageRef = ref1(
+      storage,
+      `flowerbands/${storageUrl}/${storageUrl}.png`.toString()
+    );
     getDownloadURL(storageRef)
       .then((url) => {
         resolve(url);
@@ -652,8 +883,6 @@ async function GetStoragePicGardenBed(storageUrl: string): Promise<string> {
       });
   });
 }
-
-
 
 // // const createAndDownloadPdf = async () => {
 // //   const pdf = new jsPDF('p', 'pt', 'a4');  // orientation, unit, format
@@ -711,8 +940,13 @@ const FONT_SIZE_H1 = 28;
 const TEXT_COLOR = rgb(0, 0, 0);
 const FILE_NAME = "bushtree-материалы-генерации.pdf";
 
-
-const pdfTextToCenter = ["Результат", "Карта рассадки", "Цветы", "Здесь вы можете посмотреть список цветов и растений,", "которые мы собрали специально для вас."];
+const pdfTextToCenter = [
+  "Результат",
+  "Карта рассадки",
+  "Цветы",
+  "Здесь вы можете посмотреть список цветов и растений,",
+  "которые мы собрали специально для вас.",
+];
 
 // Function to create and download a PDF
 const createAndDownloadPdf = async () => {
@@ -724,9 +958,6 @@ const createAndDownloadPdf = async () => {
       "https://db.onlinewebfonts.com/t/643e59524d730ce6c6f2384eebf945f8.ttf";
     const fontBytes = await fetch(url2).then((res) => res.arrayBuffer());
 
-
-
-
     const pdfDoc = await PDFDocument.create();
     let fontCustom;
     if (fontBytes) {
@@ -734,11 +965,16 @@ const createAndDownloadPdf = async () => {
       await pdfDoc.embedFont(fontBytes);
       fontCustom = await pdfDoc.embedFont(fontBytes);
     }
-    const width_text1_pdfTextToCenter = pdfTextToCenter[0].length * (FONT_SIZE_H1 / 2);
-    const width_text2_pdfTextToCenter = pdfTextToCenter[1].length * (FONT_SIZE_H1 / 2);
-    const width_text3_pdfTextToCenter = pdfTextToCenter[2].length * (FONT_SIZE_H1 / 2);
-    const width_text4_pdfTextToCenter = pdfTextToCenter[3].length * (FONT_SIZE / 2);
-    const width_text5_pdfTextToCenter = pdfTextToCenter[4].length * (FONT_SIZE / 2);
+    const width_text1_pdfTextToCenter =
+      pdfTextToCenter[0].length * (FONT_SIZE_H1 / 2);
+    const width_text2_pdfTextToCenter =
+      pdfTextToCenter[1].length * (FONT_SIZE_H1 / 2);
+    const width_text3_pdfTextToCenter =
+      pdfTextToCenter[2].length * (FONT_SIZE_H1 / 2);
+    const width_text4_pdfTextToCenter =
+      pdfTextToCenter[3].length * (FONT_SIZE / 2);
+    const width_text5_pdfTextToCenter =
+      pdfTextToCenter[4].length * (FONT_SIZE / 2);
     // const fontCustom = await pdfDoc.embedFont(StandardFonts.TimesRoman);
     const page = pdfDoc.addPage();
     const { width, height } = page.getSize();
@@ -751,7 +987,9 @@ const createAndDownloadPdf = async () => {
     });
 
     const url_pic_garden = pic_garden.value.toString();
-    const arrayBuffer_pic_garden = await fetch(url_pic_garden).then(res => res.arrayBuffer())
+    const arrayBuffer_pic_garden = await fetch(url_pic_garden).then((res) =>
+      res.arrayBuffer()
+    );
     const jpgImage_pic_garden = await pdfDoc.embedPng(arrayBuffer_pic_garden);
     // const jpgDims_pic_garden = 300;
     const imageDims = jpgImage_pic_garden.scale(0.3);
@@ -772,14 +1010,18 @@ const createAndDownloadPdf = async () => {
       color: TEXT_COLOR,
     });
 
-    const url_pic_gardenMap = await GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
-      (resp) => {
-        return resp;
-        // тут потом будет другая функция, чтобы получить карту цветника
-      }
+    const url_pic_gardenMap = await GetStoragePicGardensMap(
+      gardenArrayToSend.value.gardens
+    ).then((resp) => {
+      return resp;
+      // тут потом будет другая функция, чтобы получить карту цветника
+    });
+    const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(
+      (res) => res.arrayBuffer()
     );
-    const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(res => res.arrayBuffer())
-    const jpgImage_pic_gardenMap = await pdfDoc.embedPng(arrayBuffer_pic_gardenMap);
+    const jpgImage_pic_gardenMap = await pdfDoc.embedPng(
+      arrayBuffer_pic_gardenMap
+    );
     const jpgDims_pic_gardenMap = 220;
     page.drawImage(jpgImage_pic_gardenMap, {
       x: page.getWidth() / 2 - 500 / 2,
@@ -816,10 +1058,9 @@ const createAndDownloadPdf = async () => {
       var temp = a.slice();
       let index = 1;
       temp.map(function (ele) {
-
         ele.FlowerCurrentIndex = index;
         index++;
-        return
+        return;
       });
       var arr = [];
 
@@ -830,10 +1071,10 @@ const createAndDownloadPdf = async () => {
       return arr;
     }
     var newArr = pairArray(flowersGeneratedList.value);
-    console.log(newArr)
+    console.log(newArr);
     // список того что НЕ РАБОТАЕТ ТУТ: итерация на +2 (вызывает ошибку библы pdf), вложенный цикл (вызывает ошибку библы pdf)
     const pages = [];
-    for (let i = 0; i < (newArr.length); i++) {
+    for (let i = 0; i < newArr.length; i++) {
       const page3 = pdfDoc.addPage();
       pages.push(page3);
 
@@ -859,25 +1100,39 @@ const createAndDownloadPdf = async () => {
         color: TEXT_COLOR,
       });
 
-      pages[i].drawText(newArr[i]?.[0].FlowerCurrentIndex + " " + newArr[i]?.[0].name, {
-        x: 50,
-        y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
-        size: FONT_SIZE_FLOWERNAME,
-        font: fontCustom,
-        color: TEXT_COLOR,
-        maxWidth: 228, wordBreaks: [" "]
-      });
-      pages[i].drawText(newArr[i]?.[0].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
-        x: 50,
-        y: height - 4 * FONT_SIZE - 180 - 200,
-        size: FONT_SIZE,
-        font: fontCustom,
-        color: TEXT_COLOR,
-        maxWidth: 228, wordBreaks: [" "]
-      });
+      pages[i].drawText(
+        newArr[i]?.[0].FlowerCurrentIndex + " " + newArr[i]?.[0].name,
+        {
+          x: 50,
+          y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+          size: FONT_SIZE_FLOWERNAME,
+          font: fontCustom,
+          color: TEXT_COLOR,
+          maxWidth: 228,
+          wordBreaks: [" "],
+        }
+      );
+      pages[i].drawText(
+        newArr[i]?.[0].description
+          .split("\.", 4)
+          .slice(0, 4)
+          .join(". ")
+          .toString(),
+        {
+          x: 50,
+          y: height - 4 * FONT_SIZE - 180 - 200,
+          size: FONT_SIZE,
+          font: fontCustom,
+          color: TEXT_COLOR,
+          maxWidth: 228,
+          wordBreaks: [" "],
+        }
+      );
 
       const url_pic_flower = newArr[i]?.[0].storageUrl || img_placeholder;
-      const arrayBuffer_pic_flower = await fetch(url_pic_flower).then(res => res.arrayBuffer())
+      const arrayBuffer_pic_flower = await fetch(url_pic_flower).then((res) =>
+        res.arrayBuffer()
+      );
       const jpgImage_pic_flower = await pdfDoc.embedPng(arrayBuffer_pic_flower);
       const jpgDims_pic_flower = 200;
       pages[i].drawImage(jpgImage_pic_flower, {
@@ -887,26 +1142,42 @@ const createAndDownloadPdf = async () => {
         height: jpgDims_pic_flower,
       });
 
-      pages[i].drawText(newArr[i]?.[1].FlowerCurrentIndex + " " + newArr[i]?.[1].name, {
-        x: 350 - 20,
-        y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
-        size: FONT_SIZE_FLOWERNAME,
-        font: fontCustom,
-        color: TEXT_COLOR,
-        maxWidth: 228, wordBreaks: [" "]
-      });
-      pages[i].drawText(newArr[i]?.[1].description.split("\.", 4).slice(0, 4).join(". ").toString(), {
-        x: 350 - 20,
-        y: height - 4 * FONT_SIZE - 180 - 200,
-        size: FONT_SIZE,
-        font: fontCustom,
-        color: TEXT_COLOR,
-        maxWidth: 228, wordBreaks: [" "]
-      });
+      pages[i].drawText(
+        newArr[i]?.[1].FlowerCurrentIndex + " " + newArr[i]?.[1].name,
+        {
+          x: 350 - 20,
+          y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+          size: FONT_SIZE_FLOWERNAME,
+          font: fontCustom,
+          color: TEXT_COLOR,
+          maxWidth: 228,
+          wordBreaks: [" "],
+        }
+      );
+      pages[i].drawText(
+        newArr[i]?.[1].description
+          .split("\.", 4)
+          .slice(0, 4)
+          .join(". ")
+          .toString(),
+        {
+          x: 350 - 20,
+          y: height - 4 * FONT_SIZE - 180 - 200,
+          size: FONT_SIZE,
+          font: fontCustom,
+          color: TEXT_COLOR,
+          maxWidth: 228,
+          wordBreaks: [" "],
+        }
+      );
 
-      const url_pic_flower_1 = newArr[i]?.[1].storageUrl || img_placeholder
-      const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(res => res.arrayBuffer())
-      const jpgImage_pic_flower_1 = await pdfDoc.embedPng(arrayBuffer_pic_flower_1);
+      const url_pic_flower_1 = newArr[i]?.[1].storageUrl || img_placeholder;
+      const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(
+        (res) => res.arrayBuffer()
+      );
+      const jpgImage_pic_flower_1 = await pdfDoc.embedPng(
+        arrayBuffer_pic_flower_1
+      );
       const jpgDims_pic_flower_1 = 200;
       pages[i].drawImage(jpgImage_pic_flower_1, {
         x: page.getWidth() / 2 - jpgDims_pic_flower_1 / 2 + 150 - 20,
@@ -915,7 +1186,6 @@ const createAndDownloadPdf = async () => {
         height: jpgDims_pic_flower_1,
       });
     }
-
 
     // const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab"
     // const arrayBuffer = await fetch(url, {
@@ -1018,7 +1288,6 @@ const downloadPdf = (pdfBytes, fileName) => {
 .colorPicker_pink {
   background-color: #fe8fc7;
 }
-
 
 .p-button-success {
   background: transparent;
