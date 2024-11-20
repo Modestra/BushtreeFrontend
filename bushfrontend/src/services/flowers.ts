@@ -9,19 +9,3 @@ export function postGarden(data: Flower) {
     },
   });
 }
-// //Отправить данные цветника пользователя
-// export function postGarden(data: Garden) {
-//   return new Promise((resolve, reject) => {
-//     const result = HTTP.post("/gardens/create", data, {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((resp) => {
-//         resolve(resp);
-//       })
-//       .catch((error) => {
-//         reject(error);
-//       });
-//   });
-// }
