@@ -1,12 +1,12 @@
 export interface Flower {
   name: string;
   description: string;
-  frost_resistance_zone: number;
+  frost_resistance_zone: string;
   light: string;
   watering: string;
   color_main: string;
   color_other: string;
-  period_bloosom_start: number;
-  period_bloosom_end: number;
+  period_bloosom_start: string;
+  period_bloosom_end: string;
 }
 export interface FlowersResponce {}

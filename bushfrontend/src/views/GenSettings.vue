@@ -404,8 +404,9 @@ import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.sv
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
+import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта. эти не удалять
+import { getDownloadURL, ref as ref1 } from "firebase/storage";
+import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "../services/storage";
 
 const dialogVisibleGen = ref(false);
 
@@ -457,15 +458,13 @@ const garden_colors = [
 ];
 
 const formData: Ref<Flower> = ref({
-  name: "",
-  description: "",
-  frost_resistance_zone: 1,
+  frost_resistance_zone: "1",
   light: "солнце",
   watering: "частый",
   color_main: "белый",
   color_other: "белый",
-  period_bloosom_start: sliderValue.value[0],
-  period_bloosom_end: sliderValue.value[1],
+  period_bloosom_start: sliderValue.value[0].toString(),
+  period_bloosom_end: sliderValue.value[1].toString(),
 });
 
 const generationResults_shadow = ref({
@@ -542,13 +541,14 @@ const getSliceCount = (gardenID) => { // сейф-функция для кол-�
   } else if (sliceCounts.sliceTo13.includes(gardenID)) {
     return 13;
   }
-  return flowersGeneratedList.value.length; // Return the full length if no condition matches
+  return flowersGeneratedList.value.length; // Вернуть целиком если нету обрезки подходящего кол-ва
 };
 
 const gardenSubmit = async () => {
   // при нажатии кнопки генерации
   loading.value = true;
   postGarden(formData.value).then((resp) => {
+    console.log(1);
     loading.value = false;
     scrollToTopSmoothly();
     generationDone.value = true;
@@ -587,129 +587,9 @@ const gardenSubmit = async () => {
           }
         )
       );
-      // console.log(gardenArrayToSend.value.gardens);
-
-      // console.log(
-      //   GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
-      //     (resp) => {
-      //       pic_gardenMap.value = resp;
-      //       // тут потом будет другая функция, чтобы получить карту цветника
-      //     }
-      //   )
-      // );
     });
   });
 };
-
-import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
-import { getDownloadURL, ref as ref1 } from "firebase/storage";
-import { GetStoragePic } from "../services/storage";
-async function GetStoragePicGardensMap(storageUrl: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const storageRef = ref1(storage, `gardens/${storageUrl}.png`.toString());
-    getDownloadURL(storageRef)
-      .then((url) => {
-        resolve(url);
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "storage/object-not-found":
-            reject("Не удалось найти изображение. Используется заменитель");
-            break;
-          case "storage/unauthorized":
-            reject(
-              "Пользователь не имеет достаточно прав для получения изображения"
-            );
-            break;
-          case "storage/canceled":
-            reject("Служба Firebase отказала в доступе");
-            break;
-          case "storage/unknown":
-            reject("Неизвестный запрос");
-            break;
-        }
-      });
-  });
-}
-async function GetStoragePicGardenBed(storageUrl: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const storageRef = ref1(
-      storage,
-      `flowerbands/${storageUrl}/${storageUrl}.png`.toString()
-    );
-    getDownloadURL(storageRef)
-      .then((url) => {
-        resolve(url);
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "storage/object-not-found":
-            reject("Не удалось найти изображение. Используется заменитель");
-            break;
-          case "storage/unauthorized":
-            reject(
-              "Пользователь не имеет достаточно прав для получения изображения"
-            );
-            break;
-          case "storage/canceled":
-            reject("Служба Firebase отказала в доступе");
-            break;
-          case "storage/unknown":
-            reject("Неизвестный запрос");
-            break;
-        }
-      });
-  });
-}
-
-// // const createAndDownloadPdf = async () => {
-// //   const pdf = new jsPDF('p', 'pt', 'a4');  // orientation, unit, format
-
-// //   const width = pdf.internal.pageSize.getWidth();
-// //   const height = pdf.internal.pageSize.getHeight();
-// //   const data = document.getElementById('generated_garden_pic');
-// //   // console.log(data);
-
-// //   html2canvas(data).then((canvas) => {
-// //     // Few necessary setting options
-// //     const imgWidth = 208;
-// //     const pageHeight = 295;
-// //     const imgHeight = canvas.height * imgWidth / canvas.width;
-// //     const heightLeft = imgHeight;
-
-// //     const contentDataURL = canvas.toDataURL('image/png');
-// //     const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-// //     const position = 0;
-// //     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-// //     pdf.save('ikismail.pdf'); // Generated PDF
-// //   });
-// // }
-// const createAndDownloadPdf = async () => {
-//   const pdf = new jsPDF('p', 'pt', 'a4');  // orientation, unit, format
-
-//   var htmlElement = document.getElementById('generated_garden_pic');
-//   // you need to load html2canvas (and dompurify if you pass a string to html)
-//   const opt = {
-//     callback: function (pdf) {
-//       pdf.save("Test.pdf");
-//       // to open the generated PDF in browser window
-//       // window.open(pdf.output('bloburl'));
-//     },
-//     margin: [72, 72, 72, 72],
-//     autoPaging: 'text',
-//     html2canvas: {
-//       allowTaint: true,
-//       dpi: 300,
-//       letterRendering: true,
-//       logging: false,
-//       scale: .8
-//     }
-//   };
-
-//   pdf.html(htmlElement, opt);
-// }
-
-// createAndDownloadPdf()
 
 // Constants
 const FONT_SIZE = 14;
@@ -807,29 +687,6 @@ const createAndDownloadPdf = async () => {
       width: 500,
       height: jpgDims_pic_gardenMap,
     });
-
-    // const page2 = pdfDoc.addPage();
-    // page2.drawText(pdfTextToCenter[2], {
-    //   x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
-    //   y: height - 4 * FONT_SIZE_H1 + 40,
-    //   size: FONT_SIZE_H1,
-    //   font: fontCustom,
-    //   color: TEXT_COLOR,
-    // });
-    // page2.drawText(pdfTextToCenter[3], {
-    //   x: (page.getWidth() - width_text4_pdfTextToCenter) / 2,
-    //   y: height - 4 * FONT_SIZE - 60,
-    //   size: FONT_SIZE,
-    //   font: fontCustom,
-    //   color: TEXT_COLOR,
-    // });
-    // page2.drawText(pdfTextToCenter[4], {
-    //   x: (page.getWidth() - width_text5_pdfTextToCenter) / 2,
-    //   y: height - 4 * FONT_SIZE - 60 - FONT_SIZE,
-    //   size: FONT_SIZE,
-    //   font: fontCustom,
-    //   color: TEXT_COLOR,
-    // });
 
     // Костыль чтобы сгенерить страницы, так как нельзя двигаться на 2 в цикле генерации
     function pairArray(a) {
@@ -964,21 +821,6 @@ const createAndDownloadPdf = async () => {
         height: jpgDims_pic_flower_1,
       });
     }
-
-    // const url = "https://firebasestorage.googleapis.com/v0/b/bushtree-9423e.appspot.com/o/images%2F1319.png?alt=media&token=3458c61c-62e5-4956-a4eb-faacae240aab"
-    // const arrayBuffer = await fetch(url, {
-    //   headers: { // забавный факт - с этими заголовками не работают даже картинки из примеров, хотя без них они загружаются P S ЗАСТАВИЛИ РАБОТАТЬ - проблема была на стороне Firestore, для бакета нужно прописать cors
-    //   },
-    // }).then(res => res.arrayBuffer())
-    // const jpgImage = await pdfDoc.embedPng(arrayBuffer);
-    // const jpgDims = 300;
-
-    // page.drawImage(jpgImage, {
-    //   x: page.getWidth() / 2 - jpgDims / 2,
-    //   y: page.getHeight() / 2 - jpgDims / 2 + 250,
-    //   width: jpgDims,
-    //   height: jpgDims,
-    // });
 
     const pdfBytes = await pdfDoc.save();
     downloadPdf(pdfBytes, FILE_NAME);
