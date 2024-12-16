@@ -5,6 +5,12 @@ import {
   GetStoragePicGardenBed,
   GetStoragePicGardensMap,
 } from "../firebase/getPicsFromFirebase";
+import { ref } from "vue";
+import img_placeholder from "@assets/img/placeholder_noimage.png";
+
+import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
+const pic_garden = ref(img_flowerBedPlaceholder);
+const pic_gardenMap = ref(img_placeholder);
 
 // Constants
 const FONT_SIZE = 14;
@@ -22,9 +28,12 @@ const pdfTextToCenter = [
 ];
 
 // Function to create and download a PDF
-export const createAndDownloadPdf = async () => {
-  loading.value = true;
-  dialogVisibleGen.value = true;
+export const createAndDownloadPdf = async (
+  gardenArrayToSend1,
+  flowersGeneratedList1
+) => {
+  // loading.value = true;
+  // dialogVisibleGen.value = true;
   try {
     // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
     const url2 =
@@ -84,7 +93,7 @@ export const createAndDownloadPdf = async () => {
     });
 
     const url_pic_gardenMap = await GetStoragePicGardensMap(
-      gardenArrayToSend.value.gardens
+      gardenArrayToSend1
     ).then((resp) => {
       return resp;
       // тут потом будет другая функция, чтобы получить карту цветника
@@ -120,7 +129,7 @@ export const createAndDownloadPdf = async () => {
 
       return arr;
     }
-    var newArr = pairArray(flowersGeneratedList.value);
+    var newArr = pairArray(flowersGeneratedList1);
     console.log(newArr);
     // список того что НЕ РАБОТАЕТ ТУТ: итерация на +2 (вызывает ошибку библы pdf), вложенный цикл (вызывает ошибку библы pdf)
     const pages = [];
@@ -242,8 +251,8 @@ export const createAndDownloadPdf = async () => {
   } catch (error) {
     console.error("Error creating PDF:", error);
   }
-  loading.value = false;
-  dialogVisibleGen.value = false;
+  // loading.value = false;
+  // dialogVisibleGen.value = false;
 };
 
 // Function to trigger the download of the PDF
