@@ -17,6 +17,9 @@ app.mount("#app");
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
+    options: {
+      darkModeSelector: ".my-app-dark", // я не знаю как тут работают темные темы, но эта опция выключает дефолтный дарк мод PrimeVue
+    },
   },
 });
 

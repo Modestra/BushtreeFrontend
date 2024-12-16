@@ -25,7 +25,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio1"
-                        v-model="formData.light" value="солнце" />
+                        v-model="formDataOld.light" value="солнце" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1"
@@ -37,7 +37,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio2"
-                        v-model="formData.light" value="полутень" />
+                        v-model="formDataOld.light" value="полутень" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio2"
@@ -49,7 +49,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio3"
-                        v-model="formData.light" value="тень" />
+                        v-model="formDataOld.light" value="тень" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio3"
@@ -68,7 +68,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode1"
-                        v-model="formData.watering" value="частый" />
+                        v-model="formDataOld.watering" value="частый" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode1">
                       частый
@@ -84,7 +84,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode2"
-                        v-model="formData.watering" value="умеренный" />
+                        v-model="formDataOld.watering" value="умеренный" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode2">
                       умеренный
@@ -99,7 +99,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode3"
-                        v-model="formData.watering" value="редкий" />
+                        v-model="formDataOld.watering" value="редкий" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode3">
                       редкий
@@ -114,7 +114,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode4"
-                        v-model="formData.watering" value="сухой" />
+                        v-model="formDataOld.watering" value="сухой" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode4">
                       сухой
@@ -208,13 +208,13 @@
               <div class="col">
                 <div class="h5 fw-normal">Начало:</div>
                 <div class="h6 fw-normal">
-                  {{ sliderMarks[formData.period_bloosom_start].label }}
+                  {{ sliderMarks[formDataOld.period_bloosom_start].label }}
                 </div>
               </div>
               <div class="col">
                 <div class="h5 fw-normal">Конец:</div>
                 <div class="h6 fw-normal">
-                  {{ sliderMarks[formData.period_bloosom_end].label }}
+                  {{ sliderMarks[formDataOld.period_bloosom_end].label }}
                 </div>
               </div>
             </div>
@@ -226,10 +226,10 @@
               <div class="d-flex justify-content-start align-items-center mb-2">
                 <label class="form-check-label h5 fw-normal m-0 px-1 align-text-top" for="lightnessradio1"
                   style="min-width: 100px">
-                  {{ formData.light }}
+                  {{ formDataOld.light }}
                 </label>
                 <div style="height: 100%">
-                  <img class="px-1 svgIcon_whiteFill" :src="generationResults_shadow?.[formData.light].icon ||
+                  <img class="px-1 svgIcon_whiteFill" :src="generationResults_shadow?.[formDataOld.light].icon ||
                     img_icon_shadow_sun
                     " alt="icon_lightIcon_1_sun" />
                 </div>
@@ -239,12 +239,12 @@
               <div class="h3 fw-normal pb-2 text-truncate">Режим полива</div>
               <div class="d-flex justify-content-start align-items-center mb-2" style="max-width: 224px">
                 <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1" style="min-width: 64px">
-                  {{ formData.watering }}
+                  {{ formDataOld.watering }}
                 </label>
                 <img class="px-1 svgIcon_whiteFill" src="@assets/img/icon_note_circle.svg" alt="icon_lightIcon_1_sun"
                   v-tooltip.top="{
                     value:
-                      generationResults_watering?.[formData.watering].tooltip,
+                      generationResults_watering?.[formDataOld.watering].tooltip,
                     pt: {
                       text: 'bg-white text-black',
                     },
@@ -393,7 +393,7 @@ import { Ref, ref } from "vue";
 import { postGarden } from "../services/flowers";
 import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/gardens";
-import { Flower } from "../entities/flower";
+import { Flower, FlowerExcluded } from "../entities/flower";
 import VueSlider from "vue-slider-component";
 import Button from "primevue/button";
 import Dialog from "primevue/dialog";
@@ -404,23 +404,11 @@ import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.sv
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта. эти не удалять
-import { getDownloadURL, ref as ref1 } from "firebase/storage";
-import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "../services/storage";
+import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "../firebase/getPicsFromFirebase";
+import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
+import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 
 const dialogVisibleGen = ref(false);
-
-const scrollToTopSmoothly = () => {
-  if (typeof window !== "undefined") {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth", // Adds smooth scrolling effect
-    });
-  } else {
-    console.error("Window object is not available.");
-  }
-};
 
 const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
 const switchToGeneration = async () => {
@@ -457,14 +445,17 @@ const garden_colors = [
   "розовый",
 ];
 
-const formData: Ref<Flower> = ref({
+const formDataOld: Ref<FlowerExcluded> = ref({ // Оставляю, вдруг завтра опять добавят эти поля. Пока всё это только чтобы форма не ломалась
   frost_resistance_zone: "1",
   light: "солнце",
   watering: "частый",
-  color_main: "белый",
-  color_other: "белый",
   period_bloosom_start: sliderValue.value[0].toString(),
   period_bloosom_end: sliderValue.value[1].toString(),
+})
+
+const formData: Ref<Flower> = ref({
+  color_main: "белый",
+  color_other: "белый",
 });
 
 const generationResults_shadow = ref({
@@ -501,7 +492,7 @@ const generationResults_watering = ref({
 });
 
 const gardenArrayToSend: Ref<Garden> = ref({
-  gardens: "3", // дефолтный цветник если ничо не работает
+  garden_id: "3", // дефолтный цветник если ничо не работает
 });
 let flowersGeneratedList: Ref<any[]> = ref([]);
 
@@ -509,53 +500,19 @@ const loading = ref(false);
 const pic_garden = ref(img_flowerBedPlaceholder);
 const pic_gardenMap = ref(img_placeholder);
 
-const getSliceCount = (gardenID) => { // сейф-функция для кол-ва цветов в соответствии с картой цветника
-  const sliceCounts = {
-    sliceTo3: [4, 29, 32, 44],
-    sliceTo4: [3, 31, 43, 45, 46, 47],
-    sliceTo5: [5, 11, 18, 22, 24, 38, 41, 42],
-    sliceTo6: [1, 6, 10, 19, 23, 28, 30, 36, 37, 40],
-    sliceTo7: [2, 8, 14, 20, 21, 27, 33, 39],
-    sliceTo8: [7, 49, 51],
-    sliceTo9: [35],
-    sliceTo10: [9, 12, 16, 34],
-    sliceTo13: [17]
-  };
-
-  if (sliceCounts.sliceTo3.includes(gardenID)) {
-    return 3;
-  } else if (sliceCounts.sliceTo4.includes(gardenID)) {
-    return 4;
-  } else if (sliceCounts.sliceTo5.includes(gardenID)) {
-    return 5;
-  } else if (sliceCounts.sliceTo6.includes(gardenID)) {
-    return 6;
-  } else if (sliceCounts.sliceTo7.includes(gardenID)) {
-    return 7;
-  } else if (sliceCounts.sliceTo8.includes(gardenID)) {
-    return 8;
-  } else if (sliceCounts.sliceTo9.includes(gardenID)) {
-    return 9;
-  } else if (sliceCounts.sliceTo10.includes(gardenID)) {
-    return 10;
-  } else if (sliceCounts.sliceTo13.includes(gardenID)) {
-    return 13;
-  }
-  return flowersGeneratedList.value.length; // Вернуть целиком если нету обрезки подходящего кол-ва
-};
-
 const gardenSubmit = async () => {
   // при нажатии кнопки генерации
   loading.value = true;
   postGarden(formData.value).then((resp) => {
-    console.log(1);
+    // console.log("Doing something");
     loading.value = false;
     scrollToTopSmoothly();
     generationDone.value = true;
-    gardenArrayToSend.value.gardens = resp.data.gardens[0].toString(); // беру себе первый гарден
+    gardenArrayToSend.value.garden_id = resp.data.gardens[0].toString(); // беру себе первый гарден
     console.log(gardenArrayToSend.value);
-    postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {
-      const sliceCount = getSliceCount(Number(gardenArrayToSend.value.gardens));
+    console.log(gardenArrayToSend.value.garden_id);
+    postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {  // `{"garden_id": "3"}`
+      const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenArrayToSend.value.garden_id));
       flowersGeneratedList.value = resp.data.flowers.slice(0, sliceCount);
       console.log(
         flowersGeneratedList.value.map((value) => {
@@ -574,13 +531,13 @@ const gardenSubmit = async () => {
 
       // }, 2000);
       console.log(
-        GetStoragePicGardenBed(gardenArrayToSend.value.gardens).then((resp) => {
+        GetStoragePicGardenBed(gardenArrayToSend.value.garden_id).then((resp) => {
           pic_garden.value = resp;
           // работает корректно, проверено
         })
       );
       console.log(
-        GetStoragePicGardensMap(gardenArrayToSend.value.gardens).then(
+        GetStoragePicGardensMap(gardenArrayToSend.value.garden_id).then(
           (resp) => {
             pic_gardenMap.value = resp;
             // тут потом будет другая функция, чтобы получить карту цветника

@@ -1,4 +1,4 @@
-import { db, storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
+import { storage } from "@/firebase"; // на удивление работает? хотя пишет ошибку импорта
 import { getDownloadURL, ref as ref1 } from "firebase/storage";
 
 export async function GetStoragePic(storageUrl: string): Promise<string> {

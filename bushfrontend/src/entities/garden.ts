@@ -1,3 +1,3 @@
 export interface Garden {
-  gardens: string;
+  garden_id: string;
 }
