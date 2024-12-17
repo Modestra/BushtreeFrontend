@@ -356,16 +356,7 @@
           <div class="row g-0">
             <div class="col-8 border-top-dotted-4f4f4f py-4">
               {{
-                flower.description.length > 120
-                  ? flower.description.slice(0, 120) +
-                  flower.description
-                    .slice(120)
-                    .split("\.", 3)
-                    .slice(0, 3)
-                    .join(". ") +
-                  "."
-                  : flower.description.split("\.", 4).slice(0, 4).join(". ") +
-                  "."
+                formatDescription(flower.description)
               }}
             </div>
             <div class="col ps-4" style="max-width: 300px" :id="`flower-number-${index}`">
@@ -408,6 +399,7 @@ import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "
 import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
 import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
+import { formatDescription } from '@utils/textRelated';
 
 const dialogVisibleGen = ref(false);
 
@@ -510,6 +502,7 @@ const gardenSubmit = async () => {
     scrollToTopSmoothly();
     generationDone.value = true;
     gardenArrayToSend.value.garden_id = resp.data.gardens[0].toString(); // беру себе первый гарден
+    console.log(resp.data.gardens);
     console.log(gardenArrayToSend.value);
     console.log(gardenArrayToSend.value.garden_id);
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {  // `{"garden_id": "3"}`
@@ -553,9 +546,14 @@ const gardenSubmit = async () => {
 const createAndDownloadPdfWithLoading = async () => {
   loading.value = true;
   dialogVisibleGen.value = true;
-  createAndDownloadPdf(gardenArrayToSend.value.garden_id, flowersGeneratedList.value);
-  loading.value = false;
-  dialogVisibleGen.value = false;
+  try {
+    await createAndDownloadPdf(gardenArrayToSend.value.garden_id, flowersGeneratedList.value);
+  } catch (error) {
+    console.error("Error creating PDF:", error);
+  } finally {
+    loading.value = false;
+    dialogVisibleGen.value = false;
+  }
 };
 </script>
 
