@@ -3,7 +3,7 @@ import { Flower } from "../entities/flower.ts";
 
 //Отправить данные цветника пользователя
 export function postGarden(data: Flower) {
-  return HTTP.post("/gardens/create", data, {
+  return HTTP.post("/flower/create_garden/", data, {
     headers: {
       "Content-Type": "application/json",
     },
