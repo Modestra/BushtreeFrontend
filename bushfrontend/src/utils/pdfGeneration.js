@@ -7,6 +7,7 @@ import {
 } from "../firebase/getPicsFromFirebase";
 import { ref } from "vue";
 import img_placeholder from "@assets/img/placeholder_noimage.png";
+import { formatDescription } from "@utils/textRelated";
 
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 const pic_garden = ref(img_flowerBedPlaceholder);
@@ -68,7 +69,13 @@ export const createAndDownloadPdf = async (
       color: TEXT_COLOR,
     });
 
-    const url_pic_garden = pic_garden.value.toString();
+    // const url_pic_garden = pic_garden.value.toString();
+    const url_pic_garden = await GetStoragePicGardenBed(
+      gardenArrayToSend1
+    ).then((resp) => {
+      return resp;
+      // тут потом будет другая функция, чтобы получить карту цветника
+    });
     const arrayBuffer_pic_garden = await fetch(url_pic_garden).then((res) =>
       res.arrayBuffer()
     );
@@ -172,7 +179,7 @@ export const createAndDownloadPdf = async (
         }
       );
       pages[i].drawText(
-        newArr[i]?.[0].description
+        formatDescription(newArr[i]?.[0].description)
           .split(".", 4)
           .slice(0, 4)
           .join(". ")
@@ -214,7 +221,7 @@ export const createAndDownloadPdf = async (
         }
       );
       pages[i].drawText(
-        newArr[i]?.[1].description
+        formatDescription(newArr[i]?.[1].description)
           .split(".", 4)
           .slice(0, 4)
           .join(". ")
