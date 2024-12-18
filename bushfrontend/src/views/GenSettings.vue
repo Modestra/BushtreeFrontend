@@ -294,7 +294,7 @@
             <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Редактировать"
               severity="success" :loading="loading" @click="switchToGeneration"></Button>
             <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Скачать материалы"
-              :disabled="flowersGeneratedList.length === 0" severity="success" :loading="loading"
+              :disabled="flowersGeneratedList.length === 0 || loading" severity="success" :loading="loading"
               @click="createAndDownloadPdfWithLoading"></Button>
           </div>
           <div id="results_5_generate">
