@@ -291,38 +291,12 @@
             </div>
           </div>
           <div id="results_4_buttons" class="py-4">
-            <!-- <Button
-              class="px-4 py-2"
-              type="submit"
-              label="Редактировать"
-              severity="Success"
-              :loading="loading"
-              @click="switchToGeneration"
-            ></Button>
-            <Button
-              class="px-4 py-2"
-              type="submit"
-              label="Скачать материалы"
-              severity="Success"
-              :loading="loading"
-            ></Button> -->
-            <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="switchToGeneration">
-              Редактировать
-            </button> -->
             <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Редактировать"
               severity="success" :loading="loading" @click="switchToGeneration"></Button>
-            <!-- <button class="btn btn btn-outline-success text-white px-5 py-2 me-3 mb-2" @click="createAndDownloadPdf">
-              Скачать материалы
-            </button> -->
             <Button class="px-4 py-2 btn-outline-success me-2 mb-3 fw-normal" type="submit" label="Скачать материалы"
               severity="success" :loading="loading" @click="createAndDownloadPdfWithLoading"></Button>
           </div>
           <div id="results_5_generate">
-            <!-- <button
-              class="btn btn-outline-success text-black bg-white px-4 py-2"
-            >
-              Сгенерировать
-            </button> -->
             <Button class="px-4 py-2" type="submit" label="Сгенерировать" severity="secondary" :loading="loading"
               @click="gardenSubmit"></Button>
           </div>
@@ -372,7 +346,7 @@
         <img class="px-1" src="@assets/img/icon_arrow-up-Bold.svg" alt="icon_arrow-up-Bold" /></Button>
     </div>
   </div>
-  <Dialog v-model:visible="dialogVisibleGen" dismissableMask="true" modal header="Пожалуйста, подождите"
+  <Dialog v-model:visible="dialogVisibleGen" :dismissableMask="true" modal header="Пожалуйста, подождите"
     style="color: white" :style="{ width: '20vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     class="block-darkgreen1 p-4 rounded border-2px-bshtr-green1">
     <p class="m-0">Собираем ваш цветник в PDF!</p>
@@ -393,8 +367,6 @@ import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import fontkit from "@pdf-lib/fontkit";
 import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "../firebase/getPicsFromFirebase";
 import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
 import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";

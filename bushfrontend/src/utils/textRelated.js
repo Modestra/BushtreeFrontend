@@ -14,8 +14,8 @@ export function formatDescription(description) {
   const cleanedDescription = cleanText(description);
 
   return cleanedDescription.length > 120
-    ? cleanedDescription.slice(0, 120) +
-        cleanedDescription.slice(120).split(".", 3).slice(0, 3).join(". ") +
+    ? cleanedDescription.slice(0, 55) + // 120
+        cleanedDescription.slice(55).split(".", 3).slice(0, 3).join(". ") + // 120
         "."
     : cleanedDescription.split(".", 4).slice(0, 4).join(". ") + ".";
 }

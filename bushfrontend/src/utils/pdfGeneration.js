@@ -24,8 +24,8 @@ const pdfTextToCenter = [
   "Результат",
   "Карта рассадки",
   "Цветы",
-  "Здесь вы можете посмотреть список цветов и растений,",
-  "которые мы собрали специально для вас.",
+  "Здесь вы можете посмотреть список цветов и растений,",
+  "которые мы собрали специально для вас.",
 ];
 
 // Function to create and download a PDF
@@ -33,8 +33,6 @@ export const createAndDownloadPdf = async (
   gardenArrayToSend1,
   flowersGeneratedList1
 ) => {
-  // loading.value = true;
-  // dialogVisibleGen.value = true;
   try {
     // Загружаем шрифт с поддержкой русского языка, в данном случае это Microsoft Sans Serif
     const url2 =
@@ -68,29 +66,6 @@ export const createAndDownloadPdf = async (
       font: fontCustom,
       color: TEXT_COLOR,
     });
-
-    // const url_pic_garden = pic_garden.value.toString();
-    const url_pic_garden = await GetStoragePicGardenBed(
-      gardenArrayToSend1
-    ).then((resp) => {
-      return resp;
-      // тут потом будет другая функция, чтобы получить карту цветника
-    });
-    const arrayBuffer_pic_garden = await fetch(url_pic_garden).then((res) =>
-      res.arrayBuffer()
-    );
-    const jpgImage_pic_garden = await pdfDoc.embedPng(arrayBuffer_pic_garden);
-    // const jpgDims_pic_garden = 300;
-    const imageDims = jpgImage_pic_garden.scale(0.3);
-    page.drawImage(jpgImage_pic_garden, {
-      x: page.getWidth() / 2 - imageDims.width / 2,
-      y: page.getHeight() / 2 - imageDims.height / 2 + 200,
-      width: imageDims.width,
-      height: imageDims.height,
-      // width: jpgDims_pic_garden,
-      // height: jpgDims_pic_garden,
-    });
-
     page.drawText(pdfTextToCenter[1], {
       x: (page.getWidth() - width_text2_pdfTextToCenter) / 2,
       y: height - 4 * FONT_SIZE_H1 - 350,
@@ -99,51 +74,56 @@ export const createAndDownloadPdf = async (
       color: TEXT_COLOR,
     });
 
-    const url_pic_gardenMap = await GetStoragePicGardensMap(
-      gardenArrayToSend1
-    ).then((resp) => {
-      return resp;
-      // тут потом будет другая функция, чтобы получить карту цветника
+    // Получение изображения цветника
+    const url_pic_garden = await GetStoragePicGardenBed(gardenArrayToSend1);
+    const arrayBuffer_pic_garden = await fetch(url_pic_garden).then((res) =>
+      res.arrayBuffer()
+    );
+    const jpgImage_pic_garden = await pdfDoc.embedPng(arrayBuffer_pic_garden);
+    const imageDims = jpgImage_pic_garden.scale(0.4);
+    page.drawImage(jpgImage_pic_garden, {
+      x: page.getWidth() / 2 - imageDims.width / 2,
+      y: page.getHeight() / 2 - imageDims.height / 2 + 200,
+      width: imageDims.width,
+      height: imageDims.height,
     });
+
+    // Получение карты цветника
+    const url_pic_gardenMap = await GetStoragePicGardensMap(gardenArrayToSend1);
     const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(
       (res) => res.arrayBuffer()
     );
     const jpgImage_pic_gardenMap = await pdfDoc.embedPng(
       arrayBuffer_pic_gardenMap
     );
-    const jpgDims_pic_gardenMap = 220;
+
     page.drawImage(jpgImage_pic_gardenMap, {
-      x: page.getWidth() / 2 - 500 / 2,
-      y: page.getHeight() / 2 - jpgDims_pic_gardenMap / 2 - 200,
+      x: page.getWidth() / 2 - 250,
+      y: page.getHeight() / 2 - 320,
       width: 500,
-      height: jpgDims_pic_gardenMap,
+      height: 220,
     });
 
-    // Костыль чтобы сгенерить страницы, так как нельзя двигаться на 2 в цикле генерации
+    // Функция для парного массива
     function pairArray(a) {
       var temp = a.slice();
       let index = 1;
       temp.map(function (ele) {
-        ele.FlowerCurrentIndex = index;
-        index++;
+        ele.FlowerCurrentIndex = index++;
         return;
       });
       var arr = [];
-
       while (temp.length) {
         arr.push(temp.splice(0, 2));
       }
-
       return arr;
     }
+
     var newArr = pairArray(flowersGeneratedList1);
-    console.log(newArr);
-    // список того что НЕ РАБОТАЕТ ТУТ: итерация на +2 (вызывает ошибку библы pdf), вложенный цикл (вызывает ошибку библы pdf)
-    const pages = [];
+
+    // Генерация страниц для каждого цветка
     for (let i = 0; i < newArr.length; i++) {
       const page3 = pdfDoc.addPage();
-      pages.push(page3);
-
       page3.drawText(pdfTextToCenter[2], {
         x: (page.getWidth() - width_text3_pdfTextToCenter) / 2,
         y: height - 4 * FONT_SIZE_H1 + 60,
@@ -165,92 +145,107 @@ export const createAndDownloadPdf = async (
         font: fontCustom,
         color: TEXT_COLOR,
       });
+      // Проверка наличия первого цветка
+      if (newArr[i]?.[0]) {
+        const flowerData1 = newArr[i][0];
 
-      pages[i].drawText(
-        newArr[i]?.[0].FlowerCurrentIndex + " " + newArr[i]?.[0].name,
-        {
-          x: 50,
-          y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
-          size: FONT_SIZE_FLOWERNAME,
-          font: fontCustom,
-          color: TEXT_COLOR,
-          maxWidth: 228,
-          wordBreaks: [" "],
-        }
-      );
-      pages[i].drawText(
-        formatDescription(newArr[i]?.[0].description)
-          .split(".", 4)
-          .slice(0, 4)
-          .join(". ")
-          .toString(),
-        {
-          x: 50,
-          y: height - 4 * FONT_SIZE - 180 - 200,
-          size: FONT_SIZE,
-          font: fontCustom,
-          color: TEXT_COLOR,
-          maxWidth: 228,
-          wordBreaks: [" "],
-        }
-      );
+        page3.drawText(
+          flowerData1.FlowerCurrentIndex + ". " + flowerData1.name,
+          {
+            x: 50,
+            y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+            size: FONT_SIZE_FLOWERNAME,
+            font: fontCustom,
+            color: TEXT_COLOR,
+            maxWidth: 228,
+            wordBreaks: [" "],
+          }
+        );
 
-      const url_pic_flower = newArr[i]?.[0].storageUrl || img_placeholder;
-      const arrayBuffer_pic_flower = await fetch(url_pic_flower).then((res) =>
-        res.arrayBuffer()
-      );
-      const jpgImage_pic_flower = await pdfDoc.embedPng(arrayBuffer_pic_flower);
-      const jpgDims_pic_flower = 200;
-      pages[i].drawImage(jpgImage_pic_flower, {
-        x: page.getWidth() / 2 - jpgDims_pic_flower / 2 - 150,
-        y: page.getHeight() / 2 - jpgDims_pic_flower / 2 + 110,
-        width: jpgDims_pic_flower,
-        height: jpgDims_pic_flower,
-      });
+        page3.drawText(
+          formatDescription(flowerData1.description)
+            .split(".", 4)
+            .slice(0, 4)
+            .join(". "),
+          {
+            x: 50,
+            y: height - 4 * FONT_SIZE - 180 - 200,
+            size: FONT_SIZE,
+            font: fontCustom,
+            color: TEXT_COLOR,
+            maxWidth: 228,
+            wordBreaks: [" "],
+          }
+        );
 
-      pages[i].drawText(
-        newArr[i]?.[1].FlowerCurrentIndex + " " + newArr[i]?.[1].name,
-        {
-          x: 350 - 20,
-          y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
-          size: FONT_SIZE_FLOWERNAME,
-          font: fontCustom,
-          color: TEXT_COLOR,
-          maxWidth: 228,
-          wordBreaks: [" "],
-        }
-      );
-      pages[i].drawText(
-        formatDescription(newArr[i]?.[1].description)
-          .split(".", 4)
-          .slice(0, 4)
-          .join(". ")
-          .toString(),
-        {
-          x: 350 - 20,
-          y: height - 4 * FONT_SIZE - 180 - 200,
-          size: FONT_SIZE,
-          font: fontCustom,
-          color: TEXT_COLOR,
-          maxWidth: 228,
-          wordBreaks: [" "],
-        }
-      );
+        const url_pic_flower_1 = flowerData1.storageUrl || img_placeholder;
+        const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(
+          (res) => res.arrayBuffer()
+        );
+        const jpgImage_pic_flower_1 = await pdfDoc.embedPng(
+          arrayBuffer_pic_flower_1
+        );
 
-      const url_pic_flower_1 = newArr[i]?.[1].storageUrl || img_placeholder;
-      const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(
-        (res) => res.arrayBuffer()
-      );
-      const jpgImage_pic_flower_1 = await pdfDoc.embedPng(
-        arrayBuffer_pic_flower_1
-      );
-      const jpgDims_pic_flower_1 = 200;
-      pages[i].drawImage(jpgImage_pic_flower_1, {
-        x: page.getWidth() / 2 - jpgDims_pic_flower_1 / 2 + 150 - 20,
-        y: page.getHeight() / 2 - jpgDims_pic_flower_1 / 2 + 110,
-        width: jpgDims_pic_flower_1,
-        height: jpgDims_pic_flower_1,
-      });
+        const jpgDims_pic_flower_1 = 200;
+        // Выравнивание изображения первого цветка по центру
+        page3.drawImage(jpgImage_pic_flower_1, {
+          x: (page.getWidth() - jpgDims_pic_flower_1) / 2 - 150, // Центрируем изображение
+          y: page.getHeight() / 2 - jpgDims_pic_flower_1 / 2 + 110,
+          width: jpgDims_pic_flower_1,
+          height: jpgDims_pic_flower_1,
+        });
+      }
+
+      // Проверка наличия второго цветка
+      if (newArr[i]?.[1]) {
+        const flowerData2 = newArr[i][1];
+
+        page3.drawText(
+          flowerData2.FlowerCurrentIndex + ". " + flowerData2.name,
+          {
+            x: 350 - 20,
+            y: height - 4 * FONT_SIZE_FLOWERNAME - 100,
+            size: FONT_SIZE_FLOWERNAME,
+            font: fontCustom,
+            color: TEXT_COLOR,
+            maxWidth: 228,
+            wordBreaks: [" "],
+          }
+        );
+
+        page3.drawText(
+          formatDescription(flowerData2.description)
+            .split(".", 4)
+            .slice(0, 4)
+            .join(". "),
+          {
+            x: 350 - 20,
+            y: height - 4 * FONT_SIZE - 180 - 200,
+            size: FONT_SIZE,
+            font: fontCustom,
+            color: TEXT_COLOR,
+            maxWidth: 228,
+            wordBreaks: [" "],
+          }
+        );
+
+        const url_pic_flower_2 = flowerData2.storageUrl || img_placeholder;
+        const arrayBuffer_pic_flower_2 = await fetch(url_pic_flower_2).then(
+          (res) => res.arrayBuffer()
+        );
+        const jpgImage_pic_flower_2 = await pdfDoc.embedPng(
+          arrayBuffer_pic_flower_2
+        );
+
+        const jpgDims_pic_flower_2 = 200;
+        // Выравнивание изображения второго цветка по центру
+        page3.drawImage(jpgImage_pic_flower_2, {
+          x: (page.getWidth() - jpgDims_pic_flower_2) / 2 + 130, // Центрируем изображение
+          y: page.getHeight() / 2 - jpgDims_pic_flower_2 / 2 + 110,
+          width: jpgDims_pic_flower_2,
+          height: jpgDims_pic_flower_2,
+        });
+      }
     }
 
     const pdfBytes = await pdfDoc.save();
