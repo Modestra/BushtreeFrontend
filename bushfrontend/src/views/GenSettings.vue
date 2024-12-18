@@ -400,6 +400,7 @@ import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
 import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
 import { formatDescription } from '@utils/textRelated';
+import { getRandomInt } from '@utils/randomGen';
 
 const dialogVisibleGen = ref(false);
 
@@ -501,7 +502,7 @@ const gardenSubmit = async () => {
     loading.value = false;
     scrollToTopSmoothly();
     generationDone.value = true;
-    gardenArrayToSend.value.garden_id = resp.data.gardens[0].toString(); // беру себе первый гарден
+    gardenArrayToSend.value.garden_id = resp.data.gardens[getRandomInt(3)].toString(); // беру себе первый гарден
     console.log(resp.data.gardens);
     console.log(gardenArrayToSend.value);
     console.log(gardenArrayToSend.value.garden_id);
