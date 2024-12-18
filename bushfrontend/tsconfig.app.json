@@ -23,7 +23,13 @@
     /* Added stuff */
     "allowJs": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/assets/**/*",
+    "src/utils/**/*"
+  ],
   "exclude": [
     "node_modules",
     "./node_modules",
