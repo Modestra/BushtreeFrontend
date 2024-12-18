@@ -18,6 +18,7 @@ declare module "@utils/pdfGeneration" {
 declare module "@utils/textRelated" {
   const value: any;
   export const formatDescription: typeof value;
+  export const formatName: typeof value;
 }
 
 declare module "@utils/randomGen" {

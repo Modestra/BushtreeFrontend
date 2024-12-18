@@ -326,7 +326,7 @@
         <div class="flower-item py-4 px-4" v-for="(flower, index) in flowersGeneratedList" :key="flower"
           style="max-width: 700px">
           <div class="h4 fw-normal px-0">
-            {{ index + 1 + ". " }}{{ flower.name }}
+            {{ index + 1 + ". " }}{{ formatName(flower.name) }}
           </div>
           <div class="row g-0">
             <div class="col-8 border-top-dotted-4f4f4f py-4">
@@ -372,7 +372,7 @@ import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "
 import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
 import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
-import { formatDescription } from '@utils/textRelated';
+import { formatDescription, formatName } from '@utils/textRelated';
 import { getRandomInt } from '@utils/randomGen';
 
 const dialogVisibleGen = ref(false);
