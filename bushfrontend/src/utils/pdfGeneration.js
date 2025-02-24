@@ -169,7 +169,7 @@ export const createAndDownloadPdf = async (
             .join(". "),
           {
             x: 50,
-            y: height - 4 * FONT_SIZE - 180 - 200,
+            y: height - 4 * FONT_SIZE - 180 - 200 - 20,
             size: FONT_SIZE,
             font: fontCustom,
             color: TEXT_COLOR,
@@ -220,7 +220,7 @@ export const createAndDownloadPdf = async (
             .join(". "),
           {
             x: 350 - 20,
-            y: height - 4 * FONT_SIZE - 180 - 200,
+            y: height - 4 * FONT_SIZE - 180 - 200 - 20,
             size: FONT_SIZE,
             font: fontCustom,
             color: TEXT_COLOR,

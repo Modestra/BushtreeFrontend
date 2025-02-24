@@ -128,8 +128,10 @@ const dialogVisible = ref(false);
                     Дизайн и разработка
                   </p>
                 </div>
-                <div class="col">
-                  <img src="@assets/img/logo-devBy.svg" class="col" style="width: 100%" />
+                <div class="col" style="min-width: 140px;">
+                  <div> <a target="_blank" href="https://союз.рф/"><img class="col" style="width: 100%"
+                        src="@assets/img/logo-devBy.svg" /></a></div>
+
                 </div>
               </div>
             </div>

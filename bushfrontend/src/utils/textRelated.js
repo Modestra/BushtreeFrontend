@@ -9,6 +9,22 @@ export function cleanText(description) {
     .replace(/\s*\.(?=\S)/g, ".") // Удаляем пробел перед точкой
     .replace(/\.(?!\s)/g, ". "); // Добавляем пробел после точки, если его нет
 }
+export function cleanTextWithoutDots(description) {
+  return description
+    .replace(/^['"`]|['"`]$/g, "") // Удаляем кавычки в начале и конце
+    .replace(/\s+/g, " ") // Удаляем лишние пробелы
+    .replace(/\s*-\s*/g, " - ") // Пробелы перед и после тире
+    .replace(/\s*,/g, ",") // Удаляем пробел перед запятой
+    .replace(/,(?!\s)/g, ", ") // Добавляем пробел после запятой, если его нет
+    .replace(/\s*\.(?=\S)/g, ".") // Удаляем пробел перед точкой
+    .replace(/\.$/, ""); // Удаляем точку в конце строки
+}
+
+export function formatName(name) {
+  const cleanedName = cleanTextWithoutDots(name);
+
+  return cleanedName;
+}
 
 export function formatDescription(description) {
   const cleanedDescription = cleanText(description);
