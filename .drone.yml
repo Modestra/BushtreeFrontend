@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build-and-test
+    image: node:18
+    commands:
+      - npm install
+      - npm test
