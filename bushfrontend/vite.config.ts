@@ -54,6 +54,10 @@ export default defineConfig({
           new URL("../../node_modules", import.meta.url)
         ),
       },
+      {
+        find: "@utils",
+        replacement: fileURLToPath(new URL("./src/utils", import.meta.url)),
+      },
     ],
   },
   css: {
