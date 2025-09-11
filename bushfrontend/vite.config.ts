@@ -9,8 +9,8 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        //changeOrigin: true,
-        target: "http://localhost:8000",
+        target: "http://backend.bushtree.ru/",
+        rewrite: path => path.replace(/^\/api/, ''),
         changeOrigin: false,
         secure: false,
       },
