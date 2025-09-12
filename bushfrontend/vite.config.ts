@@ -10,7 +10,6 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "http://backend.bushtree.ru/",
-        rewrite: path => path.replace(/^\/api/, ''),
         changeOrigin: true,
         secure: false,
       },
