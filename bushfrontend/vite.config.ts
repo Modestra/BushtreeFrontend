@@ -11,7 +11,7 @@ export default defineConfig({
       "/api": {
         target: "http://backend.bushtree.ru/",
         rewrite: path => path.replace(/^\/api/, ''),
-        changeOrigin: false,
+        changeOrigin: true,
         secure: false,
       },
     },
