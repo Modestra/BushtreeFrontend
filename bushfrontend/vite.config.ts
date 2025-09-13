@@ -9,9 +9,8 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://backend.bushtree.ru/",
-        changeOrigin: true,
-        secure: false,
+        target: "http://45.12.74.181:8000/",
+        changeOrigin: true
       },
     },
   },
