@@ -10,7 +10,10 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "http://45.12.74.181:8000/",
-        changeOrigin: true
+        changeOrigin: true,
+        headers:{
+          "Access-Control-Allow-Origin": "*"
+        }
       },
     },
   },
