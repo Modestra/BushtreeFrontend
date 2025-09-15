@@ -5,11 +5,12 @@ import { fileURLToPath, URL } from "url";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  base: '/',
   server: {
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://45.12.74.181:8000/",
+        target: "http://backend.bushtree.ru/",
         changeOrigin: true,
         headers:{
           "Access-Control-Allow-Origin": "*"
