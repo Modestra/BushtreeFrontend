@@ -56,7 +56,6 @@ export const createAndDownloadPdf = async (
       pdfTextToCenter[3].length * (FONT_SIZE / 2);
     const width_text5_pdfTextToCenter =
       pdfTextToCenter[4].length * (FONT_SIZE / 2);
-    // const fontCustom = await pdfDoc.embedFont(StandardFonts.TimesRoman);
     const page = pdfDoc.addPage();
     const { width, height } = page.getSize();
     page.drawText(pdfTextToCenter[0], {

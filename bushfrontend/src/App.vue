@@ -1,41 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-// import { db, storage } from "@/firebase";
-// // import { collection, getDocs, query } from "firebase/firestore";
-// import { getStorage, getDownloadURL, ref as ref1 } from "firebase/storage";
 import Dialog from "primevue/dialog";
-
-// onMounted(async () => {
-//   const starsRef = ref1(storage, "images/0.png"); // Потом это будет юзаться чтобы от сервера получить номера картинок, а с storage забирать их по номерам
-//   const flowers = [];
-//   // Get the download URL
-//   getDownloadURL(starsRef)
-//     .then((url) => {
-//       console.log(url);
-//       // Insert url into an <img> tag to "download"
-//     })
-//     .catch((error) => {
-//       // A full list of error codes is available at
-//       // https://firebase.google.com/docs/storage/web/handle-errors
-//       switch (error.code) {
-//         case "storage/object-not-found":
-//           // File doesn't exist
-//           break;
-//         case "storage/unauthorized":
-//           // User doesn't have permission to access the object
-//           break;
-//         case "storage/canceled":
-//           // User canceled the upload
-//           break;
-
-//         // ...
-
-//         case "storage/unknown":
-//           // Unknown error occurred, inspect the server response
-//           break;
-//       }
-//     });
-// });
 
 const dialogVisible = ref(false);
 </script>
@@ -46,7 +11,7 @@ const dialogVisible = ref(false);
     <nav class="navbar navbar-expand-md fixed-top my-1">
       <div class="container glass-effect-1 g-4 py-2 d-flex">
         <RouterLink class="navbar-brand" :to="{ name: 'home', hash: '#landing_start' }" active-class="active"><img
-            src="@assets/logo.svg" class="" /></RouterLink>
+            src="@assets/logo.svg" /></RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -168,7 +133,6 @@ const dialogVisible = ref(false);
 }
 
 .glass-effect-1 {
-  /* From https://css.glass */
   background: $bshtr-green-1-opas25;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

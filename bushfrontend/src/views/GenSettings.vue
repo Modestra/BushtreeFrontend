@@ -179,12 +179,6 @@
               </div>
             </div>
             <div class="mt-5">
-              <!-- <button
-                class="btn btn-outline-success text-black bg-white px-4 py-2"
-                type="submit"
-              >
-                Сгенерировать
-              </button> -->
               <Button class="px-4 py-2" type="submit" label="Сгенерировать" severity="secondary" :loading="loading"
                 @click="gardenSubmit"></Button>
             </div>
@@ -335,7 +329,7 @@
               }}
             </div>
             <div class="col ps-4" style="max-width: 300px" :id="`flower-number-${index}`">
-              <img :src="flower.storageUrl || img_placeholder" :alt="flower.id" style="width: 100%" class="rounded" />
+              <img :src="generateImageList(flower.id)" :alt="flower.id" style="width: 100%" class="rounded" />
             </div>
           </div>
         </div>
@@ -368,22 +362,22 @@ import img_icon_shadow_sun from "@assets/img/icon_lightIcon_1_sun.svg";
 import img_icon_shadow_halfsun from "@assets/img/icon_lightIcon_2_halfsun.svg";
 import img_icon_shadow_cloudyDay from "@assets/img/icon_lightIcon_3_cloudyDay.svg";
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
-import { GetStoragePic, GetStoragePicGardenBed, GetStoragePicGardensMap } from "../firebase/getPicsFromFirebase";
 import { scrollToTopSmoothly } from "@utils/scrollToFunctions";
 import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
 import { formatDescription, formatName } from '@utils/textRelated';
 import { getRandomInt } from '@utils/randomGen';
-
-const dialogVisibleGen = ref(false);
-
-const generationDone = ref(false); // для скрытия окна с формой и показа результатов генерации
-const switchToGeneration = async () => {
-  generationDone.value = !generationDone.value;
-};
+import {GardensGenerated, FlowerGenerated} from '../entities/gensettings.interface';
 
 const sliderValue = ref([6, 8]);
 defineExpose({ sliderValue });
+
+const dialogVisibleGen = ref(false);
+
+const generationDone = ref(false);
+const switchToGeneration = async () => {
+  generationDone.value = !generationDone.value;
+};
 const sliderMarks = ref({
   5: {
     label: "май",
@@ -412,7 +406,7 @@ const garden_colors = [
   "розовый",
 ];
 
-const formDataOld: Ref<FlowerExcluded> = ref({ // Оставляю, вдруг завтра опять добавят эти поля. Пока всё это только чтобы форма не ломалась
+const formDataOld: Ref<FlowerExcluded> = ref<FlowerExcluded>({
   frost_resistance_zone: "1",
   light: "солнце",
   watering: "частый",
@@ -420,7 +414,7 @@ const formDataOld: Ref<FlowerExcluded> = ref({ // Оставляю, вдруг �
   period_bloosom_end: sliderValue.value[1].toString(),
 })
 
-const formData: Ref<Flower> = ref({
+const formData: Ref<Flower> = ref<Flower>({
   color_main: "белый",
   color_other: "белый",
 });
@@ -461,7 +455,7 @@ const generationResults_watering = ref({
 const gardenArrayToSend: Ref<Garden> = ref({
   garden_id: "3", // дефолтный цветник если ничо не работает
 });
-let flowersGeneratedList: Ref<any[]> = ref([]);
+let flowersGeneratedList: Ref<FlowerGenerated[]> = ref<FlowerGenerated[]>([]);
 
 const loading = ref(false);
 const pic_garden = ref(img_flowerBedPlaceholder);
@@ -471,47 +465,14 @@ const gardenSubmit = async () => {
   // при нажатии кнопки генерации
   loading.value = true;
   postGarden(formData.value).then((resp) => {
-    // console.log("Doing something");
+    
     loading.value = false;
     scrollToTopSmoothly();
     generationDone.value = true;
-    gardenArrayToSend.value.garden_id = resp.data.gardens[getRandomInt(3)].toString(); // беру себе первый гарден
-    console.log(resp.data.gardens);
-    console.log(gardenArrayToSend.value);
-    console.log(gardenArrayToSend.value.garden_id);
+    gardenArrayToSend.value.garden_id = resp.data.gardens[getRandomInt(3)].toString(); 
     postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {  // `{"garden_id": "3"}`
       const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenArrayToSend.value.garden_id));
       flowersGeneratedList.value = resp.data.flowers.slice(0, sliceCount);
-      console.log(
-        flowersGeneratedList.value.map((value) => {
-          GetStoragePic(value.id)
-            .then((resp) => {
-              value["storageUrl"] = resp;
-            })
-            .catch((error: any) => {
-              console.error(error);
-            });
-          return value;
-        })
-      );
-      // setTimeout(() => {
-      //   // Code to execute after 2 seconds
-
-      // }, 2000);
-      console.log(
-        GetStoragePicGardenBed(gardenArrayToSend.value.garden_id).then((resp) => {
-          pic_garden.value = resp;
-          // работает корректно, проверено
-        })
-      );
-      console.log(
-        GetStoragePicGardensMap(gardenArrayToSend.value.garden_id).then(
-          (resp) => {
-            pic_gardenMap.value = resp;
-            // тут потом будет другая функция, чтобы получить карту цветника
-          }
-        )
-      );
     });
   });
 };
@@ -521,7 +482,8 @@ const createAndDownloadPdfWithLoading = async () => {
   loading.value = true;
   dialogVisibleGen.value = true;
   try {
-    await createAndDownloadPdf(gardenArrayToSend.value.garden_id, flowersGeneratedList.value);
+    console.log(flowersGeneratedList.value)
+    //await createAndDownloadPdf(gardenArrayToSend.value.garden_id, flowersGeneratedList.value);
   } catch (error) {
     console.error("Error creating PDF:", error);
   } finally {
@@ -529,6 +491,10 @@ const createAndDownloadPdfWithLoading = async () => {
     dialogVisibleGen.value = false;
   }
 };
+
+function generateImageList(id: string){
+  return `https://backend.bushtree.ru/api/media/images/${id}.png`
+}
 </script>
 
 <style lang="scss" scoped>
