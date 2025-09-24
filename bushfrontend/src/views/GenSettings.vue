@@ -364,11 +364,12 @@ import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
 import { formatDescription, formatName } from '@utils/textRelated';
 import { getRandomInt } from '@utils/randomGen';
-import { getMediaPipe } from "../services/media";
+import { getMediaImage, getMediaPipe } from "../services/media";
 import {GardensGenerated, FlowerGenerated, WateringResult, ShadowResult} from '../entities/gensettings.interface';
 
 const sliderValue = ref([6, 8]);
-const gardenId: Ref<string> = ref<string>(0)
+const gardenId: Ref<string> = ref<string>("0")
+const flowersGeneratedList: Ref<FlowerGenerated[]> = ref<FlowerGenerated[]>([]);
 defineExpose({ sliderValue });
 
 const dialogVisibleGen = ref(false);
@@ -455,7 +456,7 @@ const generationResults_watering: WateringResult = {
   },
 };
 
-let flowersGeneratedList: Ref<FlowerGenerated[]> = ref<FlowerGenerated[]>([]);
+const flowerGeneratedResult: FlowerGenerated[] = [];
 
 const gardenSubmit = () => {
   loading.value = true;
@@ -468,6 +469,9 @@ const gardenSubmit = () => {
     postGetFlowersByGarden({"garden_id": gardenId.value}).then((resp) => { 
       const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenId.value));
       flowersGeneratedList.value = resp.data.flowers.slice(0, sliceCount);
+      flowersGeneratedList.value.forEach((f) => {
+        flowerGeneratedResult.push({id: f.id, name: f.name, description: f.description, url: getMediaPipe("images", f.id)})
+      })
     });
   });
 };
@@ -477,7 +481,7 @@ const createAndDownloadPdfWithLoading = async () => {
   loading.value = true;
   dialogVisibleGen.value = true;
   try {
-    await createAndDownloadPdf(gardenId.value, flowersGeneratedList.value);
+    await createAndDownloadPdf(gardenId.value, flowerGeneratedResult);
   } catch (error) {
     console.error("Error creating PDF:", error);
   } finally {

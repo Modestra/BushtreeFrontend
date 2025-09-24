@@ -178,8 +178,7 @@ export const createAndDownloadPdf = async (
           }
         );
 
-        const url_pic_flower_1 = flowerData1.storageUrl || img_placeholder;
-        const arrayBuffer_pic_flower_1 = await fetch(url_pic_flower_1).then(
+        const arrayBuffer_pic_flower_1 = await fetch(flowerData1.url).then(
           (res) => res.arrayBuffer()
         );
         const jpgImage_pic_flower_1 = await pdfDoc.embedPng(
@@ -229,8 +228,7 @@ export const createAndDownloadPdf = async (
           }
         );
 
-        const url_pic_flower_2 = flowerData2.storageUrl || img_placeholder;
-        const arrayBuffer_pic_flower_2 = await fetch(url_pic_flower_2).then(
+        const arrayBuffer_pic_flower_2 = await fetch(flowerData2.url).then(
           (res) => res.arrayBuffer()
         );
         const jpgImage_pic_flower_2 = await pdfDoc.embedPng(

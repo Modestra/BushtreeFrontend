@@ -1,5 +1,6 @@
 import { HTTP } from "../http.ts";
 import { Garden } from "../entities/garden.ts";
+import { FlowerGenerated } from "../entities/gensettings.interface.ts";
 
 //Отправить данные цветника пользователя
 export function postGetFlowersByGarden(data: Garden) {

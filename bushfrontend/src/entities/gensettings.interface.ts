@@ -18,7 +18,6 @@ export interface FlowerGenerated{
     name: string,
     description: string,
     url: string
-    storageUrl: string
 }
 
 export interface ShadowTemp{
