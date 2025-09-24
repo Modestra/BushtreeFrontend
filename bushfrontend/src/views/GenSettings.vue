@@ -364,8 +364,8 @@ import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
 import { formatDescription, formatName } from '@utils/textRelated';
 import { getRandomInt } from '@utils/randomGen';
-import { getMediaImage, getMediaPipe } from "../services/media";
-import {GardensGenerated, FlowerGenerated, WateringResult, ShadowResult} from '../entities/gensettings.interface';
+import { getMediaPipe } from "../services/media";
+import {FlowerGenerated, WateringResult, ShadowResult} from '../entities/gensettings.interface';
 
 const sliderValue = ref([6, 8]);
 const gardenId: Ref<string> = ref<string>("0")

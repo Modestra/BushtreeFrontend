@@ -1,14 +1,9 @@
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import {
-  GetStoragePic,
-  GetStoragePicGardenBed,
-  GetStoragePicGardensMap,
-} from "../firebase/getPicsFromFirebase";
 import { ref } from "vue";
 import img_placeholder from "@assets/img/placeholder_noimage.png";
 import { formatDescription } from "@utils/textRelated";
-import { getMediaImage } from "../services/media";
+import { getMediaImage, getMediaPipe } from "../services/media";
 
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 const pic_garden = ref(img_flowerBedPlaceholder);
@@ -75,7 +70,7 @@ export const createAndDownloadPdf = async (
     });
 
     // Получение изображения цветника
-    const url_pic_garden = await GetStoragePicGardenBed(gardenArrayToSend1);
+    const url_pic_garden = await getMediaPipe('flowerbands', gardenArrayToSend1);
     const arrayBuffer_pic_garden = await fetch(url_pic_garden).then((res) =>
       res.arrayBuffer()
     );
@@ -89,7 +84,7 @@ export const createAndDownloadPdf = async (
     });
 
     // Получение карты цветника
-    const url_pic_gardenMap = await GetStoragePicGardensMap(gardenArrayToSend1);
+    const url_pic_gardenMap = await getMediaPipe('gardens', gardenArrayToSend1);
     const arrayBuffer_pic_gardenMap = await fetch(url_pic_gardenMap).then(
       (res) => res.arrayBuffer()
     );
@@ -251,8 +246,6 @@ export const createAndDownloadPdf = async (
   } catch (error) {
     console.error("Error creating PDF:", error);
   }
-  // loading.value = false;
-  // dialogVisibleGen.value = false;
 };
 
 // Function to trigger the download of the PDF
