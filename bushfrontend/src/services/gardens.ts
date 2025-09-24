@@ -9,3 +9,11 @@ export function postGetFlowersByGarden(data: Garden) {
     },
   });
 }
+
+export function getGardensList(){
+  return HTTP.get("/gardens", {
+    headers:{
+      "Content-Type": "application/json"
+    }
+  })
+}

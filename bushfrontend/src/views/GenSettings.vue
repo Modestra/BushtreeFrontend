@@ -25,7 +25,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio1"
-                        v-model="formDataOld.light" value="солнце" />
+                        v-model="formDataOld.light" value="sun" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1"
@@ -37,7 +37,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio2"
-                        v-model="formDataOld.light" value="полутень" />
+                        v-model="formDataOld.light" value="halfbody" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio2"
@@ -49,7 +49,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2">
                     <div>
                       <input class="form-check-input" type="radio" name="lightnessradio" id="lightnessradio3"
-                        v-model="formDataOld.light" value="тень" />
+                        v-model="formDataOld.light" value="shadow" />
                     </div>
 
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio3"
@@ -68,7 +68,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode1"
-                        v-model="formDataOld.watering" value="частый" />
+                        v-model="formDataOld.watering" value="often" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode1">
                       частый
@@ -84,7 +84,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode2"
-                        v-model="formDataOld.watering" value="умеренный" />
+                        v-model="formDataOld.watering" value="welldone" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode2">
                       умеренный
@@ -99,7 +99,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode3"
-                        v-model="formDataOld.watering" value="редкий" />
+                        v-model="formDataOld.watering" value="rare" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode3">
                       редкий
@@ -114,7 +114,7 @@
                   <div class="form-check d-flex justify-content-start align-items-center mb-2" style="max-width: 280px">
                     <div>
                       <input class="form-check-input" type="radio" name="wateringMode" id="wateringMode4"
-                        v-model="formDataOld.watering" value="сухой" />
+                        v-model="formDataOld.watering" value="dry" />
                     </div>
                     <label class="form-check-label h5 fw-normal m-0 px-1" for="wateringMode4">
                       сухой
@@ -220,12 +220,10 @@
               <div class="d-flex justify-content-start align-items-center mb-2">
                 <label class="form-check-label h5 fw-normal m-0 px-1 align-text-top" for="lightnessradio1"
                   style="min-width: 100px">
-                  {{ formDataOld.light }}
+                  {{ generationResults_shadow[formDataOld.light].label }}
                 </label>
                 <div style="height: 100%">
-                  <img class="px-1 svgIcon_whiteFill" :src="generationResults_shadow?.[formDataOld.light].icon ||
-                    img_icon_shadow_sun
-                    " alt="icon_lightIcon_1_sun" />
+                  <img class="px-1 svgIcon_whiteFill" :src="generationResults_shadow[formDataOld.light].icon" alt="icon_lightIcon_1_sun" />
                 </div>
               </div>
             </div>
@@ -233,12 +231,12 @@
               <div class="h3 fw-normal pb-2 text-truncate">Режим полива</div>
               <div class="d-flex justify-content-start align-items-center mb-2" style="max-width: 224px">
                 <label class="form-check-label h5 fw-normal m-0 px-1" for="lightnessradio1" style="min-width: 64px">
-                  {{ formDataOld.watering }}
+                  {{ generationResults_watering[formDataOld.watering].label }}
                 </label>
                 <img class="px-1 svgIcon_whiteFill" src="@assets/img/icon_note_circle.svg" alt="icon_lightIcon_1_sun"
                   v-tooltip.top="{
                     value:
-                      generationResults_watering?.[formDataOld.watering].tooltip,
+                      generationResults_watering[formDataOld.watering].label,
                     pt: {
                       text: 'bg-white text-black',
                     },
@@ -317,7 +315,7 @@
     <div class="container-custom1920 px-0 py-5 mb-5 glowBehindBlock-1">
       <h1 class="pb-4 mr-auto text-center text-uppercase">Цветы</h1>
       <div class="d-flex flex-wrap justify-content-center" v-if="flowersGeneratedList.length > 2">
-        <div class="flower-item py-4 px-4" v-for="(flower, index) in flowersGeneratedList" :key="flower"
+        <div class="flower-item py-4 px-4" v-for="(flower, index) in flowersGeneratedList" :key="flower.id"
           style="max-width: 700px">
           <div class="h4 fw-normal px-0">
             {{ index + 1 + ". " }}{{ formatName(flower.name) }}
@@ -329,7 +327,7 @@
               }}
             </div>
             <div class="col ps-4" style="max-width: 300px" :id="`flower-number-${index}`">
-              <img :src="generateImageList(flower.id)" :alt="flower.id" style="width: 100%" class="rounded" />
+              <img :src="getMediaPipe('images', flower.id)" :alt="flower.id" style="width: 100%" class="rounded" />
             </div>
           </div>
         </div>
@@ -351,7 +349,6 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { postGarden } from "../services/flowers";
-import { Garden } from "../entities/garden";
 import { postGetFlowersByGarden } from "../services/gardens";
 import { Flower, FlowerExcluded } from "../entities/flower";
 import VueSlider from "vue-slider-component";
@@ -367,18 +364,24 @@ import { getFlowerSliceCountFromGardenID } from "@utils/gardenArraySlicer";
 import { createAndDownloadPdf } from "@utils/pdfGeneration";
 import { formatDescription, formatName } from '@utils/textRelated';
 import { getRandomInt } from '@utils/randomGen';
-import {GardensGenerated, FlowerGenerated} from '../entities/gensettings.interface';
+import { getMediaPipe } from "../services/media";
+import {GardensGenerated, FlowerGenerated, WateringResult, ShadowResult} from '../entities/gensettings.interface';
 
 const sliderValue = ref([6, 8]);
+const gardenId: Ref<string> = ref<string>(0)
 defineExpose({ sliderValue });
 
 const dialogVisibleGen = ref(false);
+const loading = ref(false);
+
+const pic_garden = ref(img_flowerBedPlaceholder);
+const pic_gardenMap = ref(img_placeholder);
 
 const generationDone = ref(false);
 const switchToGeneration = async () => {
   generationDone.value = !generationDone.value;
 };
-const sliderMarks = ref({
+const sliderMarks : Ref<any> = ref({
   5: {
     label: "май",
   },
@@ -408,8 +411,8 @@ const garden_colors = [
 
 const formDataOld: Ref<FlowerExcluded> = ref<FlowerExcluded>({
   frost_resistance_zone: "1",
-  light: "солнце",
-  watering: "частый",
+  light: "sun",
+  watering: "often",
   period_bloosom_start: sliderValue.value[0].toString(),
   period_bloosom_end: sliderValue.value[1].toString(),
 })
@@ -419,59 +422,51 @@ const formData: Ref<Flower> = ref<Flower>({
   color_other: "белый",
 });
 
-const generationResults_shadow = ref({
-  солнце: {
+const generationResults_shadow: ShadowResult = {
+  "sun": {
     label: "Cолнце",
     icon: img_icon_shadow_sun,
   },
-  полутень: {
+  "halfbody": {
     label: "Полутень",
     icon: img_icon_shadow_halfsun,
   },
-  тень: {
+  "shadow": {
     label: "Тень",
     icon: img_icon_shadow_cloudyDay,
   },
-});
-const generationResults_watering = ref({
-  частый: {
+};
+const generationResults_watering: WateringResult = {
+  "often": {
     label: "частый",
     tooltip: "ежедневно",
   },
-  умеренный: {
+  "welldone": {
     label: "умеренный",
     tooltip: "через 2-3 дня",
   },
-  редкий: {
+  "rare": {
     label: "редкий",
     tooltip: "раз в неделю",
   },
-  сухой: {
+  "dry": {
     label: "сухой",
     tooltip: "опрыскивание",
   },
-});
+};
 
-const gardenArrayToSend: Ref<Garden> = ref({
-  garden_id: "3", // дефолтный цветник если ничо не работает
-});
 let flowersGeneratedList: Ref<FlowerGenerated[]> = ref<FlowerGenerated[]>([]);
 
-const loading = ref(false);
-const pic_garden = ref(img_flowerBedPlaceholder);
-const pic_gardenMap = ref(img_placeholder);
-
-const gardenSubmit = async () => {
-  // при нажатии кнопки генерации
+const gardenSubmit = () => {
   loading.value = true;
   postGarden(formData.value).then((resp) => {
-    
     loading.value = false;
     scrollToTopSmoothly();
-    generationDone.value = true;
-    gardenArrayToSend.value.garden_id = resp.data.gardens[getRandomInt(3)].toString(); 
-    postGetFlowersByGarden(gardenArrayToSend.value).then((resp) => {  // `{"garden_id": "3"}`
-      const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenArrayToSend.value.garden_id));
+    generationDone.value = true; 
+    gardenId.value = resp.data.gardens[getRandomInt(3)].toString()
+    pic_gardenMap.value = getMediaPipe("gardens", gardenId.value)
+    postGetFlowersByGarden({"garden_id": gardenId.value}).then((resp) => { 
+      const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenId.value));
       flowersGeneratedList.value = resp.data.flowers.slice(0, sliceCount);
     });
   });
@@ -482,8 +477,7 @@ const createAndDownloadPdfWithLoading = async () => {
   loading.value = true;
   dialogVisibleGen.value = true;
   try {
-    console.log(flowersGeneratedList.value)
-    //await createAndDownloadPdf(gardenArrayToSend.value.garden_id, flowersGeneratedList.value);
+    await createAndDownloadPdf(gardenId.value, flowersGeneratedList.value);
   } catch (error) {
     console.error("Error creating PDF:", error);
   } finally {
@@ -491,10 +485,6 @@ const createAndDownloadPdfWithLoading = async () => {
     dialogVisibleGen.value = false;
   }
 };
-
-function generateImageList(id: string){
-  return `https://backend.bushtree.ru/api/media/images/${id}.png`
-}
 </script>
 
 <style lang="scss" scoped>

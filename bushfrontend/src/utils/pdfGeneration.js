@@ -8,6 +8,7 @@ import {
 import { ref } from "vue";
 import img_placeholder from "@assets/img/placeholder_noimage.png";
 import { formatDescription } from "@utils/textRelated";
+import { getMediaImage } from "../services/media";
 
 import img_flowerBedPlaceholder from "@assets/img/flowerbedGen_default.png";
 const pic_garden = ref(img_flowerBedPlaceholder);
