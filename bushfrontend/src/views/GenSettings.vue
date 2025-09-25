@@ -295,7 +295,7 @@
           </div>
         </div>
         <div class="col mt-4" id="pic_garden" style="min-width: 50%">
-          <img :src="pic_garden" :alt="pic_garden" style="max-height: 100%; width: 100%" class="rounded"
+          <img :src="pic_garden" :alt="img_flowerBedPlaceholder" style="max-height: 100%; width: 100%" class="rounded"
             id="generated_garden_pic" />
         </div>
       </div>
@@ -466,6 +466,7 @@ const gardenSubmit = () => {
     generationDone.value = true; 
     gardenId.value = resp.data.gardens[getRandomInt(3)].toString()
     pic_gardenMap.value = getMediaPipe("gardens", gardenId.value)
+    pic_garden.value = getMediaPipe('flowerbands', gardenId.value)
     postGetFlowersByGarden({"garden_id": gardenId.value}).then((resp) => { 
       const sliceCount = getFlowerSliceCountFromGardenID(Number(gardenId.value));
       flowersGeneratedList.value = resp.data.flowers.slice(0, sliceCount);
